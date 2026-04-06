@@ -15,7 +15,8 @@ Esta stack ajuda a manter:
 - evolução arquitetural controlada;
 - versionamento e changelog auditáveis;
 - critérios mais objetivos para mudanças de produto e dashboard;
-- guardrails para custo, execução e observabilidade.
+- guardrails para custo, execução e observabilidade;
+- economia de créditos via handoff de execuções caras com scripts e logs persistentes.
 
 ## Estrutura
 

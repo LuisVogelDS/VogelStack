@@ -26,6 +26,7 @@ Regras:
 - evitar gasto desnecessário de créditos, tempo de máquina e recursos externos;
 - não disparar instalações, downloads, treinos longos, cargas pesadas ou processos mecânicos sem necessidade real;
 - preferir análise estática, comandos prontos e checklists antes de sugerir execuções caras;
+- em execuções longas, pesadas ou ruidosas, preferir o padrão `agente prepara, usuário executa, agente interpreta` em vez de gastar créditos acompanhando toda a execução;
 - quando uma execução custosa for necessária, explicitar por que ela destrava a tarefa.
 
 ## 3. Quando o agente deve executar por conta própria
@@ -55,6 +56,8 @@ O agente deve preferir preparar comandos e instruções quando a ação envolver
 - uso intenso de CPU, memória ou rede;
 - acesso a ambiente autenticado;
 - acesso a infraestrutura externa;
+- builds pesados de Docker ou containers;
+- suites longas de teste, benchmark ou migração;
 - deploy, publicação ou operação sensível.
 
 ## 5. Convenção para comandos
@@ -76,6 +79,36 @@ Antes de propor ou executar comandos, o agente deve identificar:
 
 O agente não deve promover um fluxo `WIP` como padrão só porque ele parece mais simples no momento.
 
+## 5.2 Padrão de handoff para execução custosa
+
+Quando a execução for longa, cara ou muito verbosa, o agente deve preferir entregar um comando ou script com logging persistente.
+
+O handoff ideal deve incluir:
+
+- comando idempotente quando possível;
+- criação explícita do diretório de logs;
+- nome de arquivo com timestamp;
+- captura conjunta de `stdout` e `stderr`;
+- preservação do código de saída do processo;
+- indicação clara de onde o log será encontrado;
+- lista breve dos artefatos ou sinais esperados ao final.
+
+Base recomendada em `PowerShell`:
+
+```powershell
+New-Item -ItemType Directory -Force -Path .\logs | Out-Null
+$ts = Get-Date -Format 'yyyyMMdd-HHmmss'
+$log = ".\logs\run-$ts.log"
+
+& <comando> 2>&1 | Tee-Object -FilePath $log
+$exitCode = $LASTEXITCODE
+
+Write-Host "Log salvo em: $log"
+exit $exitCode
+```
+
+Quando a rotina envolver múltiplas etapas, preparação de ambiente ou comandos encadeados, também vale usar `Start-Transcript` para capturar contexto adicional da sessão.
+
 ## 6. Atualizações de progresso
 
 Durante trabalhos maiores, o agente deve:
@@ -94,6 +127,8 @@ Projetos agent-friendly devem prever:
 - retenção ou rotação;
 - separação por superfície, por exemplo backend e frontend;
 - mensagens suficientes para que o usuário compartilhe contexto sem precisar reconstruir o problema manualmente.
+
+Em execuções entregues ao usuário, o log não é acessório: ele faz parte do contrato de colaboração entre agente e operador local.
 
 ## 7.1 Handoffs explícitos para áreas sensíveis
 

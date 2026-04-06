@@ -50,11 +50,13 @@ Este arquivo traz modelos mínimos para iniciar novos repositórios com o padrã
 
 - evitar gasto desnecessário de recursos
 - preferir agente prepara, usuário executa, agente interpreta
+- para execuções longas, caras ou muito verbosas, entregar script com logging persistente em vez de acompanhar tudo ao vivo pelo agente
 
 ## 8. Convenção de comandos
 
 - PowerShell no Windows
 - bash quando aplicável
+- em rotinas pesadas, sempre informar onde o log será salvo e como o código de saída será preservado
 
 ## 9. Regras de UX e filtros
 
@@ -315,6 +317,13 @@ Este documento concentra o contexto mínimo para futuras conversas sobre uma ár
 - falhas comuns
 - como coletar contexto para repassar ao agente
 
+## 5.1 Handoff para execuções custosas
+
+- quando o usuário deve executar localmente
+- quais comandos devem ser entregues prontos
+- onde os logs são gravados
+- como o projeto diferencia stdout, stderr, transcript e artefatos finais
+
 ## 6. Guardrails operacionais
 
 - o que não deve ser rodado automaticamente
@@ -322,7 +331,21 @@ Este documento concentra o contexto mínimo para futuras conversas sobre uma ár
 - o que deve ser executado pelo usuário localmente
 ```
 
-## 8. Template de brainstorm de dashboard
+## 8. Template de script PowerShell com log
+
+```powershell
+New-Item -ItemType Directory -Force -Path .\logs | Out-Null
+$ts = Get-Date -Format 'yyyyMMdd-HHmmss'
+$log = ".\logs\<nome-da-rotina>-$ts.log"
+
+& <comando> 2>&1 | Tee-Object -FilePath $log
+$exitCode = $LASTEXITCODE
+
+Write-Host "Log salvo em: $log"
+exit $exitCode
+```
+
+## 9. Template de brainstorm de dashboard
 
 ```text
 # Brainstorm do Novo Dashboard
@@ -350,7 +373,7 @@ Este documento concentra o contexto mínimo para futuras conversas sobre uma ár
 - tabela contextual
 ```
 
-## 9. Template de concepção
+## 10. Template de concepção
 
 ```text
 # Concepção do Novo Dashboard
@@ -366,7 +389,7 @@ Este documento concentra o contexto mínimo para futuras conversas sobre uma ár
 ## Direção visual
 ```
 
-## 10. Template de wireframe textual
+## 11. Template de wireframe textual
 
 ```text
 # Wireframe da Nova Aba
