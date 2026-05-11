@@ -7,6 +7,7 @@ Este documento define um padrão de documentação para projetos que precisam pe
 Para projetos com alguma complexidade, o conjunto mínimo recomendado é:
 
 - `README.md`
+- `quickstart.md`
 - `AGENTS.md`
 - `docs/arquitetura.md`
 - `docs/versionamento.md`
@@ -37,9 +38,21 @@ Deve responder:
 
 - o que o projeto faz;
 - qual é o estado atual;
-- como rodar;
+- como rodar em visão resumida;
 - qual é a versão atual;
 - quais são as superfícies principais do produto.
+
+### `quickstart.md`
+
+Deve responder:
+
+- como sair de zero até o sistema rodando localmente;
+- qual comando entra na pasta correta do projeto;
+- quais dependências precisam ser instaladas;
+- como iniciar, reiniciar e validar o caminho oficialmente suportado;
+- quais problemas comuns impedem o primeiro uso.
+
+O `quickstart.md` deve ser operacional, direto e copiável. Ele não substitui o `README.md`: o README explica o produto, enquanto o quickstart reduz fricção de instalação e execução.
 
 ### `AGENTS.md`
 

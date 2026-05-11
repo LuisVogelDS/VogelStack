@@ -32,7 +32,7 @@ Esta stack ajuda a manter:
 Forma mínima de adoção em outro projeto:
 
 1. copiar esta pasta para o novo repositório;
-2. adaptar `templates.md` para gerar `AGENTS.md`, `README.md`, `docs/arquitetura.md`, `docs/versionamento.md` e `docs/changelog.md`;
+2. adaptar `templates.md` para gerar `AGENTS.md`, `README.md`, `quickstart.md`, `docs/arquitetura.md`, `docs/versionamento.md` e `docs/changelog.md`;
 3. ajustar fontes de verdade, fluxo de deploy, autenticação, matriz de suporte de ambiente e contratos do projeto alvo;
 4. manter os documentos atualizados no mesmo ciclo em que o comportamento do produto mudar.
 

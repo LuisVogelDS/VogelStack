@@ -92,7 +92,50 @@ Este arquivo traz modelos mínimos para iniciar novos repositórios com o padrã
 - sem regressão óbvia
 ```
 
-## 2. Template de `docs/arquitetura.md`
+## 2. Template de `quickstart.md`
+
+````text
+# Quickstart
+
+## 1. Entrar na pasta do projeto
+
+```powershell
+Set-Location "<CAMINHO_DO_PROJETO>"
+```
+
+## 2. Instalar dependências
+
+```powershell
+<COMANDO_DE_INSTALACAO>
+```
+
+## 3. Iniciar o sistema
+
+```powershell
+<COMANDO_DE_START>
+```
+
+## 4. Validar funcionamento
+
+- URL local, se existir
+- comando de healthcheck, se existir
+- sinal esperado de sucesso
+
+## 5. Reiniciar
+
+```powershell
+<COMANDO_DE_RESTART_OU_PASSOS_PARA_PARAR_E_SUBIR>
+```
+
+## 6. Problemas comuns
+
+- dependência ausente
+- porta ocupada
+- configuração local ausente
+- credencial inválida
+````
+
+## 3. Template de `docs/arquitetura.md`
 
 ```text
 # Arquitetura do Projeto
@@ -140,7 +183,7 @@ Estado atual resumido:
 ## 7. Próximos passos já materializados ou assumidos
 ```
 
-## 3. Template de `docs/versionamento.md`
+## 4. Template de `docs/versionamento.md`
 
 ```text
 # Versionamento do Projeto
@@ -172,7 +215,7 @@ Status:
 - estável
 ```
 
-## 4. Template de `docs/changelog.md`
+## 5. Template de `docs/changelog.md`
 
 ```text
 # Changelog
@@ -192,7 +235,7 @@ Estado:
 - observação
 ```
 
-## 5. Template de `docs/fontes-e-filtros.md`
+## 6. Template de `docs/fontes-e-filtros.md`
 
 ```text
 # Fontes e Filtros
@@ -228,7 +271,7 @@ Estado:
 - dicas de uso seguro
 ```
 
-## 6. Template de `docs/ai-handoff-dominio.md`
+## 7. Template de `docs/ai-handoff-dominio.md`
 
 ````text
 # AI Handoff: <domínio>
@@ -279,7 +322,7 @@ Este documento concentra o contexto mínimo para futuras conversas sobre uma ár
 - contexto mínimo para iniciar uma nova conversa sem perder o estado real
 ````
 
-## 7. Template de `docs/operacao.md`
+## 8. Template de `docs/operacao.md`
 
 ```text
 # Operação do Projeto
