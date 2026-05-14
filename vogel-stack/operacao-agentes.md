@@ -1,10 +1,10 @@
 # Operação de Agentes
 
-Este documento define um padrão operacional para projetos que usam agentes de IA como parte do fluxo real de trabalho.
+Este documento define um padrão operacional para projetos que usam agentes de IA como parte do fluxo real de trabalho, conectado a [[registro-e-evidencias|Registro e Evidências Operacionais]].
 
 ## 1. Fluxo operacional padrão
 
-Fluxo preferencial:
+Fluxo preferencial, também tratado como [[Handoff Padrão de Execução]]:
 
 1. agente prepara;
 2. usuário executa;
@@ -81,7 +81,7 @@ O agente não deve promover um fluxo `WIP` como padrão só porque ele parece ma
 
 ## 5.2 Padrão de handoff para execução custosa
 
-Quando a execução for longa, cara ou muito verbosa, o agente deve preferir entregar um comando ou script com logging persistente.
+Quando a execução for longa, cara ou muito verbosa, o agente deve preferir entregar um comando ou script com [[PowerShell Logging Pattern|logging persistente]].
 
 O handoff ideal deve incluir:
 
@@ -132,7 +132,7 @@ Em execuções entregues ao usuário, o log não é acessório: ele faz parte do
 
 ## 7.1 Handoffs explícitos para áreas sensíveis
 
-Quando um domínio do sistema for especialmente crítico, instável ou cheio de contexto acumulado, vale manter um documento de handoff específico.
+Quando um domínio do sistema for especialmente crítico, instável ou cheio de contexto acumulado, vale manter um documento de [[Handoff Padrão de Execução|handoff]] específico.
 
 Esse handoff deve concentrar:
 
@@ -145,7 +145,7 @@ Esse handoff deve concentrar:
 
 ## 7.2 Registro mínimo de execução
 
-Quando o projeto gera artefatos, relatórios, exportações ou resultados por rodada, vale manter um registro explícito de execução.
+Quando o projeto gera artefatos, relatórios, exportações ou resultados por rodada, vale manter um [[Registry de Execuções|registro explícito de execução]].
 
 Esse registro deve permitir ao agente e ao usuário localizar:
 
@@ -157,6 +157,21 @@ Esse registro deve permitir ao agente e ao usuário localizar:
 - observações de execução.
 
 Isso reduz retrabalho e evita que o agente trate como desconhecido algo que já foi materializado.
+
+## 7.2.1 [[Regra de Juros Compostos]]
+
+Quando o agente criar ou orientar a criação de um diretório `reports/runs/<run_id>/`, ele deve tratar essa run como memória futura do projeto e entrada para o [[Knowledge Graph]].
+
+Regras:
+
+- criar ou atualizar um resumo legível dentro da run;
+- registrar quais artefatos foram finais, auxiliares, parciais ou ausentes;
+- garantir que o `registry` aponte para o diretório da run;
+- escrever nomes e descrições que possam ser indexados pelo [[Knowledge Graph]];
+- deixar explícitas relações com decisões, hipóteses, métricas, erros ou serviços avaliados;
+- orientar a próxima atualização do [[Graphify Knowledge Graph Tool|Graphify]] para incluir esses artefatos.
+
+A disciplina de log continua rígida, mas agora tem um ganho acumulativo: cada execução bem registrada vira material de aprendizado para a próxima varredura semântica.
 
 ## 7.3 Arquivos privados do usuário e da AI stack
 

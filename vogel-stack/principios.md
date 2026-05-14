@@ -4,7 +4,7 @@ Este documento reúne princípios que devem permanecer válidos em diferentes pr
 
 ## 1. O comportamento documentado deve refletir o sistema real
 
-Documentação aspiracional só é útil quando está explicitamente marcada como futura.
+Documentação aspiracional só é útil quando está explicitamente marcada como futura, mantendo coerência com [[documentacao-e-versionamento|Documentação e Versionamento]].
 
 Regra prática:
 
@@ -79,7 +79,7 @@ Regras mínimas:
 
 ## 8. Observabilidade precisa existir desde cedo
 
-Mesmo em protótipos, o projeto deve oferecer algum grau de rastreabilidade.
+Mesmo em protótipos, o projeto deve oferecer algum grau de [[Observabilidade e Logs|observabilidade]] e rastreabilidade.
 
 Base recomendada:
 
@@ -131,7 +131,7 @@ Boas práticas:
 
 ## 13. Identificadores canônicos devem prevalecer
 
-Aliases convenientes demais costumam gerar ambiguidade entre código, API, documentação e operação.
+Aliases convenientes demais costumam gerar ambiguidade entre código, API, documentação e operação. Por isso, [[Identificadores Canônicos]] são parte do contrato de clareza.
 
 Regra prática:
 
@@ -173,4 +173,23 @@ Também é preciso materializar:
 - quais artefatos foram gerados;
 - qual foi o resultado principal.
 
-Em projetos com esse perfil, manter um `registry` e manifestos por execução deixa de ser luxo e passa a ser parte da rastreabilidade mínima.
+Em projetos com esse perfil, manter um [[Registry de Execuções|registry]] e [[Manifesto por Run|manifestos por execução]] deixa de ser luxo e passa a ser parte da rastreabilidade mínima, como detalhado em [[registro-e-evidencias|Registro e Evidências Operacionais]].
+
+## 17. Descoberta visual deve anteceder implementações relevantes
+
+Com [[Graphify Knowledge Graph Tool|Graphify]], o projeto passa a ter um segundo cérebro navegável por relações semânticas.
+
+A interface do Obsidian deve ser tratada como a camada oficial de visualização desse [[Knowledge Graph|grafo]].
+
+Antes de implementar novos serviços, painéis, integrações ou mudanças estruturais, equipe e agentes devem consultar as conexões visuais para cruzar:
+
+- documentos oficiais;
+- entradas brutas em [[Pasta docs/raw e intake|docs/raw/ ou intake/]];
+- artefatos de runs anteriores descritos em [[registro-e-evidencias|Registro e Evidências Operacionais]];
+- decisões de produto;
+- contratos de dados;
+- módulos e superfícies existentes.
+
+Essa etapa ajuda a revelar dependências, decisões antigas, hipóteses já testadas e relações que uma busca textual comum pode não mostrar.
+
+Descoberta visual não elimina análise técnica. Ela melhora o ponto de partida da análise.

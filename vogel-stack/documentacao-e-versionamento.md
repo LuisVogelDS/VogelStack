@@ -1,6 +1,6 @@
 # Documentação e Versionamento
 
-Este documento define um padrão de documentação para projetos que precisam permanecer legíveis para humanos e agentes.
+Este documento define um padrão de documentação para projetos que precisam permanecer legíveis para humanos e agentes, em diálogo direto com [[principios|Princípios Gerais]].
 
 ## 1. Conjunto mínimo de documentos
 
@@ -8,7 +8,7 @@ Para projetos com alguma complexidade, o conjunto mínimo recomendado é:
 
 - `README.md`
 - `quickstart.md`
-- `AGENTS.md`
+- [[AGENTS.md Document Pattern|`AGENTS.md`]]
 - `docs/arquitetura.md`
 - `docs/versionamento.md`
 - `docs/changelog.md`
@@ -20,7 +20,8 @@ Documentos complementares devem existir quando o projeto tiver fluxos específic
 - Docker;
 - integrações externas;
 - dashboards;
-- brainstorms e wireframes de produto.
+- brainstorms e wireframes de produto;
+- pasta de entrada bruta, como [[Pasta docs/raw e intake|`docs/raw/` ou `intake/`]].
 
 Para projetos com API, UI dinâmica, múltiplas integrações ou uso intenso de agentes, também vale padronizar:
 
@@ -54,7 +55,7 @@ Deve responder:
 
 O `quickstart.md` deve ser operacional, direto e copiável. Ele não substitui o `README.md`: o README explica o produto, enquanto o quickstart reduz fricção de instalação e execução.
 
-### `AGENTS.md`
+### [[AGENTS.md Document Pattern|`AGENTS.md`]]
 
 Deve responder:
 
@@ -116,10 +117,52 @@ Quando o projeto executa pipelines, jobs, análises ou agentes recorrentes, a do
 
 Boas práticas:
 
-- manter um `registry` de execuções ou equivalente;
-- manter manifesto por run quando houver múltiplos artefatos;
+- manter um [[Registry de Execuções|registry de execuções]] ou equivalente;
+- manter [[Manifesto por Run|manifesto por run]] quando houver múltiplos artefatos;
 - documentar onde esses registros vivem e como consultá-los;
 - não tratar changelog como substituto de rastreabilidade operacional.
+
+## 2.2 Pasta de entrada bruta: `docs/raw/` ou `intake/`
+
+Projetos que usam agentes e [[Knowledge Graph]] devem ter um lugar explícito para despejar material ainda desorganizado.
+
+Essa pasta serve para receber:
+
+- transcrições;
+- brainstorms;
+- notas soltas;
+- entrevistas;
+- rascunhos de produto;
+- referências externas;
+- fragmentos que ainda não pertencem a um documento oficial.
+
+Padrão recomendado:
+
+```text
+docs/
+  raw/
+    <material-bruto>
+```
+
+ou, quando fizer mais sentido para o projeto:
+
+```text
+intake/
+  <material-bruto>
+```
+
+Regras:
+
+- [[Pasta docs/raw e intake|`docs/raw/` ou `intake/`]] não substitui documentação oficial;
+- conteúdo bruto deve ser tratado como material de entrada, não como fonte canônica final;
+- a IA deve ler essa pasta de forma autônoma antes de concluir que um assunto não existe no projeto;
+- a IA deve classificar, resumir e propor promoção de conteúdo bruto para documentos oficiais quando houver valor recorrente;
+- a ferramenta de [[Knowledge Graph]] deve indexar essas relações para conectar brainstorms, transcrições, decisões e artefatos;
+- material sensível, privado ou local deve ser marcado antes de entrar nessa pasta.
+
+Com [[Graphify Knowledge Graph Tool|Graphify]], essa pasta vira uma camada de captura do segundo cérebro do projeto.
+
+O objetivo não é exigir organização perfeita no momento da captura. O objetivo é permitir que nosso exército digital de manutenção leia o material bruto, encontre relações, preserve contexto e ajude a transformar sinal disperso em documentação confiável.
 
 ## 3. Quando a documentação deve ser atualizada
 

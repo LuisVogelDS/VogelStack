@@ -1,6 +1,6 @@
 # Evolução de Produto e Arquitetura
 
-Este documento propõe um método para evoluir produtos digitais e dashboards sem ficar preso ao formato atual da interface ou ao acoplamento técnico existente.
+Este documento propõe um método para evoluir produtos digitais e dashboards sem ficar preso ao formato atual da interface ou ao acoplamento técnico existente, em coerência com [[principios|Princípios Gerais]].
 
 ## 1. Começar pelas respostas, não pelos widgets
 
@@ -22,7 +22,7 @@ Exemplos de respostas desejadas:
 
 ## 2. Método recomendado para dashboards
 
-Sequência recomendada:
+Sequência recomendada, formalizada como [[Método Brainstorm-Concepção-Wireframe-Implementação]]:
 
 1. `Brainstorm`
 2. `Concepção`
@@ -116,9 +116,9 @@ Modelo prático:
 
 ### Fase 1: documentar e desacoplar
 
-- descrever arquitetura real;
+- descrever arquitetura real segundo [[documentacao-e-versionamento|Documentação e Versionamento]];
 - extrair regras de negócio da UI;
-- centralizar contratos e serviços;
+- centralizar contratos, serviços e [[Identificadores Canônicos]];
 - preservar o fluxo operacional existente.
 
 ### Fase 2: introduzir nova camada de backend

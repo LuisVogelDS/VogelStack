@@ -6,9 +6,9 @@ Este documento define um padrão para projetos que executam pipelines, jobs, age
 
 Ele complementa:
 
-- `documentacao-e-versionamento.md`, que define papéis dos documentos;
-- `operacao-agentes.md`, que define quem prepara, quem executa e como colaborar;
-- `principios.md`, que define rastreabilidade como princípio.
+- [[documentacao-e-versionamento|documentacao-e-versionamento.md]], que define papéis dos documentos;
+- [[operacao-agentes|operacao-agentes.md]], que define quem prepara, quem executa e como colaborar;
+- [[principios|principios.md]], que define rastreabilidade como princípio.
 
 Aqui o foco é:
 
@@ -22,7 +22,7 @@ Cada artefato tem papel diferente:
 
 - `docs/changelog.md`: o que foi entregue ao produto ou ao repositório;
 - `docs/versionamento.md`: como o produto evoluiu por versão;
-- `registry` de execução: o que foi rodado, quando, com qual escopo, com quais artefatos e com qual resultado.
+- [[Registry de Execuções|`registry` de execução]]: o que foi rodado, quando, com qual escopo, com quais artefatos e com qual resultado.
 
 Projetos com jobs, pipelines, modelos, agentes ou automações recorrentes não devem depender só de changelog para auditoria operacional.
 
@@ -55,7 +55,7 @@ O formato exato pode variar, mas o registro deveria capturar pelo menos:
 
 ## 5. Manifesto por run
 
-Quando a execução gera múltiplos arquivos, vale manter um manifesto por run.
+Quando a execução gera múltiplos arquivos, vale manter um [[Manifesto por Run|manifesto por run]].
 
 Esse manifesto deve responder:
 
@@ -80,17 +80,42 @@ reports/
 
 O diretório por run concentra o contexto local da rodada.
 
-O `registry.csv` ou equivalente serve para comparação transversal entre execuções.
+O `registry.csv` ou equivalente materializa o [[Registry de Execuções]] e serve para comparação transversal entre execuções.
 
 ## 7. Relação com agentes
 
-Projetos agent-friendly ganham muito quando o registry já existe, porque o agente pode:
+Projetos agent-friendly ganham muito quando o [[Registry de Execuções|registry]] já existe, porque o agente pode:
 
 - comparar execuções sem inferir demais;
 - localizar artefatos rapidamente;
 - resumir progresso por estágio;
 - detectar lacunas de cobertura entre escopos;
 - evitar repetir trabalho já materializado.
+
+## 7.1 [[Regra de Juros Compostos]]
+
+Cada execução registrada deve aumentar o valor do segundo cérebro do projeto e reforçar o [[Knowledge Graph]].
+
+Sempre que um novo diretório de artefato for criado em:
+
+```text
+reports/
+  runs/
+    <run_id>/
+```
+
+o agente responsável deve garantir que esse resultado possa ser lido pela próxima indexação do [[Knowledge Graph]].
+
+Regras práticas:
+
+- todo diretório `reports/runs/<run_id>/` deve conter um resumo legível por humanos e agentes, como `summary.md` ou `summary.json`;
+- `artifacts.json` ou equivalente deve apontar os arquivos finais, auxiliares, parciais e ausentes;
+- artefatos binários importantes devem ter uma descrição textual mínima;
+- o `registry.csv` deve referenciar o diretório da run;
+- a próxima execução de [[Graphify Knowledge Graph Tool|Graphify]] deve conseguir capturar a relação entre run, escopo, decisão, métrica, relatório e artefato;
+- se uma run corrigiu, confirmou ou contradisse uma hipótese anterior, essa relação deve aparecer no resumo.
+
+Esse é o efeito de juros compostos da stack: execuções operacionais passadas deixam de ser arquivos mortos e passam a funcionar como memória de longo prazo.
 
 ## 8. Qualidade mínima da evidência
 
