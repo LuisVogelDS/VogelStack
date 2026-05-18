@@ -121,7 +121,7 @@ Durante trabalhos maiores, o agente deve:
 
 ## 7. Logging como parte da colaboração
 
-Projetos agent-friendly devem prever:
+Projetos agent-friendly devem tratar logging como parte de [[Observabilidade e Logs|observabilidade]] mínima e prever:
 
 - logs persistidos em arquivo;
 - retenção ou rotação;

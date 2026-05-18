@@ -79,6 +79,7 @@ Conexões fortes do grafo:
 - quais arquivos devem permanecer coerentes
 - quando atualizar cada um
 - política para arquivos privados de AI stack, prompts e apoio pessoal
+- todo documento novo deve nascer com wikilinks reais para a Vogel Stack, documentos canônicos, processos, artefatos e evidências relacionadas
 
 ## 11. Evidência operacional
 

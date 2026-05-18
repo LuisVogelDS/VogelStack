@@ -119,7 +119,7 @@ Esse é o efeito de juros compostos da stack: execuções operacionais passadas 
 
 ## 8. Qualidade mínima da evidência
 
-Uma boa evidência operacional deve permitir responder:
+Uma boa evidência operacional reforça [[Observabilidade e Logs|observabilidade]] e deve permitir responder:
 
 1. o que foi executado;
 2. com qual escopo;

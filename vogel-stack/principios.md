@@ -193,3 +193,17 @@ Antes de implementar novos serviços, painéis, integrações ou mudanças estru
 Essa etapa ajuda a revelar dependências, decisões antigas, hipóteses já testadas e relações que uma busca textual comum pode não mostrar.
 
 Descoberta visual não elimina análise técnica. Ela melhora o ponto de partida da análise.
+
+## 18. Documentos novos já devem nascer conectados
+
+Sempre que um novo documento, guia, handoff, runbook, resumo de execução ou artefato textual for criado, ele deve incluir wikilinks reais para os documentos e conceitos que o tornam compreensível no [[Knowledge Graph]].
+
+Regra prática:
+
+- ligar documentos operacionais a [[operacao-agentes|Operação de Agentes]] quando envolverem agentes, comandos, handoffs, custo ou execução;
+- ligar evidências, relatórios, runs e artefatos a [[registro-e-evidencias|Registro e Evidências Operacionais]];
+- ligar README, arquitetura, quickstart, versionamento e changelog a [[documentacao-e-versionamento|Documentação e Versionamento]];
+- ligar contratos, fontes de verdade, identificadores, observabilidade e semântica de saída a este documento;
+- ligar decisões de produto, dashboards e evolução arquitetural a [[evolucao-produto|Evolução de Produto e Arquitetura]].
+
+O objetivo é reduzir retrabalho: cada documento novo deve entrar no repositório já rastreável, navegável e pronto para ser incorporado pelo Graphify.

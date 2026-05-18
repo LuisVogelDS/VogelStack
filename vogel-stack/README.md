@@ -15,7 +15,7 @@ Esta stack ajuda a manter:
 - evolução arquitetural controlada;
 - versionamento e changelog auditáveis;
 - critérios mais objetivos para mudanças de produto e dashboard;
-- guardrails para custo, execução e observabilidade;
+- guardrails para custo, execução e [[Observabilidade e Logs|observabilidade]];
 - economia de créditos via [[Handoff Padrão de Execução|handoff]] de execuções caras com scripts e [[PowerShell Logging Pattern|logs persistentes]].
 
 ## Estrutura

@@ -179,6 +179,22 @@ Atualizar docs no mesmo ciclo sempre que houver:
 - nova limitação conhecida;
 - mudança de versão.
 
+## 3.1 Linkagem semântica no nascimento
+
+Todo documento novo deve nascer já conectado ao [[Knowledge Graph]] do projeto.
+
+Ao criar `README.md`, `quickstart.md`, `AGENTS.md`, `docs/arquitetura.md`, `docs/operacao.md`, `docs/versionamento.md`, `docs/changelog.md`, handoffs, registros de execução ou guias complementares, o autor ou agente deve inserir wikilinks reais para:
+
+- documentos canônicos da própria documentação;
+- regras relevantes da [[Vogel Stack]];
+- processos, artefatos, contratos ou módulos citados no texto;
+- evidências operacionais relacionadas, quando existirem;
+- material bruto em [[Pasta docs/raw e intake|`docs/raw/` ou `intake/`]], quando o documento promover ou resumir uma entrada bruta.
+
+Essa regra evita que a linkagem vire uma tarefa de limpeza posterior. O documento deve entrar no repositório já navegável por humanos, agentes e Graphify.
+
+Links não devem ser decorativos. Cada wikilink precisa representar uma relação real de dependência, explicação, evidência, contrato, origem ou continuidade operacional.
+
 ## 4. Distinção entre estado atual, experimental e futuro
 
 Projetos em evolução costumam misturar três camadas:
