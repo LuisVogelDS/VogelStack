@@ -33,6 +33,15 @@ Com [[Graphify Knowledge Graph Tool|Graphify]], a Vogel Stack deixa de ser apena
 
 A interface do Obsidian é a camada oficial de visualização do [[Knowledge Graph]].
 
+Neste repositório, a integração local do Graphify é materializada em:
+
+- `graphify-out/GRAPH_REPORT.md`: relatório textual que agentes devem ler primeiro;
+- `graphify-out/graph.json`: grafo consultável por `graphify query`, `graphify path` e `graphify explain`;
+- `graphify-out/graph.html`: visualização HTML navegável;
+- `graphify-out/manifest.json`: hashes dos arquivos indexados.
+
+O CLI local atual não gera `graphify-out/wiki/index.md` por padrão. Se esse diretório existir em um projeto futuro, ele pode ser usado como camada adicional de navegação, mas não é pré-requisito da Vogel Stack.
+
 Antes de iniciar a implementação de novos serviços, painéis, integrações ou refatores relevantes, equipe e agentes devem usar as conexões visuais do grafo para cruzar referências entre:
 
 - documentos oficiais;
@@ -47,10 +56,11 @@ Essa descoberta visual não substitui leitura técnica, testes ou revisão de c�
 
 Forma mínima de adoção em outro projeto:
 
-1. copiar esta pasta para o novo repositório;
-2. adaptar [[templates|templates.md]] para gerar [[AGENTS.md Document Pattern|AGENTS.md]], `README.md`, `quickstart.md`, `docs/arquitetura.md`, `docs/versionamento.md` e `docs/changelog.md`;
-3. ajustar fontes de verdade, fluxo de deploy, autenticação, matriz de suporte de ambiente e contratos do projeto alvo;
-4. manter os documentos atualizados no mesmo ciclo em que o comportamento do produto mudar.
+1. ler `quickstart.md` na raiz deste repositório para instalar a stack, configurar Graphify e gerar links semânticos;
+2. copiar esta pasta ou instalá-la como submódulo no novo repositório;
+3. adaptar [[templates|templates.md]] para gerar [[AGENTS.md Document Pattern|AGENTS.md]], `README.md`, `quickstart.md`, `docs/arquitetura.md`, `docs/versionamento.md` e `docs/changelog.md`;
+4. ajustar fontes de verdade, fluxo de deploy, autenticação, matriz de suporte de ambiente e contratos do projeto alvo;
+5. manter os documentos atualizados no mesmo ciclo em que o comportamento do produto mudar.
 
 ## Escopo
 

@@ -12,9 +12,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "agents.md",
       "id": "agents_agents_md",
-      "community": 3,
-      "norm_label": "agents.md"
+      "community": 1
     },
     {
       "label": "CLAUDE.md",
@@ -25,9 +25,22 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "claude.md",
       "id": "claude_claude_md",
-      "community": 3,
-      "norm_label": "claude.md"
+      "community": 1
+    },
+    {
+      "label": "Quickstart Vogel Stack Graphify",
+      "file_type": "document",
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "quickstart vogel stack graphify",
+      "id": "quickstart_quickstart_md",
+      "community": 1
     },
     {
       "label": "Community 10",
@@ -38,9 +51,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "community 10",
       "id": "community10__community_community_10",
-      "community": 4,
-      "norm_label": "community 10"
+      "community": 2
     },
     {
       "label": "Community 7",
@@ -51,9 +64,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "community 7",
       "id": "community7__community_community_7",
-      "community": 5,
-      "norm_label": "community 7"
+      "community": 2
     },
     {
       "label": "Documenta\u00e7\u00e3o e Versionamento",
@@ -64,9 +77,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "documentacao e versionamento",
       "id": "vogelstack_documentacao",
-      "community": 0,
-      "norm_label": "documentacao e versionamento"
+      "community": 0
     },
     {
       "label": "Evolu\u00e7\u00e3o de Produto e Arquitetura",
@@ -77,9 +90,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "evolucao de produto e arquitetura",
       "id": "vogelstack_evolucao",
-      "community": 2,
-      "norm_label": "evolucao de produto e arquitetura"
+      "community": 2
     },
     {
       "label": "Opera\u00e7\u00e3o de Agentes",
@@ -90,9 +103,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "operacao de agentes",
       "id": "vogelstack_operacao",
-      "community": 1,
-      "norm_label": "operacao de agentes"
+      "community": 1
     },
     {
       "label": "Princ\u00edpios Gerais",
@@ -103,9 +116,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "principios gerais",
       "id": "vogelstack_principios",
-      "community": 0,
-      "norm_label": "principios gerais"
+      "community": 0
     },
     {
       "label": "Vogel Stack README",
@@ -116,9 +129,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "vogel stack readme",
       "id": "vogelstack_readme",
-      "community": 0,
-      "norm_label": "vogel stack readme"
+      "community": 0
     },
     {
       "label": "Registro e Evid\u00eancias Operacionais",
@@ -129,9 +142,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "registro e evidencias operacionais",
       "id": "vogelstack_registro",
-      "community": 1,
-      "norm_label": "registro e evidencias operacionais"
+      "community": 1
     },
     {
       "label": "Templates de Documenta\u00e7\u00e3o",
@@ -142,9 +155,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "templates de documentacao",
       "id": "vogelstack_templates",
-      "community": 2,
-      "norm_label": "templates de documentacao"
+      "community": 2
     },
     {
       "label": "Graphify Knowledge Graph Tool",
@@ -155,22 +168,48 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "concept_graphify",
-      "community": 3,
-      "norm_label": "graphify knowledge graph tool"
+      "norm_label": "graphify knowledge graph tool",
+      "id": "concept_graphify_knowledge_graph_tool",
+      "community": 1
     },
     {
-      "label": "Knowledge Graph",
+      "label": "M\u00e9todo Brainstorm-Concep\u00e7\u00e3o-Wireframe-Implementa\u00e7\u00e3o",
       "file_type": "concept",
-      "source_file": "vogel-stack/principios.md",
+      "source_file": "_COMMUNITY_Community 10.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "concept_knowledge_graph",
-      "community": 0,
-      "norm_label": "knowledge graph"
+      "norm_label": "metodo brainstorm-concepcao-wireframe-implementacao",
+      "id": "concept_metodo_brainstorm_concepcao_wireframe_implementacao",
+      "community": 2
+    },
+    {
+      "label": "Handoff Padr\u00e3o de Execu\u00e7\u00e3o",
+      "file_type": "concept",
+      "source_file": "_COMMUNITY_Community 7.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "handoff padrao de execucao",
+      "id": "concept_handoff_padrao_de_execucao",
+      "community": 2
+    },
+    {
+      "label": "PowerShell Logging Pattern",
+      "file_type": "concept",
+      "source_file": "_COMMUNITY_Community 7.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "powershell logging pattern",
+      "id": "concept_powershell_logging_pattern",
+      "community": 2
     },
     {
       "label": "AGENTS.md Document Pattern",
@@ -181,126 +220,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "concept_agents_md_doc",
-      "community": 0,
-      "norm_label": "agents.md document pattern"
-    },
-    {
-      "label": "Registry de Execu\u00e7\u00f5es",
-      "file_type": "concept",
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_registry",
-      "community": 1,
-      "norm_label": "registry de execucoes"
-    },
-    {
-      "label": "Handoff Padr\u00e3o de Execu\u00e7\u00e3o",
-      "file_type": "concept",
-      "source_file": "vogel-stack/operacao-agentes.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_handoff",
-      "community": 2,
-      "norm_label": "handoff padrao de execucao"
-    },
-    {
-      "label": "Regra de Juros Compostos",
-      "file_type": "concept",
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_juros_compostos",
-      "community": 1,
-      "norm_label": "regra de juros compostos"
-    },
-    {
-      "label": "Vogel Stack",
-      "file_type": "concept",
-      "source_file": "vogel-stack/README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_vogel_stack",
-      "community": 0,
-      "norm_label": "vogel stack"
-    },
-    {
-      "label": "PowerShell Logging Pattern",
-      "file_type": "concept",
-      "source_file": "vogel-stack/operacao-agentes.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_powershell_logging",
-      "community": 2,
-      "norm_label": "powershell logging pattern"
-    },
-    {
-      "label": "Manifesto por Run",
-      "file_type": "concept",
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_run_manifest",
-      "community": 1,
-      "norm_label": "manifesto por run"
-    },
-    {
-      "label": "M\u00e9todo Brainstorm-Concep\u00e7\u00e3o-Wireframe-Implementa\u00e7\u00e3o",
-      "file_type": "concept",
-      "source_file": "vogel-stack/evolucao-produto.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_dashboard_method",
-      "community": 2,
-      "norm_label": "metodo brainstorm-concepcao-wireframe-implementacao"
-    },
-    {
-      "label": "Identificadores Can\u00f4nicos",
-      "file_type": "concept",
-      "source_file": "vogel-stack/principios.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_canonical_identifiers",
-      "community": 0,
-      "norm_label": "identificadores canonicos"
-    },
-    {
-      "label": "Observabilidade e Logs",
-      "file_type": "concept",
-      "source_file": "vogel-stack/principios.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "concept_observability",
-      "community": 1,
-      "norm_label": "observabilidade e logs"
+      "norm_label": "agents.md document pattern",
+      "id": "concept_agents_md_document_pattern",
+      "community": 0
     },
     {
       "label": "Pasta docs/raw e intake",
@@ -311,9 +233,113 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "concept_docs_raw",
-      "community": 0,
-      "norm_label": "pasta docs/raw e intake"
+      "norm_label": "pasta docs/raw e intake",
+      "id": "concept_pasta_docs_raw_e_intake",
+      "community": 0
+    },
+    {
+      "label": "Registry de Execu\u00e7\u00f5es",
+      "file_type": "concept",
+      "source_file": "vogel-stack/documentacao-e-versionamento.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "registry de execucoes",
+      "id": "concept_registry_de_execucoes",
+      "community": 0
+    },
+    {
+      "label": "Manifesto por Run",
+      "file_type": "concept",
+      "source_file": "vogel-stack/documentacao-e-versionamento.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "manifesto por run",
+      "id": "concept_manifesto_por_run",
+      "community": 0
+    },
+    {
+      "label": "Knowledge Graph",
+      "file_type": "concept",
+      "source_file": "vogel-stack/documentacao-e-versionamento.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "knowledge graph",
+      "id": "concept_knowledge_graph",
+      "community": 1
+    },
+    {
+      "label": "Identificadores Can\u00f4nicos",
+      "file_type": "concept",
+      "source_file": "vogel-stack/evolucao-produto.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "identificadores canonicos",
+      "id": "concept_identificadores_canonicos",
+      "community": 0
+    },
+    {
+      "label": "Regra de Juros Compostos",
+      "file_type": "concept",
+      "source_file": "vogel-stack/operacao-agentes.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "regra de juros compostos",
+      "id": "concept_regra_de_juros_compostos",
+      "community": 1
+    },
+    {
+      "label": "Observabilidade e Logs",
+      "file_type": "concept",
+      "source_file": "vogel-stack/principios.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "observabilidade e logs",
+      "id": "concept_observabilidade_e_logs",
+      "community": 0
+    },
+    {
+      "label": "Vogel Stack",
+      "file_type": "concept",
+      "source_file": "vogel-stack/templates.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "vogel stack",
+      "id": "concept_vogel_stack",
+      "community": 2
+    },
+    {
+      "label": "Google AI Studio API Key",
+      "file_type": "concept",
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "norm_label": "google ai studio api key",
+      "id": "concept_google_ai_studio_api_key",
+      "community": 1
     }
   ],
   "links": [
@@ -325,17 +351,47 @@
       "source_location": null,
       "weight": 1.0,
       "source": "agents_agents_md",
-      "target": "concept_graphify"
+      "target": "concept_graphify_knowledge_graph_tool"
     },
     {
-      "relation": "semantically_similar_to",
+      "relation": "references",
       "confidence": "EXTRACTED",
-      "confidence_score": 0.99,
+      "confidence_score": 1.0,
       "source_file": "AGENTS.md",
       "source_location": null,
-      "weight": 0.99,
+      "weight": 1.0,
       "source": "agents_agents_md",
-      "target": "claude_claude_md"
+      "target": "vogelstack_principios"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_agents_md",
+      "target": "vogelstack_documentacao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_agents_md",
+      "target": "vogelstack_operacao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_agents_md",
+      "target": "vogelstack_registro"
     },
     {
       "relation": "references",
@@ -345,47 +401,267 @@
       "source_location": null,
       "weight": 1.0,
       "source": "claude_claude_md",
-      "target": "concept_graphify"
+      "target": "concept_graphify_knowledge_graph_tool"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "vogel-stack/README.md",
+      "source_file": "CLAUDE.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "vogelstack_readme",
+      "source": "claude_claude_md",
+      "target": "vogelstack_principios"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "claude_claude_md",
       "target": "vogelstack_documentacao"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "vogel-stack/registro-e-evidencias.md",
+      "source_file": "CLAUDE.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "vogelstack_registro",
+      "source": "claude_claude_md",
+      "target": "vogelstack_operacao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "claude_claude_md",
+      "target": "vogelstack_registro"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "quickstart_quickstart_md",
+      "target": "vogelstack_principios"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "quickstart_quickstart_md",
       "target": "vogelstack_documentacao"
     },
     {
-      "relation": "implements",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "vogel-stack/documentacao-e-versionamento.md",
+      "source_file": "quickstart.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "vogelstack_documentacao",
-      "target": "concept_agents_md_doc"
+      "source": "quickstart_quickstart_md",
+      "target": "vogelstack_operacao"
     },
     {
-      "relation": "implements",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "quickstart_quickstart_md",
+      "target": "vogelstack_registro"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "quickstart_quickstart_md",
+      "target": "vogelstack_evolucao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "quickstart_quickstart_md",
+      "target": "vogelstack_templates"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "quickstart_quickstart_md",
+      "target": "concept_graphify_knowledge_graph_tool"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "quickstart_quickstart_md",
+      "target": "concept_google_ai_studio_api_key"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 10.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community10__community_community_10",
+      "target": "vogelstack_evolucao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 10.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community10__community_community_10",
+      "target": "concept_metodo_brainstorm_concepcao_wireframe_implementacao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 10.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community10__community_community_10",
+      "target": "vogelstack_principios"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 10.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community10__community_community_10",
+      "target": "vogelstack_templates"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 7.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community7__community_community_7",
+      "target": "vogelstack_templates"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 7.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community7__community_community_7",
+      "target": "concept_handoff_padrao_de_execucao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 7.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community7__community_community_7",
+      "target": "concept_powershell_logging_pattern"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 7.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community7__community_community_7",
+      "target": "vogelstack_operacao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_COMMUNITY_Community 7.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "community7__community_community_7",
+      "target": "vogelstack_registro"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/principios.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_principios",
+      "target": "vogelstack_documentacao"
+    },
+    {
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "vogel-stack/documentacao-e-versionamento.md",
       "source_location": null,
       "weight": 1.0,
       "source": "vogelstack_documentacao",
-      "target": "concept_docs_raw"
+      "target": "concept_agents_md_document_pattern"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/documentacao-e-versionamento.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_documentacao",
+      "target": "concept_pasta_docs_raw_e_intake"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/documentacao-e-versionamento.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_documentacao",
+      "target": "concept_registry_de_execucoes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/documentacao-e-versionamento.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_documentacao",
+      "target": "concept_manifesto_por_run"
     },
     {
       "relation": "references",
@@ -405,16 +681,16 @@
       "source_location": null,
       "weight": 1.0,
       "source": "vogelstack_documentacao",
-      "target": "concept_graphify"
+      "target": "concept_graphify_knowledge_graph_tool"
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "vogel-stack/principios.md",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/evolucao-produto.md",
       "source_location": null,
-      "weight": 0.85,
-      "source": "vogelstack_principios",
+      "weight": 1.0,
+      "source": "vogelstack_evolucao",
       "target": "vogelstack_documentacao"
     },
     {
@@ -425,27 +701,47 @@
       "source_location": null,
       "weight": 1.0,
       "source": "vogelstack_readme",
+      "target": "vogelstack_documentacao"
+    },
+    {
+      "relation": "complements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/registro-e-evidencias.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_documentacao",
+      "target": "vogelstack_registro"
+    },
+    {
+      "relation": "guides",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "vogel-stack/evolucao-produto.md",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "vogelstack_principios",
       "target": "vogelstack_evolucao"
     },
     {
-      "relation": "implements",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "vogel-stack/evolucao-produto.md",
       "source_location": null,
       "weight": 1.0,
       "source": "vogelstack_evolucao",
-      "target": "concept_dashboard_method"
+      "target": "concept_metodo_brainstorm_concepcao_wireframe_implementacao"
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "vogel-stack/principios.md",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/evolucao-produto.md",
       "source_location": null,
-      "weight": 0.8,
-      "source": "vogelstack_principios",
-      "target": "vogelstack_evolucao"
+      "weight": 1.0,
+      "source": "vogelstack_evolucao",
+      "target": "concept_identificadores_canonicos"
     },
     {
       "relation": "references",
@@ -455,7 +751,17 @@
       "source_location": null,
       "weight": 1.0,
       "source": "vogelstack_readme",
-      "target": "vogelstack_operacao"
+      "target": "vogelstack_evolucao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/templates.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_templates",
+      "target": "vogelstack_evolucao"
     },
     {
       "relation": "references",
@@ -468,34 +774,14 @@
       "target": "vogelstack_operacao"
     },
     {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/operacao-agentes.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_operacao",
-      "target": "concept_handoff"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/operacao-agentes.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_operacao",
-      "target": "concept_powershell_logging"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
-      "confidence_score": 0.9,
+      "confidence_score": 1.0,
       "source_file": "vogel-stack/operacao-agentes.md",
       "source_location": null,
-      "weight": 0.9,
+      "weight": 1.0,
       "source": "vogelstack_operacao",
-      "target": "concept_registry"
+      "target": "concept_handoff_padrao_de_execucao"
     },
     {
       "relation": "references",
@@ -505,17 +791,137 @@
       "source_location": null,
       "weight": 1.0,
       "source": "vogelstack_operacao",
-      "target": "concept_juros_compostos"
+      "target": "concept_powershell_logging_pattern"
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/operacao-agentes.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_operacao",
+      "target": "concept_registry_de_execucoes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/operacao-agentes.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_operacao",
+      "target": "concept_regra_de_juros_compostos"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/operacao-agentes.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_operacao",
+      "target": "concept_knowledge_graph"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/operacao-agentes.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_operacao",
+      "target": "concept_graphify_knowledge_graph_tool"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_readme",
+      "target": "vogelstack_operacao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "vogel-stack/principios.md",
       "source_location": null,
-      "weight": 0.85,
+      "weight": 1.0,
       "source": "vogelstack_principios",
-      "target": "vogelstack_operacao"
+      "target": "concept_observabilidade_e_logs"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/principios.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_principios",
+      "target": "concept_identificadores_canonicos"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/principios.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_principios",
+      "target": "concept_registry_de_execucoes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/principios.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_principios",
+      "target": "concept_manifesto_por_run"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/registro-e-evidencias.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_registro",
+      "target": "vogelstack_principios"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/principios.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_principios",
+      "target": "concept_graphify_knowledge_graph_tool"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/principios.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_principios",
+      "target": "concept_knowledge_graph"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/principios.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_principios",
+      "target": "concept_pasta_docs_raw_e_intake"
     },
     {
       "relation": "references",
@@ -528,64 +934,24 @@
       "target": "vogelstack_principios"
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "vogel-stack/principios.md",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/README.md",
       "source_location": null,
-      "weight": 0.85,
-      "source": "vogelstack_principios",
-      "target": "vogelstack_registro"
+      "weight": 1.0,
+      "source": "vogelstack_readme",
+      "target": "concept_handoff_padrao_de_execucao"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "vogel-stack/principios.md",
+      "source_file": "vogel-stack/README.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "vogelstack_principios",
-      "target": "concept_knowledge_graph"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/principios.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_principios",
-      "target": "concept_graphify"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/principios.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_principios",
-      "target": "concept_canonical_identifiers"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/principios.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_principios",
-      "target": "concept_observability"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 0.9,
-      "source_file": "vogel-stack/principios.md",
-      "source_location": null,
-      "weight": 0.9,
-      "source": "vogelstack_principios",
-      "target": "concept_docs_raw"
+      "source": "vogelstack_readme",
+      "target": "concept_powershell_logging_pattern"
     },
     {
       "relation": "references",
@@ -596,6 +962,26 @@
       "weight": 1.0,
       "source": "vogelstack_readme",
       "target": "vogelstack_registro"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_readme",
+      "target": "concept_registry_de_execucoes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_readme",
+      "target": "concept_manifesto_por_run"
     },
     {
       "relation": "references",
@@ -608,196 +994,216 @@
       "target": "vogelstack_templates"
     },
     {
-      "relation": "implements",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "vogel-stack/README.md",
       "source_location": null,
       "weight": 1.0,
       "source": "vogelstack_readme",
+      "target": "concept_graphify_knowledge_graph_tool"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_readme",
+      "target": "concept_knowledge_graph"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_readme",
+      "target": "concept_pasta_docs_raw_e_intake"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_readme",
+      "target": "concept_agents_md_document_pattern"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/registro-e-evidencias.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_registro",
+      "target": "concept_registry_de_execucoes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/registro-e-evidencias.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_registro",
+      "target": "concept_manifesto_por_run"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/registro-e-evidencias.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_registro",
+      "target": "concept_regra_de_juros_compostos"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/registro-e-evidencias.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_registro",
+      "target": "concept_knowledge_graph"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/registro-e-evidencias.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_registro",
+      "target": "concept_graphify_knowledge_graph_tool"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/templates.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_templates",
       "target": "concept_vogel_stack"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "vogel-stack/README.md",
+      "source_file": "vogel-stack/templates.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "vogelstack_readme",
-      "target": "concept_graphify"
+      "source": "vogelstack_templates",
+      "target": "concept_agents_md_document_pattern"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "vogel-stack/README.md",
+      "source_file": "vogel-stack/templates.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "vogelstack_readme",
+      "source": "vogelstack_templates",
+      "target": "concept_registry_de_execucoes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/templates.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_templates",
+      "target": "concept_manifesto_por_run"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/templates.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_templates",
+      "target": "concept_handoff_padrao_de_execucao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/templates.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_templates",
+      "target": "concept_powershell_logging_pattern"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/templates.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_templates",
+      "target": "concept_metodo_brainstorm_concepcao_wireframe_implementacao"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vogel-stack/templates.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "vogelstack_templates",
       "target": "concept_knowledge_graph"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_registro",
-      "target": "concept_registry"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_registro",
-      "target": "concept_run_manifest"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_registro",
-      "target": "concept_juros_compostos"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_registro",
-      "target": "concept_knowledge_graph"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/templates.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_templates",
-      "target": "concept_agents_md_doc"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vogel-stack/templates.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "vogelstack_templates",
-      "target": "concept_powershell_logging"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 0.9,
-      "source_file": "vogel-stack/templates.md",
-      "source_location": null,
-      "weight": 0.9,
-      "source": "vogelstack_templates",
-      "target": "concept_dashboard_method"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 0.9,
-      "source_file": "vogel-stack/templates.md",
-      "source_location": null,
-      "weight": 0.9,
-      "source": "vogelstack_templates",
-      "target": "concept_registry"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 0.9,
-      "source_file": "vogel-stack/templates.md",
-      "source_location": null,
-      "weight": 0.9,
-      "source": "vogelstack_templates",
-      "target": "concept_handoff"
     },
     {
       "relation": "implements",
       "confidence": "INFERRED",
       "confidence_score": 0.95,
-      "source_file": "AGENTS.md",
-      "source_location": null,
-      "weight": 0.95,
-      "source": "concept_graphify",
-      "target": "concept_knowledge_graph"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
-      "weight": 0.95,
-      "source": "concept_juros_compostos",
-      "target": "concept_knowledge_graph"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.9,
-      "source_file": "vogel-stack/documentacao-e-versionamento.md",
-      "source_location": null,
-      "weight": 0.9,
-      "source": "concept_docs_raw",
-      "target": "concept_knowledge_graph"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
       "source_file": "vogel-stack/principios.md",
       "source_location": null,
-      "weight": 0.75,
-      "source": "concept_canonical_identifiers",
-      "target": "concept_agents_md_doc"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "vogel-stack/registro-e-evidencias.md",
-      "source_location": null,
       "weight": 0.95,
-      "source": "concept_juros_compostos",
-      "target": "concept_registry"
+      "source": "concept_graphify_knowledge_graph_tool",
+      "target": "concept_knowledge_graph"
     },
     {
-      "relation": "conceptually_related_to",
+      "relation": "enables",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "quickstart.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "concept_google_ai_studio_api_key",
+      "target": "concept_graphify_knowledge_graph_tool"
+    },
+    {
+      "relation": "tracks",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
-      "source_file": "vogel-stack/principios.md",
+      "source_file": "vogel-stack/registro-e-evidencias.md",
       "source_location": null,
       "weight": 0.85,
-      "source": "concept_observability",
-      "target": "concept_registry"
+      "source": "concept_registry_de_execucoes",
+      "target": "concept_manifesto_por_run"
     },
     {
-      "relation": "conceptually_related_to",
+      "relation": "reinforces",
       "confidence": "INFERRED",
-      "confidence_score": 0.9,
-      "source_file": "vogel-stack/operacao-agentes.md",
+      "confidence_score": 0.95,
+      "source_file": "vogel-stack/registro-e-evidencias.md",
       "source_location": null,
-      "weight": 0.9,
-      "source": "concept_handoff",
-      "target": "concept_powershell_logging"
+      "weight": 0.95,
+      "source": "concept_regra_de_juros_compostos",
+      "target": "concept_knowledge_graph"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "75e005b088ddc0e791e4fed2ccd1885e3831ee2f"
+  "built_at_commit": "385ca4041c30b9a97dc710eb87ce201cb44e73ce"
 }
