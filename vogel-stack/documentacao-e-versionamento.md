@@ -179,6 +179,31 @@ Atualizar docs no mesmo ciclo sempre que houver:
 - nova limitação conhecida;
 - mudança de versão.
 
+## 3.05 Workflows com commit automático e mensagem genérica
+
+Alguns projetos usam scripts de sincronização que executam `git add -A`, `git commit` e `git push` em lote, normalmente com mensagem genérica do tipo `sync: <maquina> <data>`. Exemplos: o script `sync-2ms-repos.ps1` da stack 2morrow, automações de backup local, hooks de "save on quit".
+
+Quando esse tipo de workflow estiver em uso:
+
+- a mensagem do commit não descreve o que foi entregue;
+- `git log` deixa de ser fonte legível de histórico funcional;
+- `docs/changelog.md` passa a ser o **registro real** da entrega.
+
+Implicação operacional:
+
+- atualizar `docs/changelog.md` é parte obrigatória do encerramento da rodada, não opcional;
+- a entrada do changelog deve sair antes da execução do script de sync, para que o próprio commit automático carregue o registro junto;
+- o agente que prepara a entrega não pode considerar a rodada concluída sem confirmar:
+  - existe entrada nova no topo do changelog;
+  - a entrada usa o `## 8. Template de changelog` desta página;
+  - `Entradas principais` lista arquivos tocados e efeito observável;
+  - `Estado` registra verificações executadas e o que continua não suportado;
+  - documentação relacionada (arquitetura, fontes, dashboards, operação) foi atualizada quando o contrato mudou.
+
+Quando o projeto usa submódulos e o script de sync não entra neles, o agente deve avisar explicitamente o usuário de que o `git push` dentro do submódulo precisa ser manual antes do sync principal — caso contrário o repositório pai vai apontar para um commit inexistente no remoto.
+
+Essa regra mantém [[Knowledge Graph]], handoffs e auditoria operacional consistentes mesmo em projetos onde o histórico do Git foi deliberadamente trocado por automação leve.
+
 ## 3.1 Linkagem semântica no nascimento
 
 Todo documento novo deve nascer já conectado ao [[Knowledge Graph]] do projeto.
