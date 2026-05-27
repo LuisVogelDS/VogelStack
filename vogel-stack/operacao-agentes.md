@@ -197,7 +197,9 @@ Antes de encerrar uma entrega, validar:
 2. se imports e caminhos continuam válidos;
 3. se a documentação foi atualizada quando necessário;
 4. se nenhum segredo novo foi exposto;
-5. se a mudança não introduziu regressão óbvia nas áreas principais.
+5. se a mudança não introduziu regressão óbvia nas áreas principais;
+6. se o projeto usa workflow de commit automático com mensagem genérica (ver [[documentacao-e-versionamento#3.05 Workflows com commit automático e mensagem genérica|Workflows com commit automático]]), entrada nova no topo de `docs/changelog.md` é parte do encerramento e deve sair antes do sync;
+7. se o projeto tem submódulos e o script de sync não entra neles, o `git push` dentro do submódulo precisa ser feito manualmente antes do sync principal, ou o repositório pai vai empurrar um ponteiro para commit inexistente no remoto.
 
 ## 9. Resultado esperado de uma boa operação com agentes
 
