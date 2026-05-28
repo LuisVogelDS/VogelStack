@@ -232,3 +232,25 @@ Exemplos de "problema" sob este princípio:
 | Auditoria estrutural | `graphify cluster-only` | Agente IA com prompt explícito |
 
 A escolha entre família A e B é feita pelo princípio nº 11 ([[principios|modos de execução suportados devem ser explícitos]]) e este princípio nº 19. Detalhes operacionais de cada família vivem em [[quickstart]] (padrão) e [[operacao-leve]] (leve).
+
+## 20. Integrações de dados devem partir da fonte primária
+
+Quando o projeto integra dados externos, a fonte primária oficial (API governamental, FTP institucional, banco do órgão produtor, registro público mantido pela autoridade que emite o dado) deve ser preferida sobre intermediários, re-curadores ou réplicas, mesmo quando o intermediário oferece UX, SQL ou conveniência de consulta melhor.
+
+Esse princípio complementa o [[principios#2. Toda aplicação precisa de fontes de verdade explícitas|Princípio 2]] qualificando *qual* fonte de verdade declarar quando há mais de uma camada disponível, e dialoga com o princípio nº 19 ([[principios|Problema, não tecnologia]]): a conveniência de consulta de um intermediário é um problema operacional que o projeto pode optar por resolver internamente em vez de delegar a um terceiro privado.
+
+Motivação:
+
+- intermediários adicionam delay de curadoria (de semanas a meses) entre a publicação oficial e o que o consumidor vê;
+- podem ficar desatualizados, parados ou degradados sem aviso, criando assimetria invisível entre o sistema e o estado real da fonte oficial;
+- removem a responsabilidade direta entre o consumidor do dado e o emissor oficial, dificultando reclamação, auditoria e correção;
+- introduzem dependência operacional sobre um terceiro privado que pode mudar contrato, preço, política de acesso ou simplesmente desligar.
+
+Regras práticas:
+
+- declarar no [[documentacao-e-versionamento|README ou docs/arquitetura]] quais fontes primárias o projeto integra (URL, protocolo, formato, ritmo esperado de atualização);
+- usar intermediários apenas como fallback explícito e documentado (ex.: histórico que a fonte oficial não mais serve), nunca como caminho default;
+- registrar como [[principios#1. O comportamento documentado deve refletir o sistema real|limitação conhecida]] quando o caminho atual depende de intermediário e o motivo (ex.: dados anteriores ao lançamento da API oficial);
+- preferir formato cru oficial mesmo que exija pós-processamento local sobre formato pré-tratado por terceiros que possa ter perdido fidelidade.
+
+A vantagem operacional do intermediário (filtro server-side, SQL, UX) deve ser reconstruída no próprio projeto quando relevante, em vez de ser razão para abandonar a fonte primária. Ver [[operacao-agentes|Operação de Agentes]] para a política de handoff em coletas custosas a partir de fontes primárias instáveis.
