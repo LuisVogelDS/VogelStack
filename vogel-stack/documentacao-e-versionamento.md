@@ -204,6 +204,18 @@ Quando o projeto usa submódulos e o script de sync não entra neles, o agente d
 
 Essa regra mantém [[Knowledge Graph]], handoffs e auditoria operacional consistentes mesmo em projetos onde o histórico do Git foi deliberadamente trocado por automação leve.
 
+## 3.06 Piso de integridade da malha — link checker
+
+Independente da família de operação documental adotada ([[principios|padrão ou leve, princípio nº 19]]), wikilinks são contrato de navegação. Wikilink quebrado é dívida visível.
+
+Recomendação para qualquer projeto:
+
+- manter um **link checker determinístico** (script sem LLM) que valida todo `[[wikilink]]` no repo;
+- rodar em CI (GitHub Action ou equivalente) em push/PR para branch principal;
+- falhar a CI em link quebrado.
+
+Esse piso vale especialmente para projetos no [[operacao-leve|caminho leve]], que dispensam Graphify e dependem dos wikilinks como única infra de navegação semântica. Detalhes operacionais em [[operacao-agentes#7.4 Link checker determinístico como piso da malha|operacao-agentes seção 7.4]].
+
 ## 3.1 Linkagem semântica no nascimento
 
 Todo documento novo deve nascer já conectado ao [[Knowledge Graph]] do projeto.

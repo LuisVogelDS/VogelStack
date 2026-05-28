@@ -1,8 +1,34 @@
-# Quickstart: Vogel Stack + Graphify
+# Quickstart: Vogel Stack
 
-Este guia mostra o fluxo recomendado para instalar a Vogel Stack em outro repositório, usar Codex como auditor principal da documentação e materializar um Knowledge Graph navegável com Graphify.
+Este guia mostra como instalar a Vogel Stack em outro repositório e escolher a **família de operação documental** que faz sentido para esse projeto.
 
-A estratégia padrão é **Codex-led, Graphify-assisted**:
+A stack reconhece duas famílias suportadas, em coerência com o princípio nº 19 ([[vogel-stack/principios|Problema, não tecnologia]]):
+
+- **Família padrão — Codex-led + Graphify-assisted.** Materializa Knowledge Graph em `graphify-out/` e usa Obsidian como camada visual. Documentada neste arquivo a partir da seção "Fluxo principal — caminho padrão".
+- **Família leve — wikilinks + link checker + agente sob demanda.** Sem Graphify, sem Obsidian versionado. Documentada em [[vogel-stack/operacao-leve|operacao-leve]]. Indicada para projetos com agente forte disponível constantemente e menos de ~80 documentos.
+
+A escolha é declarada explicitamente pelo projeto, em ADR próprio.
+
+## Como escolher a família
+
+Use o **caminho leve** quando **todos** os pontos abaixo valerem:
+
+- Repo com < ~80 docs ou < ~500KB de markdown.
+- Agente forte (Claude Code Max/High, Codex pago) constantemente disponível.
+- Maioria dos consumidores entra com agente carregado ou via hub humano.
+- Volatilidade documental alta — regenerar grafo paga caro.
+- Sem material bruto extenso em `docs/raw/` ou `intake/`.
+
+Use o **caminho padrão** (este quickstart) nos demais casos, em especial quando:
+
+- Repo é grande ou cresce rapidamente.
+- Múltiplos agentes externos (não-Claude, não-Codex) consomem o repo sem contexto.
+- Material bruto extenso precisa ser conectado a docs canônicos.
+- Auditoria estrutural é frequente o suficiente para que cache materializado pague.
+
+Em caso de dúvida, comece pelo **caminho leve** — migrar para o padrão depois é trivial (rodar `graphify extract .` uma vez); migrar do padrão para o leve exige remover artefatos versionados.
+
+A estratégia do caminho padrão, descrita abaixo, é **Codex-led, Graphify-assisted**:
 
 1. **Submódulo:** trazer a Vogel Stack para o ambiente local.
 2. **Auditoria Codex:** pedir ao Codex para ler o projeto, a Vogel Stack e criar links reais entre processos técnicos e regras da stack.
@@ -12,7 +38,7 @@ A estratégia padrão é **Codex-led, Graphify-assisted**:
 
 Gemini fica como fallback econômico para repositórios grandes, exploração descartável ou situações em que custo é mais importante do que precisão. A saída do Gemini não deve virar mapa canônico sem revisão.
 
-## Conexões Principais
+## Conexões principais
 
 Este guia operacional se conecta diretamente a:
 
@@ -22,9 +48,10 @@ Este guia operacional se conecta diretamente a:
 - [[vogel-stack/registro-e-evidencias|Registro e Evidências Operacionais]]
 - [[vogel-stack/evolucao-produto|Evolução de Produto e Arquitetura]]
 - [[vogel-stack/templates|Templates de Documentação]]
+- [[vogel-stack/operacao-leve|Operação Leve (alternativa sem Graphify)]]
 - [[AGENTS|Graphify Knowledge Graph Tool]]
 
-## Fluxo Principal
+## Fluxo principal — caminho padrão
 
 ### 1. Instalar a Vogel Stack como submódulo
 
@@ -166,6 +193,23 @@ Aceite o novo grafo apenas se:
 - nenhuma chave de API foi versionada.
 
 Se a qualidade cair, restaure o grafo anterior e investigue antes de commitar.
+
+## Caminho leve — sem Graphify, sem Obsidian versionado
+
+Quando o projeto se encaixa nos critérios da seção "Como escolher a família" (poucos docs, agente forte sempre disponível, volatilidade alta, raw enxuto), o caminho leve substitui as 5 etapas acima por uma combinação muito mais barata.
+
+Detalhes operacionais completos, **incluindo receita passo a passo para migrar um projeto que já adotou o caminho padrão**, vivem em [[vogel-stack/operacao-leve]].
+
+Resumo da substituição:
+
+| Problema | Caminho padrão | Caminho leve |
+|---|---|---|
+| Sumário canônico | `graphify-out/GRAPH_REPORT.md` | `docs/contexto.md` + `docs/README.md` curados |
+| Detecção de link quebrado | (implícito no fluxo) | `scripts/check-wikilinks.ps1` + GitHub Action |
+| Auditoria estrutural | `graphify cluster-only` + análise humana | Agente IA sob demanda com prompt explícito |
+| Visualização gráfica | `graph.html` + Obsidian versionado | Obsidian local não-versionado |
+
+Em ambos os caminhos os princípios da stack se mantêm; o que muda é a camada de ferramenta.
 
 ## Fallback Gemini
 

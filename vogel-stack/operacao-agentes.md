@@ -189,6 +189,19 @@ Regra recomendada:
 - não devem entrar em commit, release ou PR sem intenção clara do usuário;
 - o projeto deve manter distinção entre stack compartilhada e apoio individual.
 
+## 7.4 Link checker determinístico como piso da malha
+
+Independente da família de operação documental adotada ([[principios|padrão ou leve, princípio nº 19]]), wikilink quebrado é dívida visível. Recomendação base para qualquer projeto que use wikilinks como contrato de navegação:
+
+- manter um **link checker determinístico** (script, sem dependência de LLM) que valida que todo `[[wikilink]]` aponta para arquivo existente;
+- rodar o checker localmente antes de fechar rodada documental;
+- rodar o checker em CI (GitHub Action ou equivalente) em push/PR para branch principal;
+- falhar a CI em link quebrado — wikilink que aponta para nada confunde tanto humano quanto agente.
+
+Esse piso vale especialmente no [[operacao-leve|caminho leve]], onde não há `GRAPH_REPORT.md` para acusar inconsistência. No [[quickstart|caminho padrão]] o checker continua útil como verificação rápida sem precisar regenerar Graphify a cada commit.
+
+Implementação de referência (PowerShell, ignora blocos de código, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, com resolução em três pontos âncora) disponível em `scripts/check-wikilinks.ps1` no projeto Alquimia, que pode servir de template para outros projetos.
+
 ## 8. Checklist antes de concluir uma alteração
 
 Antes de encerrar uma entrega, validar:
@@ -199,7 +212,8 @@ Antes de encerrar uma entrega, validar:
 4. se nenhum segredo novo foi exposto;
 5. se a mudança não introduziu regressão óbvia nas áreas principais;
 6. se o projeto usa workflow de commit automático com mensagem genérica (ver [[documentacao-e-versionamento#3.05 Workflows com commit automático e mensagem genérica|Workflows com commit automático]]), entrada nova no topo de `docs/changelog.md` é parte do encerramento e deve sair antes do sync;
-7. se o projeto tem submódulos e o script de sync não entra neles, o `git push` dentro do submódulo precisa ser feito manualmente antes do sync principal, ou o repositório pai vai empurrar um ponteiro para commit inexistente no remoto.
+7. se o projeto tem submódulos e o script de sync não entra neles, o `git push` dentro do submódulo precisa ser feito manualmente antes do sync principal, ou o repositório pai vai empurrar um ponteiro para commit inexistente no remoto;
+8. se a rodada tocou em `.md`, o **link checker** ([[operacao-agentes#7.4 Link checker determinístico como piso da malha|seção 7.4]]) passou — wikilinks novos resolvem para arquivos reais.
 
 ## 9. Resultado esperado de uma boa operação com agentes
 

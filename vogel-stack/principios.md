@@ -175,13 +175,9 @@ Também é preciso materializar:
 
 Em projetos com esse perfil, manter um [[Registry de Execuções|registry]] e [[Manifesto por Run|manifestos por execução]] deixa de ser luxo e passa a ser parte da rastreabilidade mínima, como detalhado em [[registro-e-evidencias|Registro e Evidências Operacionais]].
 
-## 17. Descoberta visual deve anteceder implementações relevantes
+## 17. Descoberta semântica deve anteceder implementações relevantes
 
-Com [[Graphify Knowledge Graph Tool|Graphify]], o projeto passa a ter um segundo cérebro navegável por relações semânticas.
-
-A interface do Obsidian deve ser tratada como a camada oficial de visualização desse [[Knowledge Graph|grafo]].
-
-Antes de implementar novos serviços, painéis, integrações ou mudanças estruturais, equipe e agentes devem consultar as conexões visuais para cruzar:
+Antes de implementar novos serviços, painéis, integrações ou mudanças estruturais, equipe e agentes devem **cruzar relações semânticas** entre:
 
 - documentos oficiais;
 - entradas brutas em [[Pasta docs/raw e intake|docs/raw/ ou intake/]];
@@ -190,13 +186,18 @@ Antes de implementar novos serviços, painéis, integrações ou mudanças estru
 - contratos de dados;
 - módulos e superfícies existentes.
 
-Essa etapa ajuda a revelar dependências, decisões antigas, hipóteses já testadas e relações que uma busca textual comum pode não mostrar.
+Essa etapa revela dependências, decisões antigas, hipóteses já testadas e relações que uma busca textual comum não mostra.
 
-Descoberta visual não elimina análise técnica. Ela melhora o ponto de partida da análise.
+**A ferramenta que materializa essa descoberta é escolha do projeto** — ver princípio nº 19 ([[principios|Problema, não tecnologia]]). Duas famílias de solução são suportadas:
+
+- **Padrão:** [[Graphify Knowledge Graph Tool|Graphify]] gera knowledge graph em `graphify-out/`; Obsidian é camada visual. Indicada para projetos grandes ou com material bruto extenso. Detalhes em [[quickstart]].
+- **Leve:** wikilinks curados servem de mapa; agente de IA faz auditoria estrutural sob demanda; link checker determinístico valida integridade da malha. Detalhes em [[operacao-leve]].
+
+Independente da família escolhida, **o princípio se mantém**: descoberta semântica não elimina análise técnica, mas melhora seu ponto de partida.
 
 ## 18. Documentos novos já devem nascer conectados
 
-Sempre que um novo documento, guia, handoff, runbook, resumo de execução ou artefato textual for criado, ele deve incluir wikilinks reais para os documentos e conceitos que o tornam compreensível no [[Knowledge Graph]].
+Sempre que um novo documento, guia, handoff, runbook, resumo de execução ou artefato textual for criado, ele deve incluir wikilinks reais para os documentos e conceitos que o tornam compreensível.
 
 Regra prática:
 
@@ -206,4 +207,28 @@ Regra prática:
 - ligar contratos, fontes de verdade, identificadores, observabilidade e semântica de saída a este documento;
 - ligar decisões de produto, dashboards e evolução arquitetural a [[evolucao-produto|Evolução de Produto e Arquitetura]].
 
-O objetivo é reduzir retrabalho: cada documento novo deve entrar no repositório já rastreável, navegável e pronto para ser incorporado pelo Graphify.
+O objetivo é reduzir retrabalho: cada documento novo deve entrar no repositório já rastreável e navegável — pronto para ser consumido por humano ou agente sem investigação extra. Em projetos no caminho padrão, isso prepara o documento para ser incorporado pelo Graphify; em projetos no caminho leve, isso já é o contrato de navegação suficiente.
+
+Links não devem ser decorativos. Cada wikilink precisa representar uma relação real de dependência, explicação, evidência, contrato, origem ou continuidade operacional.
+
+## 19. Problema, não tecnologia
+
+Cada projeto declara, de forma explícita, qual **solução adota para cada problema operacional** — não herda ferramenta por convenção da stack.
+
+Regra prática:
+
+- Antes de adotar uma ferramenta sugerida (Graphify, Obsidian versionado, etc.), conferir que o **problema** que ela resolve existe no projeto em magnitude suficiente para justificar o custo.
+- Quando o projeto escolhe ferramenta diferente da default, **declarar a decisão em ADR**, listar a substituição problema-a-problema, e referenciar este princípio.
+- Quando uma decisão dessas existir, ela vence o que a stack indica por convenção — em coerência com o princípio nº 1 ([[principios|comportamento documentado reflete o sistema real]]).
+- Stack indica **problemas e famílias de solução**; projeto escolhe **uma família** e declara.
+
+Exemplos de "problema" sob este princípio:
+
+| Problema | Família de solução A | Família de solução B |
+|---|---|---|
+| Sumário canônico para agente frio | `GRAPH_REPORT.md` materializado | Hub humano + agente sob demanda |
+| Detecção de link quebrado | (implícito no fluxo Graphify) | Link checker determinístico |
+| Visualização do grafo | `graph.html` + Obsidian versionado | Obsidian local não-versionado |
+| Auditoria estrutural | `graphify cluster-only` | Agente IA com prompt explícito |
+
+A escolha entre família A e B é feita pelo princípio nº 11 ([[principios|modos de execução suportados devem ser explícitos]]) e este princípio nº 19. Detalhes operacionais de cada família vivem em [[quickstart]] (padrão) e [[operacao-leve]] (leve).
