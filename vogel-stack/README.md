@@ -20,12 +20,12 @@ Esta stack ajuda a manter:
 
 ## Estrutura
 
-- [[principios|principios.md]]: princípios permanentes para qualquer projeto.
-- [[operacao-agentes|operacao-agentes.md]]: política operacional para uso de agentes, comandos e execuções.
-- [[registro-e-evidencias|registro-e-evidencias.md]]: padrão para [[Registry de Execuções|registry]], [[Manifesto por Run|manifestos]] e rastreabilidade de execuções.
-- [[documentacao-e-versionamento|documentacao-e-versionamento.md]]: papéis dos docs, regras de atualização e convenções de versionamento.
-- [[evolucao-produto|evolucao-produto.md]]: método para evoluir arquitetura, produto e dashboards sem ficar preso ao legado atual.
-- [[templates|templates.md]]: modelos de documentos para iniciar novos repositórios com o mesmo padrão.
+- [[vogel-stack/vogel-stack/principios]]: princípios permanentes para qualquer projeto.
+- [[vogel-stack/vogel-stack/operacao-agentes]]: política operacional para uso de agentes, comandos e execuções.
+- [[vogel-stack/vogel-stack/registro-e-evidencias]]: padrão para [[Registry de Execuções|registry]], [[Manifesto por Run|manifestos]] e rastreabilidade de execuções.
+- [[vogel-stack/vogel-stack/documentacao-e-versionamento]]: papéis dos docs, regras de atualização e convenções de versionamento.
+- [[vogel-stack/vogel-stack/evolucao-produto]]: método para evoluir arquitetura, produto e dashboards sem ficar preso ao legado atual.
+- [[vogel-stack/vogel-stack/templates]]: modelos de documentos para iniciar novos repositórios com o mesmo padrão.
 
 ## Descoberta visual
 
@@ -58,7 +58,7 @@ Forma mínima de adoção em outro projeto:
 
 1. ler `quickstart.md` na raiz deste repositório para instalar a stack, configurar Graphify e gerar links semânticos;
 2. copiar esta pasta ou instalá-la como submódulo no novo repositório;
-3. adaptar [[templates|templates.md]] para gerar [[AGENTS.md Document Pattern|AGENTS.md]], `README.md`, `quickstart.md`, `docs/arquitetura.md`, `docs/versionamento.md` e `docs/changelog.md`;
+3. adaptar [[vogel-stack/vogel-stack/templates]] para gerar [[AGENTS.md Document Pattern|AGENTS.md]], `README.md`, `quickstart.md`, `docs/arquitetura.md`, `docs/versionamento.md` e `docs/changelog.md`;
 4. ajustar fontes de verdade, fluxo de deploy, autenticação, matriz de suporte de ambiente e contratos do projeto alvo;
 5. manter os documentos atualizados no mesmo ciclo em que o comportamento do produto mudar.
 
