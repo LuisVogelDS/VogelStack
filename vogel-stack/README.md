@@ -20,29 +20,17 @@ Esta stack ajuda a manter:
 
 ## Estrutura
 
-- [[vogel-stack/vogel-stack/principios]]: princípios permanentes para qualquer projeto.
+- [[vogel-stack/vogel-stack/principios]]: princípios permanentes para qualquer projeto, incluindo o princípio nº 19 ("Problema, não tecnologia").
 - [[vogel-stack/vogel-stack/operacao-agentes]]: política operacional para uso de agentes, comandos e execuções.
 - [[vogel-stack/vogel-stack/registro-e-evidencias]]: padrão para [[Registry de Execuções|registry]], [[Manifesto por Run|manifestos]] e rastreabilidade de execuções.
 - [[vogel-stack/vogel-stack/documentacao-e-versionamento]]: papéis dos docs, regras de atualização e convenções de versionamento.
 - [[vogel-stack/vogel-stack/evolucao-produto]]: método para evoluir arquitetura, produto e dashboards sem ficar preso ao legado atual.
 - [[vogel-stack/vogel-stack/templates]]: modelos de documentos para iniciar novos repositórios com o mesmo padrão.
+- [[vogel-stack/vogel-stack/operacao-leve]]: alternativa ao fluxo padrão Codex-led + Graphify-assisted, para projetos que adotam wikilinks + link checker + agente sob demanda.
 
-## Descoberta visual
+## Descoberta semântica
 
-Com [[Graphify Knowledge Graph Tool|Graphify]], a Vogel Stack deixa de ser apenas um conjunto de rotas manuais de documentação e passa a operar como um segundo cérebro do projeto.
-
-A interface do Obsidian é a camada oficial de visualização do [[Knowledge Graph]].
-
-Neste repositório, a integração local do Graphify é materializada em:
-
-- `graphify-out/GRAPH_REPORT.md`: relatório textual que agentes devem ler primeiro;
-- `graphify-out/graph.json`: grafo consultável por `graphify query`, `graphify path` e `graphify explain`;
-- `graphify-out/graph.html`: visualização HTML navegável;
-- `graphify-out/manifest.json`: hashes dos arquivos indexados.
-
-O CLI local atual não gera `graphify-out/wiki/index.md` por padrão. Se esse diretório existir em um projeto futuro, ele pode ser usado como camada adicional de navegação, mas não é pré-requisito da Vogel Stack.
-
-Antes de iniciar a implementação de novos serviços, painéis, integrações ou refatores relevantes, equipe e agentes devem usar as conexões visuais do grafo para cruzar referências entre:
+Antes de iniciar a implementação de novos serviços, painéis, integrações ou refatores relevantes, equipe e agentes devem cruzar referências entre:
 
 - documentos oficiais;
 - material bruto em [[Pasta docs/raw e intake|docs/raw/ ou intake/]];
@@ -50,17 +38,23 @@ Antes de iniciar a implementação de novos serviços, painéis, integrações o
 - decisões de produto;
 - contratos, módulos e superfícies de UI ou API.
 
-Essa descoberta visual não substitui leitura técnica, testes ou revisão de código. Ela orienta onde procurar primeiro e reduz o risco de reinventar decisões que o projeto já materializou.
+A ferramenta que materializa essa descoberta é escolha do projeto, em coerência com o princípio nº 19 ([[vogel-stack/vogel-stack/principios|Problema, não tecnologia]]):
+
+- **Família padrão (Codex-led + Graphify-assisted).** Materializa knowledge graph em `graphify-out/` (relatório, JSON, HTML, manifest) e usa Obsidian como camada visual. Fluxo completo em [[quickstart]].
+- **Família leve (wikilinks + link checker + agente sob demanda).** Sem Graphify, sem Obsidian versionado. Indicada para projetos com agente forte (Claude Code Max, Codex pago) constantemente disponível. Detalhes em [[vogel-stack/vogel-stack/operacao-leve]].
+
+Em ambos os caminhos, descoberta semântica não substitui leitura técnica, testes ou revisão de código — ela orienta onde procurar primeiro e reduz o risco de reinventar decisões que o projeto já materializou.
 
 ## Como usar
 
 Forma mínima de adoção em outro projeto:
 
-1. ler `quickstart.md` na raiz deste repositório para instalar a stack, configurar Graphify e gerar links semânticos;
-2. copiar esta pasta ou instalá-la como submódulo no novo repositório;
+1. ler `quickstart.md` na raiz deste repositório para escolher a família de operação documental (padrão Codex-led + Graphify-assisted, ou leve com wikilinks + link checker);
+2. instalar a Vogel Stack como submódulo no projeto-alvo;
 3. adaptar [[vogel-stack/vogel-stack/templates]] para gerar [[AGENTS.md Document Pattern|AGENTS.md]], `README.md`, `quickstart.md`, `docs/arquitetura.md`, `docs/versionamento.md` e `docs/changelog.md`;
 4. ajustar fontes de verdade, fluxo de deploy, autenticação, matriz de suporte de ambiente e contratos do projeto alvo;
-5. manter os documentos atualizados no mesmo ciclo em que o comportamento do produto mudar.
+5. **declarar a família escolhida em ADR próprio do projeto** (regra do princípio nº 19);
+6. manter os documentos atualizados no mesmo ciclo em que o comportamento do produto mudar.
 
 ## Escopo
 
