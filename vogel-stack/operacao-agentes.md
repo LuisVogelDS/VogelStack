@@ -29,6 +29,25 @@ Regras:
 - em execuções longas, pesadas ou ruidosas, preferir o padrão `agente prepara, usuário executa, agente interpreta` em vez de gastar créditos acompanhando toda a execução;
 - quando uma execução custosa for necessária, explicitar por que ela destrava a tarefa.
 
+## 2.1 Orçamento de tokens e alerta antecipado
+
+O custo de uma tarefa deve ser previsto, não descoberto no fim. Regras:
+
+- antes de mergulhar, **estimar o custo aproximado** de tokens/créditos da tarefa;
+- se a projeção for alta (regra prática: acima de ~70k tokens, ou muito acima da média de tarefas similares), **avisar o usuário logo no início** — antes de executar — explicando o porquê e oferecendo recortes menores;
+- deixar a decisão de gastar com o usuário; não assumir que escopo grande está autorizado só porque foi pedido em uma frase;
+- calibração de referência: tarefas bem escopadas (uma feature, um bug, um conjunto coerente de edições) custam tipicamente uma fração disso. Estouro muito acima da média quase sempre indica escopo grande demais **ou** atrito de ambiente (ver 2.2), não trabalho útil;
+- o usuário reduz custo declarando a barra de aceitação no próprio pedido (ex.: "build verde basta"), apontando arquivos/caminhos relevantes e fatiando entregas grandes.
+
+## 2.2 Resiliência a instabilidade de runtime
+
+Ambiente de ferramentas instável é uma das maiores fontes de desperdício silencioso de créditos. Quando as ferramentas falharem de forma intermitente (ex.: erro de carga de biblioteca, flush de chamadas duplicadas, mesma saída repetida em bloco):
+
+- **parar cedo e avisar o usuário** em vez de insistir contra a instabilidade;
+- **não re-disparar comandos pesados** (build completo, scan de diretório inteiro, leitura de arquivos grandes) durante a instabilidade — cada saída grande permanece no contexto e é **re-cobrada a cada turno**, então re-execução cega multiplica o custo de forma composta;
+- preferir buscas estreitas (arquivo ou linhas específicas) a varreduras amplas;
+- quando o usuário souber de antemão que o ambiente está instável, sinalizar ao agente para que ele ajuste a tática desde o começo.
+
 ## 3. Quando o agente deve executar por conta própria
 
 O agente pode executar diretamente quando a ação for:
