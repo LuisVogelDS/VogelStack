@@ -8,7 +8,7 @@ Para projetos com alguma complexidade, o conjunto mínimo recomendado é:
 
 - `README.md`
 - `quickstart.md`
-- [[AGENTS.md Document Pattern|`AGENTS.md`]]
+- `AGENTS.md`
 - `docs/arquitetura.md`
 - `docs/versionamento.md`
 - `docs/changelog.md`
@@ -21,7 +21,7 @@ Documentos complementares devem existir quando o projeto tiver fluxos específic
 - integrações externas;
 - dashboards;
 - brainstorms e wireframes de produto;
-- pasta de entrada bruta, como [[Pasta docs/raw e intake|`docs/raw/` ou `intake/`]].
+- pasta de entrada bruta, como `docs/raw/` ou `intake/`.
 
 Para projetos com API, UI dinâmica, múltiplas integrações ou uso intenso de agentes, também vale padronizar:
 
@@ -55,7 +55,7 @@ Deve responder:
 
 O `quickstart.md` deve ser operacional, direto e copiável. Ele não substitui o `README.md`: o README explica o produto, enquanto o quickstart reduz fricção de instalação e execução.
 
-### [[AGENTS.md Document Pattern|`AGENTS.md`]]
+### `AGENTS.md`
 
 Deve responder:
 
@@ -117,14 +117,14 @@ Quando o projeto executa pipelines, jobs, análises ou agentes recorrentes, a do
 
 Boas práticas:
 
-- manter um [[Registry de Execuções|registry de execuções]] ou equivalente;
-- manter [[Manifesto por Run|manifesto por run]] quando houver múltiplos artefatos;
+- manter um [[registro-e-evidencias|registry de execuções]] ou equivalente;
+- manter [[registro-e-evidencias|manifesto por run]] quando houver múltiplos artefatos;
 - documentar onde esses registros vivem e como consultá-los;
 - não tratar changelog como substituto de rastreabilidade operacional.
 
 ## 2.2 Pasta de entrada bruta: `docs/raw/` ou `intake/`
 
-Projetos que usam agentes e [[Knowledge Graph]] devem ter um lugar explícito para despejar material ainda desorganizado.
+Projetos que usam agentes e Knowledge Graph devem ter um lugar explícito para despejar material ainda desorganizado.
 
 Essa pasta serve para receber:
 
@@ -153,14 +153,14 @@ intake/
 
 Regras:
 
-- [[Pasta docs/raw e intake|`docs/raw/` ou `intake/`]] não substitui documentação oficial;
+- `docs/raw/` ou `intake/` não substitui documentação oficial;
 - conteúdo bruto deve ser tratado como material de entrada, não como fonte canônica final;
 - a IA deve ler essa pasta de forma autônoma antes de concluir que um assunto não existe no projeto;
 - a IA deve classificar, resumir e propor promoção de conteúdo bruto para documentos oficiais quando houver valor recorrente;
-- a ferramenta de [[Knowledge Graph]] deve indexar essas relações para conectar brainstorms, transcrições, decisões e artefatos;
+- a ferramenta de Knowledge Graph deve indexar essas relações para conectar brainstorms, transcrições, decisões e artefatos;
 - material sensível, privado ou local deve ser marcado antes de entrar nessa pasta.
 
-Com [[Graphify Knowledge Graph Tool|Graphify]], essa pasta vira uma camada de captura do segundo cérebro do projeto.
+Com Graphify, essa pasta vira uma camada de captura do segundo cérebro do projeto.
 
 O objetivo não é exigir organização perfeita no momento da captura. O objetivo é permitir que nosso exército digital de manutenção leia o material bruto, encontre relações, preserve contexto e ajude a transformar sinal disperso em documentação confiável.
 
@@ -202,7 +202,7 @@ Implicação operacional:
 
 Quando o projeto usa submódulos e o script de sync não entra neles, o agente deve avisar explicitamente o usuário de que o `git push` dentro do submódulo precisa ser manual antes do sync principal — caso contrário o repositório pai vai apontar para um commit inexistente no remoto.
 
-Essa regra mantém [[Knowledge Graph]], handoffs e auditoria operacional consistentes mesmo em projetos onde o histórico do Git foi deliberadamente trocado por automação leve.
+Essa regra mantém Knowledge Graph, handoffs e auditoria operacional consistentes mesmo em projetos onde o histórico do Git foi deliberadamente trocado por automação leve.
 
 ## 3.06 Piso de integridade da malha — link checker
 
@@ -218,15 +218,15 @@ Esse piso vale especialmente para projetos no [[operacao-leve|caminho leve]], qu
 
 ## 3.1 Linkagem semântica no nascimento
 
-Todo documento novo deve nascer já conectado ao [[Knowledge Graph]] do projeto.
+Todo documento novo deve nascer já conectado ao Knowledge Graph do projeto.
 
 Ao criar `README.md`, `quickstart.md`, `AGENTS.md`, `docs/arquitetura.md`, `docs/operacao.md`, `docs/versionamento.md`, `docs/changelog.md`, handoffs, registros de execução ou guias complementares, o autor ou agente deve inserir wikilinks reais para:
 
 - documentos canônicos da própria documentação;
-- regras relevantes da [[Vogel Stack]];
+- regras relevantes da [[README|Vogel Stack]];
 - processos, artefatos, contratos ou módulos citados no texto;
 - evidências operacionais relacionadas, quando existirem;
-- material bruto em [[Pasta docs/raw e intake|`docs/raw/` ou `intake/`]], quando o documento promover ou resumir uma entrada bruta.
+- material bruto em `docs/raw/` ou `intake/`, quando o documento promover ou resumir uma entrada bruta.
 
 Essa regra evita que a linkagem vire uma tarefa de limpeza posterior. O documento deve entrar no repositório já navegável por humanos, agentes e Graphify.
 

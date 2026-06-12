@@ -22,7 +22,7 @@ Exemplos de respostas desejadas:
 
 ## 2. Método recomendado para dashboards
 
-Sequência recomendada, formalizada como [[Método Brainstorm-Concepção-Wireframe-Implementação]]:
+Sequência recomendada, formalizada como Método Brainstorm-Concepção-Wireframe-Implementação:
 
 1. `Brainstorm`
 2. `Concepção`
@@ -118,7 +118,7 @@ Modelo prático:
 
 - descrever arquitetura real segundo [[documentacao-e-versionamento|Documentação e Versionamento]];
 - extrair regras de negócio da UI;
-- centralizar contratos, serviços e [[Identificadores Canônicos]];
+- centralizar contratos, serviços e [[principios#13. Identificadores canônicos devem prevalecer|Identificadores Canônicos]];
 - preservar o fluxo operacional existente.
 
 ### Fase 2: introduzir nova camada de backend
