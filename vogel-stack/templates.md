@@ -1,17 +1,17 @@
 # Templates de Documentação
 
-Este arquivo traz modelos mínimos para iniciar novos repositórios com o padrão da [[Vogel Stack]].
+Este arquivo traz modelos mínimos para iniciar novos repositórios com o padrão da [[README|Vogel Stack]].
 
 Conexões fortes do grafo:
 
-- [[AGENTS.md Document Pattern]]
-- [[Registry de Execuções]]
-- [[Manifesto por Run]]
-- [[Handoff Padrão de Execução]]
-- [[PowerShell Logging Pattern]]
-- [[Método Brainstorm-Concepção-Wireframe-Implementação]]
+- AGENTS.md Document Pattern
+- [[registro-e-evidencias|Registry de Execuções]]
+- [[registro-e-evidencias|Manifesto por Run]]
+- Handoff Padrão de Execução
+- PowerShell Logging Pattern
+- Método Brainstorm-Concepção-Wireframe-Implementação
 
-## 1. Template de [[AGENTS.md Document Pattern|`AGENTS.md`]]
+## 1. Template de `AGENTS.md`
 
 ```text
 # AGENTS: Diretrizes Operacionais do Projeto
@@ -54,13 +54,13 @@ Conexões fortes do grafo:
 - mudanças de fonte, auth e deploy exigem atualização documental
 - fluxo oficialmente suportado não pode ficar ambíguo
 - semântica de saída precisa permanecer estável
-- conexões relevantes devem ser materializadas no [[Knowledge Graph]]
+- conexões relevantes devem ser materializadas no Knowledge Graph
 
 ## 7. Política de execução
 
 - evitar gasto desnecessário de recursos
 - preferir agente prepara, usuário executa, agente interpreta
-- para execuções longas, caras ou muito verbosas, entregar [[Handoff Padrão de Execução|script com logging persistente]] em vez de acompanhar tudo ao vivo pelo agente
+- para execuções longas, caras ou muito verbosas, entregar script com logging persistente em vez de acompanhar tudo ao vivo pelo agente
 
 ## 8. Convenção de comandos
 
@@ -83,9 +83,9 @@ Conexões fortes do grafo:
 
 ## 11. Evidência operacional
 
-- onde vive o [[Registry de Execuções|registry de execuções]], se existir
+- onde vive o [[registro-e-evidencias|registry de execuções]], se existir
 - como runs e artefatos são identificados
-- como localizar [[Manifesto por Run|manifestos]] e saídas por rodada
+- como localizar [[registro-e-evidencias|manifestos]] e saídas por rodada
 
 ## 12. Regras de mudança segura
 
@@ -335,7 +335,7 @@ Este documento concentra o contexto mínimo para futuras conversas sobre uma ár
 
 ## 8. Template de `docs/operacao.md`
 
-Este template se conecta ao [[Handoff Padrão de Execução]] e ao [[PowerShell Logging Pattern]].
+Este template se conecta ao Handoff Padrão de Execução e ao PowerShell Logging Pattern.
 
 ```text
 # Operação do Projeto
@@ -403,7 +403,7 @@ exit $exitCode
 
 ## 9. Template de brainstorm de dashboard
 
-Este template implementa o [[Método Brainstorm-Concepção-Wireframe-Implementação]] descrito em [[evolucao-produto|Evolução de Produto e Arquitetura]].
+Este template implementa o Método Brainstorm-Concepção-Wireframe-Implementação descrito em [[evolucao-produto|Evolução de Produto e Arquitetura]].
 
 ```text
 # Brainstorm do Novo Dashboard

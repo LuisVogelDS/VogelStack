@@ -79,7 +79,7 @@ Regras mínimas:
 
 ## 8. Observabilidade precisa existir desde cedo
 
-Mesmo em protótipos, o projeto deve oferecer algum grau de [[Observabilidade e Logs|observabilidade]] e rastreabilidade.
+Mesmo em protótipos, o projeto deve oferecer algum grau de [[principios#8. Observabilidade precisa existir desde cedo|observabilidade]] e rastreabilidade.
 
 Base recomendada:
 
@@ -131,7 +131,7 @@ Boas práticas:
 
 ## 13. Identificadores canônicos devem prevalecer
 
-Aliases convenientes demais costumam gerar ambiguidade entre código, API, documentação e operação. Por isso, [[Identificadores Canônicos]] são parte do contrato de clareza.
+Aliases convenientes demais costumam gerar ambiguidade entre código, API, documentação e operação. Por isso, [[principios#13. Identificadores canônicos devem prevalecer|Identificadores Canônicos]] são parte do contrato de clareza.
 
 Regra prática:
 
@@ -173,14 +173,14 @@ Também é preciso materializar:
 - quais artefatos foram gerados;
 - qual foi o resultado principal.
 
-Em projetos com esse perfil, manter um [[Registry de Execuções|registry]] e [[Manifesto por Run|manifestos por execução]] deixa de ser luxo e passa a ser parte da rastreabilidade mínima, como detalhado em [[registro-e-evidencias|Registro e Evidências Operacionais]].
+Em projetos com esse perfil, manter um [[registro-e-evidencias|registry]] e [[registro-e-evidencias|manifestos por execução]] deixa de ser luxo e passa a ser parte da rastreabilidade mínima, como detalhado em [[registro-e-evidencias|Registro e Evidências Operacionais]].
 
 ## 17. Descoberta semântica deve anteceder implementações relevantes
 
 Antes de implementar novos serviços, painéis, integrações ou mudanças estruturais, equipe e agentes devem **cruzar relações semânticas** entre:
 
 - documentos oficiais;
-- entradas brutas em [[Pasta docs/raw e intake|docs/raw/ ou intake/]];
+- entradas brutas em docs/raw/ ou intake/;
 - artefatos de runs anteriores descritos em [[registro-e-evidencias|Registro e Evidências Operacionais]];
 - decisões de produto;
 - contratos de dados;
@@ -190,7 +190,7 @@ Essa etapa revela dependências, decisões antigas, hipóteses já testadas e re
 
 **A ferramenta que materializa essa descoberta é escolha do projeto** — ver princípio nº 19 ([[principios|Problema, não tecnologia]]). Duas famílias de solução são suportadas:
 
-- **Padrão:** [[Graphify Knowledge Graph Tool|Graphify]] gera knowledge graph em `graphify-out/`; Obsidian é camada visual. Indicada para projetos grandes ou com material bruto extenso. Detalhes em [[quickstart]].
+- **Padrão:** Graphify gera knowledge graph em `graphify-out/`; Obsidian é camada visual. Indicada para projetos grandes ou com material bruto extenso. Detalhes em [[quickstart]].
 - **Leve:** wikilinks curados servem de mapa; agente de IA faz auditoria estrutural sob demanda; link checker determinístico valida integridade da malha. Detalhes em [[operacao-leve]].
 
 Independente da família escolhida, **o princípio se mantém**: descoberta semântica não elimina análise técnica, mas melhora seu ponto de partida.
