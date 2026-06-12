@@ -1,0 +1,5 @@
+# Operação leve: artefatos locais que não vão para o repo
+# (ver vogel-stack/operacao-leve.md). Graphify e Obsidian, se usados,
+# ficam como ferramentas locais não-versionadas.
+graphify-out/
+.obsidian/
