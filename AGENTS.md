@@ -23,24 +23,20 @@ Cada projeto declara qual **família de operação documental** adota:
 
 A escolha é **declarada explicitamente** pelo projeto, em coerência com o princípio nº 19 ([[vogel-stack/principios|Problema, não tecnologia]]) e nº 11 ([[vogel-stack/principios|Modos de execução suportados devem ser explícitos]]).
 
-## Regras quando o projeto adota o caminho padrão
+## Família adotada por ESTE repositório: leve
 
-Quando este repositório (ou um projeto que usa a stack) opera no caminho padrão com Graphify:
+Este repositório (a própria Vogel Stack) opera no **caminho leve**, decisão registrada em [[docs/adr/0001-adotar-operacao-leve|ADR 0001]] (princípios nº 19 e nº 11). Perfil que justifica: ~12 docs, agente forte sempre disponível, alta volatilidade documental.
 
-- Antes de ler arquivos-fonte, fazer grep/glob ou responder perguntas estruturais do repo, ler `graphify-out/GRAPH_REPORT.md`.
-- Artefatos esperados em `graphify-out/`: `GRAPH_REPORT.md`, `graph.json`, `graph.html`, `manifest.json`.
-- Para perguntas cross-módulo "como X se relaciona com Y", preferir `graphify query "<pergunta>"`, `graphify path "<A>" "<B>"`, `graphify explain "<conceito>"` em vez de grep cego. Esses comandos atravessam edges extraídas + inferidas.
-- Se `GRAPH_REPORT.md` está ausente mas `graph.json` existe, rodar `graphify cluster-only .` para regenerar relatório e visualização sem custo de LLM.
-- Após code-only changes, rodar `graphify update .` (sem custo LLM). Após documentação ou mudanças de knowledge graph, rodar `graphify extract .` com API key disponível e commitar `graphify-out/` atualizado.
+Regras de operação aqui:
 
-## Regras quando o projeto adota o caminho leve
+- **Não** procurar `graphify-out/` — não existe mais neste repo (removido na migração; ver ADR 0001). Graphify e Obsidian, se usados, são ferramentas **locais não-versionadas** (estão no `.gitignore`).
+- Entrar por este arquivo + [[vogel-stack/README|README da stack]] e por [[quickstart]] (como escolher família). **Não** há `docs/contexto.md` nem `docs/README.md`: a estrutura é `vogel-stack/` (docs canônicos) + arquivos-raiz.
+- Para auditoria estrutural (órfão, weak link, comunidade isolada), invocar o agente explicitamente com o prompt-template de [[vogel-stack/operacao-leve]]. Este repo não materializa `GRAPH_REPORT.md`.
+- Antes de fechar rodada que tocou em arquivos `.md`, rodar `pwsh ./scripts/check-wikilinks.ps1` (a GitHub Action `check-malha` valida no push/PR para `main`).
 
-Quando o projeto declara o caminho leve em ADR próprio (referenciando [[vogel-stack/operacao-leve]]):
+## Caminho padrão (referência para projetos consumidores)
 
-- Entrar pelo `docs/contexto.md` (síntese) e `docs/README.md` (hub humano curado).
-- **Não** procurar `graphify-out/` — ele não existe nesse caminho.
-- Para auditoria estrutural (órfão, weak link, comunidade), o agente é invocado explicitamente com escopo claro pelo humano ou por outro agente. Ver prompt-template em [[vogel-stack/operacao-leve]].
-- Antes de fechar rodada que tocou em arquivos `.md`, rodar `pwsh ./scripts/check-wikilinks.ps1` (ou aguardar GitHub Action equivalente).
+A família **padrão (Codex-led + Graphify-assisted)** — Graphify materializa `graphify-out/`, Obsidian é a camada visual, e o agente lê `GRAPH_REPORT.md` antes de buscar em arquivos-fonte — está documentada em [[quickstart]]. Indicada para projetos com ≥ ~80 docs, material bruto extenso ou agentes externos frios. **Este repositório não a adota**, mas a mantém documentada para quem a escolher.
 
 ## Em qualquer caminho
 
