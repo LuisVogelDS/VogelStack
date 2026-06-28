@@ -333,6 +333,54 @@ Este documento concentra o contexto mínimo para futuras conversas sobre uma ár
 - contexto mínimo para iniciar uma nova conversa sem perder o estado real
 ````
 
+## 7.1 Template de `docs/handoffs/_QUADRO.md`
+
+Quadro único conciliado a partir dos handoffs, descrito em [[operacao-agentes#7.1.1 Quadro de trabalho conciliado a partir de handoffs|Operação de Agentes §7.1.1]]. Item ainda aberto sobe para o quadro; handoff com tudo fechado vai para `docs/handoffs/legado/`.
+
+```text
+# Quadro de Trabalho — <projeto>
+
+> **O que é:** quadro único de trabalho, conciliado a partir dos handoffs em `docs/handoffs/`.
+> Cada handoff tem seus "próximos passos / decisões em aberto" reconciliados contra o estado
+> real do repo (git, `reports/`, código). Item ainda aberto sobe pra cá; handoff com tudo
+> fechado vai pra `docs/handoffs/legado/`.
+>
+> **Última reconciliação:** AAAA-MM-DD — N handoffs (A ativos, L legado-candidatos).
+>
+> **Legenda:** 🔴 Prioridade · 🟡 Em andamento · ⚪ Pendente (backlog válido) · 🗄️ Defasado (morto, mantido por memória) · ✅ Concluído
+
+## 🔴 Prioridade
+
+| Item | Origem | Próxima ação / nota |
+|---|---|---|
+| <item aberto> | <handoff de origem> | <próximo passo concreto> |
+
+## 🟡 Em andamento
+
+| Item | Origem | Próxima ação / nota |
+|---|---|---|
+| <item> | <handoff de origem> | <estado e próximo passo> |
+
+## ⚪ Pendente (backlog válido)
+
+| Item | Origem | Nota |
+|---|---|---|
+| <item> | <handoff de origem> | <por que ainda não foi priorizado> |
+
+## 🗄️ Defasado (morto — mantido por memória)
+
+- <decisão superada> → <o que a substituiu>.
+
+## Reconciliação por handoff → legado
+
+**Ativo** = tem item aberto não-trivial cujo contexto vale ter à mão.
+**Legado-concluído** = próximos passos já realizados. **Legado-defasado** = superado ou irrelevante.
+
+| Handoff | Veredito | Itens abertos (já no quadro acima) |
+|---|---|---|
+| <handoff> | Ativo / Legado-concluído / Legado-defasado | <itens, ou —> |
+```
+
 ## 8. Template de `docs/operacao.md`
 
 Este template se conecta ao Handoff Padrão de Execução e ao PowerShell Logging Pattern.
