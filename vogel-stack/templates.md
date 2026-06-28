@@ -335,50 +335,56 @@ Este documento concentra o contexto mínimo para futuras conversas sobre uma ár
 
 ## 7.1 Template de `docs/handoffs/_QUADRO.md`
 
-Quadro único conciliado a partir dos handoffs, descrito em [[operacao-agentes#7.1.1 Quadro de trabalho conciliado a partir de handoffs|Operação de Agentes §7.1.1]]. Item ainda aberto sobe para o quadro; handoff com tudo fechado vai para `docs/handoffs/legado/`.
+Quadro único conciliado a partir das fontes de demanda (handoffs, issues, `intake/`), descrito em [[operacao-agentes#7.1.1 Quadro de trabalho conciliado a partir das fontes de demanda|Operação de Agentes §7.1.1]]. Item ainda aberto sobe para o quadro; ✅ é transitório e drena para o `docs/changelog.md`; fonte com tudo fechado vai para `docs/handoffs/legado/`.
 
 ```text
 # Quadro de Trabalho — <projeto>
 
-> **O que é:** quadro único de trabalho, conciliado a partir dos handoffs em `docs/handoffs/`.
-> Cada handoff tem seus "próximos passos / decisões em aberto" reconciliados contra o estado
-> real do repo (git, `reports/`, código). Item ainda aberto sobe pra cá; handoff com tudo
-> fechado vai pra `docs/handoffs/legado/`.
+> **O que é:** quadro único de trabalho, conciliado a partir das fontes de demanda
+> (handoffs em `docs/handoffs/`, issues, `intake/`). Cada fonte tem seus "próximos passos /
+> decisões em aberto" reconciliados contra o estado real do repo (git, `reports/`, código,
+> changelog). É uma fila, não um arquivo: item aberto sobe pra cá; fonte com tudo fechado
+> vai pra `docs/handoffs/legado/`. É o **backlog único** do projeto — sem `TODO`/`IMPROVEMENTS`
+> paralelo; spec longa vira doc próprio, linkado da linha.
 >
-> **Última reconciliação:** AAAA-MM-DD — N handoffs (A ativos, L legado-candidatos).
+> **Drenagem:** ✅ é transitório — ao concluir, registre a entrega no `docs/changelog.md` (e o
+> arco em `docs/versionamento.md`, se virou versão) e remova a linha na próxima reconciliação.
+> O quadro mostra o presente em aberto; o passado materializado vive no changelog.
 >
-> **Legenda:** 🔴 Prioridade · 🟡 Em andamento · ⚪ Pendente (backlog válido) · 🗄️ Defasado (morto, mantido por memória) · ✅ Concluído
+> **Última reconciliação:** AAAA-MM-DD — N fontes (A ativas, L legado-candidatas).
+>
+> **Legenda:** 🔴 Prioridade · 🟡 Em andamento · ⚪ Pendente (backlog válido) · 🗄️ Defasado (morto, mantido por memória) · ✅ Concluído (transitório → changelog)
 
 ## 🔴 Prioridade
 
 | Item | Origem | Próxima ação / nota |
 |---|---|---|
-| <item aberto> | <handoff de origem> | <próximo passo concreto> |
+| <item aberto> | <fonte de origem> | <próximo passo concreto> |
 
 ## 🟡 Em andamento
 
 | Item | Origem | Próxima ação / nota |
 |---|---|---|
-| <item> | <handoff de origem> | <estado e próximo passo> |
+| <item> | <fonte de origem> | <estado e próximo passo> |
 
 ## ⚪ Pendente (backlog válido)
 
 | Item | Origem | Nota |
 |---|---|---|
-| <item> | <handoff de origem> | <por que ainda não foi priorizado> |
+| <item> | <fonte de origem> | <por que ainda não foi priorizado> |
 
 ## 🗄️ Defasado (morto — mantido por memória)
 
 - <decisão superada> → <o que a substituiu>.
 
-## Reconciliação por handoff → legado
+## Reconciliação por fonte → legado
 
 **Ativo** = tem item aberto não-trivial cujo contexto vale ter à mão.
 **Legado-concluído** = próximos passos já realizados. **Legado-defasado** = superado ou irrelevante.
 
-| Handoff | Veredito | Itens abertos (já no quadro acima) |
+| Fonte | Veredito | Itens abertos (já no quadro acima) |
 |---|---|---|
-| <handoff> | Ativo / Legado-concluído / Legado-defasado | <itens, ou —> |
+| <fonte> | Ativo / Legado-concluído / Legado-defasado | <itens, ou —> |
 ```
 
 ## 8. Template de `docs/operacao.md`

@@ -162,22 +162,34 @@ Esse handoff deve concentrar:
 - comandos de validação;
 - prompt-base para retomada futura, quando isso reduzir retrabalho.
 
-## 7.1.1 Quadro de trabalho conciliado a partir de handoffs
+## 7.1.1 Quadro de trabalho conciliado a partir das fontes de demanda
 
-Quando um projeto acumula vários handoffs (§7.1), cada um deixa "próximos passos" e "decisões em aberto" que envelhecem em ritmos diferentes: parte já foi entregue, parte ainda vale, parte morreu. Ler handoff a handoff para descobrir o que continua aberto é retrabalho, e handoff antigo lido como se fosse atual confunde plano com estado real.
+Projetos acumulam **fontes de demanda**: handoffs (§7.1, a fonte canônica), mas também issues, entradas de `intake/`, TODOs. Cada uma deixa "próximos passos" e "decisões em aberto" que envelhecem em ritmos diferentes: parte já foi entregue, parte ainda vale, parte morreu. Ler fonte a fonte para descobrir o que continua aberto é retrabalho, e fonte antiga lida como se fosse atual confunde plano com estado real.
 
-O padrão é manter um **quadro único de trabalho** (ex.: `docs/handoffs/_QUADRO.md`) conciliado a partir de todos os handoffs. Não é um backlog paralelo: é a projeção viva do que segue aberto, derivada dos handoffs e checada contra o repositório.
+O padrão é manter um **quadro único de trabalho** (ex.: `docs/handoffs/_QUADRO.md`, ou `docs/_QUADRO.md` quando não houver handoffs) conciliado a partir de todas as fontes. Não é um backlog paralelo: é a **projeção viva** do que segue aberto, derivada das fontes e checada contra o repositório. É uma **fila, não um arquivo** — mostra o presente em aberto, não guarda o histórico do que fechou.
 
-Regras:
+**Backlog é status, não arquivo.** O ⚪ do quadro **é** o backlog do projeto: não mantenha um `IMPROVEMENTS.md`, `TODO.md` ou `BACKLOG.md` paralelo — um arquivo desses vira um segundo board competindo pela prioridade, exatamente o conflito que o quadro existe para eliminar. Quando um item precisa de mais que uma linha (um DDL, um plano de features, um diagnóstico), o detalhe vira um **spec doc por tema** — uma fonte de demanda como outra qualquer — e a linha do quadro **linka** a spec em vez de duplicá-la. Ideia crua ou spec funda vive no intake até ser **promovida** a ⚪ quando vira candidata real; a promoção passa pelo gate de [[evolucao-produto|Evolução de Produto e Arquitetura]] ("nem toda melhoria vale a pena depois que um brainstorm redefiniu a direção"). O quadro carrega o backlog **de registro**, não o depósito de "algum dia".
 
-- cada item é reconciliado contra o **estado real** — git, `reports/`, código —, não contra o que o handoff dizia que ia acontecer (instancia o [[principios#1. O comportamento documentado deve refletir o sistema real|princípio nº 1]]);
-- item ainda aberto **sobe** para o quadro; handoff com tudo fechado **desce** para `docs/handoffs/legado/` — arquivar não perde nada, porque o que estava aberto já foi capturado no quadro;
-- registrar a data da **última reconciliação** e a contagem de handoffs (ativos vs legado-candidatos);
-- classificar cada item por status legível: 🔴 prioridade · 🟡 em andamento · ⚪ pendente (backlog válido) · 🗄️ defasado (morto, mantido por memória) · ✅ concluído;
-- manter uma tabela **handoff → veredito** (ativo / legado-concluído / legado-defasado), para que mover um handoff ao legado seja decisão auditável e não um sumiço;
-- a reconciliação é periódica e **disparada pelo usuário**, não automática: mover handoff para legado é decisão de quem conhece o estado do projeto.
+**Reconciliação — o que entra no quadro:**
 
-O quadro é o instrumento que mantém honesta a distinção entre estado atual e legado de [[documentacao-e-versionamento#4. Distinção entre estado atual, experimental e futuro|Documentação e Versionamento §4]]: o handoff é o registro do momento; o quadro é onde "ainda aberto vs encerrado" fica explícito e rastreável contra [[registro-e-evidencias|evidência operacional]]. Modelo copiável em [[templates|Templates]] (§7.1).
+- cada item é reconciliado contra o **estado real** — git, `reports/`, código, changelog —, não contra o que a fonte dizia que ia acontecer (instancia o [[principios#1. O comportamento documentado deve refletir o sistema real|princípio nº 1]]);
+- item ainda aberto **sobe** para o quadro; fonte com tudo fechado **desce** para o arquivo (`docs/handoffs/legado/` ou equivalente) — arquivar não perde nada, porque o que estava aberto já foi capturado no quadro;
+- classificar cada item por status legível: 🔴 prioridade · 🟡 em andamento · ⚪ pendente (backlog válido) · 🗄️ defasado (morto, mantido por memória) · ✅ concluído (transitório, ver abaixo);
+- manter uma tabela **fonte → veredito** (ativo / legado-concluído / legado-defasado), para que arquivar uma fonte seja decisão auditável e não um sumiço;
+- registrar a data da **última reconciliação** e a contagem de fontes (ativas vs legado-candidatas);
+- a reconciliação é periódica e **disparada pelo usuário**, não automática: mover fonte para o legado é decisão de quem conhece o estado do projeto.
+
+**Drenagem — para onde vai o item concluído:**
+
+O ✅ é **transitório**: não é uma coluna onde tarefas se acumulam, é um marcador de "isto saiu, drena e remove". Deixar ✅ morar no quadro o transforma, devagar, num changelog ruim e desestruturado. O destino durável segue um **funil**:
+
+- **sempre → changelog** (`docs/changelog.md`): toda entrega vira uma linha datada e granular. É o sink universal — um item do quadro ≈ uma entrada do changelog. Liga ao [[principios#9. Versionamento e rastreabilidade não são opcionais|princípio nº 9]] e ao [[documentacao-e-versionamento#3.05 Workflows com commit automático e mensagem genérica|protocolo de encerramento de rodada]];
+- **quando vira arco de versão → versionamento** (`docs/versionamento.md`): se o conjunto de entregas constitui ou avança uma versão (nova capacidade, mudança de produto ou de arquitetura), o arco é registrado **no nível da versão** — escopo, motivação, status (estável/alpha/futuro). Não é cópia 1:1 do item: é o **rollup** editorializado das entregas que o changelog já logou;
+- **depois → poda**: na reconciliação seguinte, a linha ✅ já registrada no changelog sai do quadro.
+
+Changelog e versionamento **não se fundem** e têm cadências distintas: o changelog é drenado continuamente, item a item ("o quê / efeito / data"); o versionamento é reconciliado nas fronteiras de versão, resumindo o changelog desde a última versão ("por quê / escopo / status"). Essa divisão de trabalho é o que mantém os dois abastecidos sem duplo-registro manual — e evita a deriva clássica de changelog atrasado, que nada mais é do que trabalho concluído que nunca foi drenado.
+
+Assim o quadro mantém honesta a distinção entre estado atual e legado de [[documentacao-e-versionamento#4. Distinção entre estado atual, experimental e futuro|Documentação e Versionamento §4]]: a fonte é o registro do momento; o quadro é o presente em aberto; changelog e versionamento são o passado materializado, rastreável contra [[registro-e-evidencias|evidência operacional]]. A drenagem e o frescor da reconciliação são verificáveis por um lint determinístico (`scripts/check-quadro.ps1`, irmão do [[operacao-agentes#7.4 Link checker determinístico como piso da malha|link checker]]): ele falha se o quadro acumula uma seção de concluídos em vez de drenar, ou se a reconciliação fica velha demais. Modelo copiável em [[templates|Templates]] (§7.1).
 
 ## 7.2 Registro mínimo de execução
 
