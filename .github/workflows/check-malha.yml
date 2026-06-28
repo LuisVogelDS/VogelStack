@@ -14,3 +14,6 @@ jobs:
       - name: Validar malha de wikilinks
         shell: pwsh
         run: ./scripts/check-wikilinks.ps1
+      - name: Validar quadro de trabalho
+        shell: pwsh
+        run: ./scripts/check-quadro.ps1
