@@ -215,9 +215,8 @@ Regras:
 - criar ou atualizar um resumo legível dentro da run;
 - registrar quais artefatos foram finais, auxiliares, parciais ou ausentes;
 - garantir que o `registry` aponte para o diretório da run;
-- escrever nomes e descrições que possam ser indexados pelo Knowledge Graph;
-- deixar explícitas relações com decisões, hipóteses, métricas, erros ou serviços avaliados;
-- orientar a próxima atualização do Graphify para incluir esses artefatos.
+- escrever nomes e descrições legíveis e rastreáveis por humanos e agentes;
+- deixar explícitas relações com decisões, hipóteses, métricas, erros ou serviços avaliados.
 
 A disciplina de log continua rígida, mas agora tem um ganho acumulativo: cada execução bem registrada vira material de aprendizado para a próxima varredura semântica.
 
@@ -239,14 +238,14 @@ Regra recomendada:
 
 ## 7.4 Link checker determinístico como piso da malha
 
-Independente da família de operação documental adotada ([[principios|padrão ou leve, princípio nº 19]]), wikilink quebrado é dívida visível. Recomendação base para qualquer projeto que use wikilinks como contrato de navegação:
+Wikilink quebrado é dívida visível. Recomendação base para qualquer projeto que use wikilinks como contrato de navegação:
 
 - manter um **link checker determinístico** (script, sem dependência de LLM) que valida que todo `[[wikilink]]` aponta para arquivo existente;
 - rodar o checker localmente antes de fechar rodada documental;
 - rodar o checker em CI (GitHub Action ou equivalente) em push/PR para branch principal;
 - falhar a CI em link quebrado — wikilink que aponta para nada confunde tanto humano quanto agente.
 
-Esse piso vale especialmente no [[operacao-leve|caminho leve]], onde não há `GRAPH_REPORT.md` para acusar inconsistência. No [[quickstart|caminho padrão]] o checker continua útil como verificação rápida sem precisar regenerar Graphify a cada commit.
+Como não há mapa materializado, o checker é o que garante que a malha de wikilinks não quebre. Ver [[operacao-leve|Operação Documental]].
 
 Implementação de referência (PowerShell, ignora blocos de código, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, com resolução em três pontos âncora) disponível em `scripts/check-wikilinks.ps1` no projeto Alquimia, que pode servir de template para outros projetos.
 
