@@ -162,6 +162,23 @@ Esse handoff deve concentrar:
 - comandos de validação;
 - prompt-base para retomada futura, quando isso reduzir retrabalho.
 
+## 7.1.1 Quadro de trabalho conciliado a partir de handoffs
+
+Quando um projeto acumula vários handoffs (§7.1), cada um deixa "próximos passos" e "decisões em aberto" que envelhecem em ritmos diferentes: parte já foi entregue, parte ainda vale, parte morreu. Ler handoff a handoff para descobrir o que continua aberto é retrabalho, e handoff antigo lido como se fosse atual confunde plano com estado real.
+
+O padrão é manter um **quadro único de trabalho** (ex.: `docs/handoffs/_QUADRO.md`) conciliado a partir de todos os handoffs. Não é um backlog paralelo: é a projeção viva do que segue aberto, derivada dos handoffs e checada contra o repositório.
+
+Regras:
+
+- cada item é reconciliado contra o **estado real** — git, `reports/`, código —, não contra o que o handoff dizia que ia acontecer (instancia o [[principios#1. O comportamento documentado deve refletir o sistema real|princípio nº 1]]);
+- item ainda aberto **sobe** para o quadro; handoff com tudo fechado **desce** para `docs/handoffs/legado/` — arquivar não perde nada, porque o que estava aberto já foi capturado no quadro;
+- registrar a data da **última reconciliação** e a contagem de handoffs (ativos vs legado-candidatos);
+- classificar cada item por status legível: 🔴 prioridade · 🟡 em andamento · ⚪ pendente (backlog válido) · 🗄️ defasado (morto, mantido por memória) · ✅ concluído;
+- manter uma tabela **handoff → veredito** (ativo / legado-concluído / legado-defasado), para que mover um handoff ao legado seja decisão auditável e não um sumiço;
+- a reconciliação é periódica e **disparada pelo usuário**, não automática: mover handoff para legado é decisão de quem conhece o estado do projeto.
+
+O quadro é o instrumento que mantém honesta a distinção entre estado atual e legado de [[documentacao-e-versionamento#4. Distinção entre estado atual, experimental e futuro|Documentação e Versionamento §4]]: o handoff é o registro do momento; o quadro é onde "ainda aberto vs encerrado" fica explícito e rastreável contra [[registro-e-evidencias|evidência operacional]]. Modelo copiável em [[templates|Templates]] (§7.1).
+
 ## 7.2 Registro mínimo de execução
 
 Quando o projeto gera artefatos, relatórios, exportações ou resultados por rodada, vale manter um [[registro-e-evidencias|registro explícito de execução]].
