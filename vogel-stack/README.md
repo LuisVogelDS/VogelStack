@@ -16,6 +16,7 @@ Esta stack ajuda a manter:
 - versionamento e changelog auditáveis;
 - critérios mais objetivos para mudanças de produto e dashboard;
 - guardrails para custo, execução e [[principios#8. Observabilidade precisa existir desde cedo|observabilidade]];
+- fronteiras de segurança e privacidade verificáveis antes de expor, conforme [[seguranca|Segurança e Privacidade]];
 - economia de créditos via handoff de execuções caras com scripts e logs persistentes.
 
 ## Estrutura
@@ -27,6 +28,7 @@ Esta stack ajuda a manter:
 - [[vogel-stack/vogel-stack/evolucao-produto]]: método para evoluir arquitetura, produto e dashboards sem ficar preso ao legado atual.
 - [[vogel-stack/vogel-stack/templates]]: modelos de documentos para iniciar novos repositórios com o mesmo padrão.
 - [[vogel-stack/vogel-stack/operacao-leve]]: a operação documental da stack — wikilinks curados + link checker determinístico + agente sob demanda.
+- [[vogel-stack/vogel-stack/seguranca]]: guardrails de segurança e privacidade, com os quatro princípios de fronteira e a checagem objetiva que precede qualquer exposição.
 
 ## Descoberta semântica
 
