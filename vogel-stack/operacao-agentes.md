@@ -19,6 +19,24 @@ Esse fluxo é o padrão quando a etapa for:
 - dependente do ambiente local do usuário;
 - sensível do ponto de vista operacional.
 
+## 1.1 Checklist antes de começar uma alteração
+
+A [[operacao-agentes#8. Checklist antes de concluir uma alteração|§8]] valida a **saída** de uma alteração. Ela não protege contra o caso inverso: a alteração é impecável, mas o **ponto de partida** estava errado. Trabalho correto sobre base velha sobrescreve trabalho novo — e passa em todo teste de saída, porque nada nele está errado.
+
+Em projeto tocado de mais de uma máquina (ou por mais de um agente), o estado local **não sabe** o que foi publicado de outro lugar até alguém perguntar ao remoto. E o Git **não avisa por conta própria**: `git status` só reporta `behind` quando a branch tem upstream configurado. Sem upstream ele diz `working tree clean` — que se lê como "estou em dia", mas significa apenas "não modifiquei nada". A falha é **silenciosa**, contra o [[principios#3. Clareza operacional é tão importante quanto correção técnica|princípio nº 3]] (erros precisam ser visíveis), e a divergência local↔remoto vira dívida **invisível**, contra o [[principios#1. O comportamento documentado deve refletir o sistema real|princípio nº 1]].
+
+Antes de implementar, editar código que vai para produção, ou deployar, confirmar:
+
+1. **houve `git fetch` nesta sessão** — sem isso `origin/<branch>` é uma foto velha, e qualquer comparação mente com cara de verdade;
+2. **a branch não está atrás**: `git log --oneline HEAD..origin/<branch>` sai **vazio**. Não usar o `git status` para responder isto;
+3. **a branch tem upstream**: `git rev-parse --abbrev-ref '@{u}'` responde. Se não responde, o Git nunca reportará `behind` nessa branch — configurar com `git branch --set-upstream-to=origin/<branch>` antes de seguir. Clone sem upstream é dívida, não detalhe;
+4. **o trabalho não commitado é meu**: pendência no working tree pode ser de outra frente ou sessão; separar antes de misturar com a alteração nova;
+5. **ao chegar numa máquina**, `pull` antes de qualquer coisa — é o passo 0 da rotina, não uma otimização.
+
+Sinal de perigo, a combinação que mais engana: **working tree limpo + branch sem upstream**. É o estado que mais parece seguro e menos garante que é.
+
+Este piso é verificável por lint determinístico (`scripts/check-sync.ps1`, irmão do [[operacao-agentes#7.4 Link checker determinístico como piso da malha|link checker]]): ele falha quando a branch está sem upstream ou atrás do remoto. Disciplina humana não escala entre máquinas — script escala. O caso que originou esta seção mostra o custo: um agente preparou uma alteração sobre um working tree 23 commits atrás; subi-la teria revertido uma poda de payload já em produção, inflando os artefatos cerca de 7x, no momento exato em que se adicionava a maior carga da base. Nada teria acusado o erro: **teria parecido um sucesso**.
+
 ## 2. Política de custo e uso de recursos
 
 Regras:
