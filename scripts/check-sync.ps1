@@ -15,23 +15,44 @@
 # contradiz o princípio nº 3 (erros precisam ser visíveis); este script é a rede
 # automática que o torna audível.
 #
+# Uso — projetos que consomem a stack como submódulo NÃO precisam copiar:
+#   ./vogel-stack/scripts/check-sync.ps1        # roda do submódulo, checa o PROJETO
+#   ./scripts/check-sync.ps1                    # se o projeto tiver cópia própria
+#   ./scripts/check-sync.ps1 -RepoPath D:\algo  # repo explícito
+#   ... -NoFetch                                # usa a foto local de origin/* (sem rede)
+#
+# Trava LOCAL, de antes de começar. Ao contrário do link checker (§7.4), NÃO é
+# checker de CI: no CI o checkout é sempre fresco, então "atrás do remoto" nunca
+# dispararia lá. O valor está na máquina de quem vai implementar.
+#
 # Sem dependência de LLM, no espírito dos irmãos scripts/check-wikilinks.ps1 e
 # scripts/check-quadro.ps1. Fora de repositório git, passa (exit 0).
-#
-# Uso:
-#   ./scripts/check-sync.ps1            # faz fetch e compara (padrão)
-#   ./scripts/check-sync.ps1 -NoFetch   # compara com a foto local de origin/*
 #
 # Exit 1 se houver qualquer erro; exit 0 caso contrário (avisos não falham).
 # ---------------------------------------------------------------------------
 [CmdletBinding()]
-param([switch]$NoFetch)
+param(
+    [switch]$NoFetch,
+    [string]$RepoPath
+)
 
 $ErrorActionPreference = 'Stop'
 # git é nativo: exit-code != 0 NÃO deve abortar o script (tratamos manualmente).
 $PSNativeCommandUseErrorActionPreference = $false
 
-$root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+# Qual repositório checar:
+#   -RepoPath explícito            -> esse;
+#   script veio pelo submódulo      -> o SUPERPROJETO (o projeto que consome a
+#     stack) — checar o submódulo daria um OK falso sobre o repo errado;
+#   script no próprio repo          -> <script>/.. (o repo dele).
+$root =
+    if ($RepoPath) { (Resolve-Path $RepoPath).Path }
+    else {
+        $cand  = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+        $super = (git -C $cand rev-parse --show-superproject-working-tree 2>$null)
+        if ($LASTEXITCODE -eq 0 -and $super) { (Resolve-Path $super).Path } else { $cand }
+    }
+
 Push-Location $root
 try {
     git rev-parse --is-inside-work-tree 2>$null | Out-Null
@@ -78,6 +99,7 @@ try {
         $warnings.Add("$dirty arquivo(s) pendente(s) no working tree — confirme que são seus antes de misturar com a alteração nova.")
     }
 
+    Write-Host "repo: $root" -ForegroundColor DarkGray
     foreach ($w in $warnings) { Write-Host "!  $w" -ForegroundColor Yellow }
 
     if ($errors.Count -gt 0) {

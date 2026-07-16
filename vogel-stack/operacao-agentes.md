@@ -35,7 +35,13 @@ Antes de implementar, editar código que vai para produção, ou deployar, confi
 
 Sinal de perigo, a combinação que mais engana: **working tree limpo + branch sem upstream**. É o estado que mais parece seguro e menos garante que é.
 
-Este piso é verificável por lint determinístico (`scripts/check-sync.ps1`, irmão do [[operacao-agentes#7.4 Link checker determinístico como piso da malha|link checker]]): ele falha quando a branch está sem upstream ou atrás do remoto. Disciplina humana não escala entre máquinas — script escala. O caso que originou esta seção mostra o custo: um agente preparou uma alteração sobre um working tree 23 commits atrás; subi-la teria revertido uma poda de payload já em produção, inflando os artefatos cerca de 7x, no momento exato em que se adicionava a maior carga da base. Nada teria acusado o erro: **teria parecido um sucesso**.
+Este piso é verificável por lint determinístico: `check-sync.ps1` (irmão do [[operacao-agentes#7.4 Link checker determinístico como piso da malha|link checker]]) falha quando a branch está sem upstream ou atrás do remoto. Disciplina humana não escala entre máquinas — script escala.
+
+Projeto que consome a stack como submódulo **não precisa copiar o script**: roda direto do submódulo (`./vogel-stack/scripts/check-sync.ps1`), que detecta o superprojeto e checa **o projeto**, não a stack. Copiar criaria uma cópia por repositório para divergir depois — e a prática mostra que o método não pega: na adoção medida em 07/2026, o link checker estava copiado em 2 de 6 consumidores e o `check-quadro` em nenhum, apesar de ambos existirem há tempo. Distribuir pelo submódulo é o mesmo raciocínio do princípio nº 1 aplicado à ferramenta: uma fonte, sem cópia que envelhece calada.
+
+Ao contrário do link checker, **este não é um checker de CI**: no CI o checkout é sempre fresco, e "atrás do remoto" nunca dispararia lá. É uma trava **local**, na máquina de quem vai implementar, antes de começar — que é exatamente onde a falha acontece.
+
+O caso que originou esta seção mostra o custo: um agente preparou uma alteração sobre um working tree 23 commits atrás; subi-la teria revertido uma poda de payload já em produção, inflando os artefatos cerca de 7x, no momento exato em que se adicionava a maior carga da base. Nada teria acusado o erro: **teria parecido um sucesso**.
 
 ## 2. Política de custo e uso de recursos
 
