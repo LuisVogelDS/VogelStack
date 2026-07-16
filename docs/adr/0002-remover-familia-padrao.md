@@ -1,10 +1,12 @@
 # ADR 0002 — Remover a família padrão e colapsar a stack numa via única
 
 - **Status:** Aceito
-- **Data:** 2026-07-16
+- **Data:** 2026-06-28 (decisão, materializada em `4fe8079`) · 2026-07-16 (este registro consolidado)
 - **Decisor:** LuisVogelDS
 - **Relação:** supersede parcialmente o [[0001-adotar-operacao-leve|ADR 0001]] — mantém a operação escolhida lá, remove a dualidade que a cercava
 - **Princípios aplicáveis:** nº 19 ([[vogel-stack/principios|Problema, não tecnologia]]) e nº 11 ([[vogel-stack/principios|Modos de execução suportados devem ser explícitos]])
+
+> **Nota de registro (2026-07-16).** Esta decisão foi tomada e materializada em **2026-06-28** (commit `4fe8079`), sob um registro anterior — `0002-aposentar-familia-graphify.md`. Em 16/07 o mesmo arco foi refeito numa branch partida de base defasada, produzindo um **segundo** registro do mesmo `0002`, sem saber do primeiro. Na reconciliação ficou este texto, por ser o mais completo, mas com a **data real da decisão**; o registro anterior saiu por ser duplicata, não por mudança de mérito — o mérito nunca esteve em disputa, as duas versões decidiam o mesmo. O episódio motivou a [[vogel-stack/operacao-agentes#1.1 Checklist antes de começar uma alteração|§1.1 — Checklist antes de começar uma alteração]], que existe para impedir exatamente esse trabalho sobre base defasada.
 
 ## Contexto
 
