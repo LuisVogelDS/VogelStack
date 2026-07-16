@@ -26,7 +26,7 @@ Esta stack ajuda a manter:
 - [[vogel-stack/vogel-stack/documentacao-e-versionamento]]: papéis dos docs, regras de atualização e convenções de versionamento.
 - [[vogel-stack/vogel-stack/evolucao-produto]]: método para evoluir arquitetura, produto e dashboards sem ficar preso ao legado atual.
 - [[vogel-stack/vogel-stack/templates]]: modelos de documentos para iniciar novos repositórios com o mesmo padrão.
-- [[vogel-stack/vogel-stack/operacao-leve]]: alternativa ao fluxo padrão Codex-led + Graphify-assisted, para projetos que adotam wikilinks + link checker + agente sob demanda.
+- [[vogel-stack/vogel-stack/operacao-leve]]: a operação documental da stack — wikilinks curados + link checker determinístico + agente sob demanda.
 
 ## Descoberta semântica
 
@@ -38,22 +38,21 @@ Antes de iniciar a implementação de novos serviços, painéis, integrações o
 - decisões de produto;
 - contratos, módulos e superfícies de UI ou API.
 
-A ferramenta que materializa essa descoberta é escolha do projeto, em coerência com o princípio nº 19 ([[vogel-stack/vogel-stack/principios|Problema, não tecnologia]]):
+A malha que materializa essa descoberta é a de **wikilinks curados**, validada por link checker determinístico e auditada por agente sob demanda — ver [[vogel-stack/vogel-stack/operacao-leve|Operação Documental]]. Fluxo de adoção em [[quickstart]].
 
-- **Família padrão (Codex-led + Graphify-assisted).** Materializa knowledge graph em `graphify-out/` (relatório, JSON, HTML, manifest) e usa Obsidian como camada visual. Fluxo completo em [[quickstart]].
-- **Família leve (wikilinks + link checker + agente sob demanda).** Sem Graphify, sem Obsidian versionado. Indicada para projetos com agente forte (Claude Code Max, Codex pago) constantemente disponível. Detalhes em [[vogel-stack/vogel-stack/operacao-leve]].
+Se um projeto concluir que esse arranjo não resolve o problema dele, o princípio nº 19 ([[vogel-stack/vogel-stack/principios|Problema, não tecnologia]]) manda declarar a solução alternativa em ADR próprio — a stack não herda ferramenta por convenção.
 
-Em ambos os caminhos, descoberta semântica não substitui leitura técnica, testes ou revisão de código — ela orienta onde procurar primeiro e reduz o risco de reinventar decisões que o projeto já materializou.
+Descoberta semântica não substitui leitura técnica, testes ou revisão de código — ela orienta onde procurar primeiro e reduz o risco de reinventar decisões que o projeto já materializou.
 
 ## Como usar
 
 Forma mínima de adoção em outro projeto:
 
-1. ler `quickstart.md` na raiz deste repositório para escolher a família de operação documental (padrão Codex-led + Graphify-assisted, ou leve com wikilinks + link checker);
+1. ler `quickstart.md` na raiz deste repositório para o passo a passo de adoção;
 2. instalar a Vogel Stack como submódulo no projeto-alvo;
 3. adaptar [[vogel-stack/vogel-stack/templates]] para gerar AGENTS.md, `README.md`, `quickstart.md`, `docs/arquitetura.md`, `docs/versionamento.md` e `docs/changelog.md`;
 4. ajustar fontes de verdade, fluxo de deploy, autenticação, matriz de suporte de ambiente e contratos do projeto alvo;
-5. **declarar a família escolhida em ADR próprio do projeto** (regra do princípio nº 19);
+5. **declarar em ADR próprio** qualquer solução que o projeto adote diferente da que a stack descreve (regra do princípio nº 19);
 6. manter os documentos atualizados no mesmo ciclo em que o comportamento do produto mudar.
 
 ## Escopo

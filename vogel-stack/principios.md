@@ -188,12 +188,9 @@ Antes de implementar novos serviços, painéis, integrações ou mudanças estru
 
 Essa etapa revela dependências, decisões antigas, hipóteses já testadas e relações que uma busca textual comum não mostra.
 
-**A ferramenta que materializa essa descoberta é escolha do projeto** — ver princípio nº 19 ([[principios|Problema, não tecnologia]]). Duas famílias de solução são suportadas:
+**A ferramenta que materializa essa descoberta é escolha do projeto** — ver princípio nº 19 ([[principios|Problema, não tecnologia]]). A solução que a stack descreve e adota: wikilinks curados servem de mapa; agente de IA faz auditoria estrutural sob demanda; link checker determinístico valida a integridade da malha. Detalhes em [[operacao-leve|Operação Documental]].
 
-- **Padrão:** Graphify gera knowledge graph em `graphify-out/`; Obsidian é camada visual. Indicada para projetos grandes ou com material bruto extenso. Detalhes em [[quickstart]].
-- **Leve:** wikilinks curados servem de mapa; agente de IA faz auditoria estrutural sob demanda; link checker determinístico valida integridade da malha. Detalhes em [[operacao-leve]].
-
-Independente da família escolhida, **o princípio se mantém**: descoberta semântica não elimina análise técnica, mas melhora seu ponto de partida.
+Um projeto que precise de outra solução declara a sua em ADR próprio. Em qualquer caso, **o princípio se mantém**: descoberta semântica não elimina análise técnica, mas melhora seu ponto de partida.
 
 ## 18. Documentos novos já devem nascer conectados
 
@@ -207,7 +204,7 @@ Regra prática:
 - ligar contratos, fontes de verdade, identificadores, observabilidade e semântica de saída a este documento;
 - ligar decisões de produto, dashboards e evolução arquitetural a [[evolucao-produto|Evolução de Produto e Arquitetura]].
 
-O objetivo é reduzir retrabalho: cada documento novo deve entrar no repositório já rastreável e navegável — pronto para ser consumido por humano ou agente sem investigação extra. Em projetos no caminho padrão, isso prepara o documento para ser incorporado pelo Graphify; em projetos no caminho leve, isso já é o contrato de navegação suficiente.
+O objetivo é reduzir retrabalho: cada documento novo deve entrar no repositório já rastreável e navegável — pronto para ser consumido por humano ou agente sem investigação extra. Os wikilinks **são** o contrato de navegação: não há camada posterior que reconstrua a malha por inferência.
 
 Links não devem ser decorativos. Cada wikilink precisa representar uma relação real de dependência, explicação, evidência, contrato, origem ou continuidade operacional.
 
@@ -217,21 +214,22 @@ Cada projeto declara, de forma explícita, qual **solução adota para cada prob
 
 Regra prática:
 
-- Antes de adotar uma ferramenta sugerida (Graphify, Obsidian versionado, etc.), conferir que o **problema** que ela resolve existe no projeto em magnitude suficiente para justificar o custo.
-- Quando o projeto escolhe ferramenta diferente da default, **declarar a decisão em ADR**, listar a substituição problema-a-problema, e referenciar este princípio.
+- Antes de adotar uma ferramenta sugerida, conferir que o **problema** que ela resolve existe no projeto em magnitude suficiente para justificar o custo.
+- Quando o projeto adota solução diferente da que a stack descreve, **declarar a decisão em ADR**, listar a substituição problema-a-problema, e referenciar este princípio.
 - Quando uma decisão dessas existir, ela vence o que a stack indica por convenção — em coerência com o princípio nº 1 ([[principios|comportamento documentado reflete o sistema real]]).
-- Stack indica **problemas e famílias de solução**; projeto escolhe **uma família** e declara.
+- A stack indica **problemas e a solução que adota**; o projeto confirma ou declara a sua.
 
-Exemplos de "problema" sob este princípio:
+Os problemas que este princípio cobre, e a solução que a stack adota para cada um:
 
-| Problema | Família de solução A | Família de solução B |
-|---|---|---|
-| Sumário canônico para agente frio | `GRAPH_REPORT.md` materializado | Hub humano + agente sob demanda |
-| Detecção de link quebrado | (implícito no fluxo Graphify) | Link checker determinístico |
-| Visualização do grafo | `graph.html` + Obsidian versionado | Obsidian local não-versionado |
-| Auditoria estrutural | `graphify cluster-only` | Agente IA com prompt explícito |
+| Problema | Solução adotada |
+|---|---|
+| Sumário canônico para agente | Hub curado (`AGENTS.md`/`CLAUDE.md`) + agente sob demanda |
+| Relacionamento entre docs | Wikilinks curados |
+| Detecção de link quebrado | Link checker determinístico em CI |
+| Auditoria estrutural | Agente de IA com prompt explícito |
+| Visualização gráfica | Ferramenta local do usuário, não versionada |
 
-A escolha entre família A e B é feita pelo princípio nº 11 ([[principios|modos de execução suportados devem ser explícitos]]) e este princípio nº 19. Detalhes operacionais de cada família vivem em [[quickstart]] (padrão) e [[operacao-leve]] (leve).
+Este princípio é o que autoriza um projeto a **divergir** da solução descrita — e é o mesmo que levou a stack a abandonar uma família inteira de ferramentas que o problema real não justificava. A escolha se declara junto com o princípio nº 11 ([[principios|modos de execução suportados devem ser explícitos]]). Detalhes operacionais em [[operacao-leve|Operação Documental]]; adoção em [[quickstart]].
 
 ## 20. Integrações de dados devem partir da fonte primária
 

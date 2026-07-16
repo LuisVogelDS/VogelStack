@@ -157,10 +157,10 @@ Regras:
 - conteúdo bruto deve ser tratado como material de entrada, não como fonte canônica final;
 - a IA deve ler essa pasta de forma autônoma antes de concluir que um assunto não existe no projeto;
 - a IA deve classificar, resumir e propor promoção de conteúdo bruto para documentos oficiais quando houver valor recorrente;
-- a ferramenta de Knowledge Graph deve indexar essas relações para conectar brainstorms, transcrições, decisões e artefatos;
+- os wikilinks devem conectar essas relações a brainstorms, transcrições, decisões e artefatos;
 - material sensível, privado ou local deve ser marcado antes de entrar nessa pasta.
 
-Com Graphify, essa pasta vira uma camada de captura do segundo cérebro do projeto.
+Bem conectada, essa pasta vira uma camada de captura do segundo cérebro do projeto.
 
 O objetivo não é exigir organização perfeita no momento da captura. O objetivo é permitir que nosso exército digital de manutenção leia o material bruto, encontre relações, preserve contexto e ajude a transformar sinal disperso em documentação confiável.
 
@@ -202,11 +202,11 @@ Implicação operacional:
 
 Quando o projeto usa submódulos e o script de sync não entra neles, o agente deve avisar explicitamente o usuário de que o `git push` dentro do submódulo precisa ser manual antes do sync principal — caso contrário o repositório pai vai apontar para um commit inexistente no remoto.
 
-Essa regra mantém Knowledge Graph, handoffs e auditoria operacional consistentes mesmo em projetos onde o histórico do Git foi deliberadamente trocado por automação leve.
+Essa regra mantém a malha de documentação, handoffs e auditoria operacional consistentes mesmo em projetos onde o histórico do Git foi deliberadamente trocado por automação leve.
 
 ## 3.06 Piso de integridade da malha — link checker
 
-Independente da família de operação documental adotada ([[principios|padrão ou leve, princípio nº 19]]), wikilinks são contrato de navegação. Wikilink quebrado é dívida visível.
+Wikilinks são contrato de navegação ([[principios|princípio nº 19]]). Wikilink quebrado é dívida visível.
 
 Recomendação para qualquer projeto:
 
@@ -214,11 +214,11 @@ Recomendação para qualquer projeto:
 - rodar em CI (GitHub Action ou equivalente) em push/PR para branch principal;
 - falhar a CI em link quebrado.
 
-Esse piso vale especialmente para projetos no [[operacao-leve|caminho leve]], que dispensam Graphify e dependem dos wikilinks como única infra de navegação semântica. Detalhes operacionais em [[operacao-agentes#7.4 Link checker determinístico como piso da malha|operacao-agentes seção 7.4]].
+Os wikilinks são a **única** infra de navegação semântica da stack — não há camada posterior que reconstrua a malha por inferência ([[operacao-leve|Operação Documental]]). Detalhes operacionais em [[operacao-agentes#7.4 Link checker determinístico como piso da malha|operacao-agentes seção 7.4]].
 
 ## 3.1 Linkagem semântica no nascimento
 
-Todo documento novo deve nascer já conectado ao Knowledge Graph do projeto.
+Todo documento novo deve nascer já conectado à malha de documentação do projeto.
 
 Ao criar `README.md`, `quickstart.md`, `AGENTS.md`, `docs/arquitetura.md`, `docs/operacao.md`, `docs/versionamento.md`, `docs/changelog.md`, handoffs, registros de execução ou guias complementares, o autor ou agente deve inserir wikilinks reais para:
 
@@ -228,7 +228,7 @@ Ao criar `README.md`, `quickstart.md`, `AGENTS.md`, `docs/arquitetura.md`, `docs
 - evidências operacionais relacionadas, quando existirem;
 - material bruto em `docs/raw/` ou `intake/`, quando o documento promover ou resumir uma entrada bruta.
 
-Essa regra evita que a linkagem vire uma tarefa de limpeza posterior. O documento deve entrar no repositório já navegável por humanos, agentes e Graphify.
+Essa regra evita que a linkagem vire uma tarefa de limpeza posterior. O documento deve entrar no repositório já navegável por humanos e agentes.
 
 Links não devem ser decorativos. Cada wikilink precisa representar uma relação real de dependência, explicação, evidência, contrato, origem ou continuidade operacional.
 

@@ -1,6 +1,6 @@
 # ADR 0001 — Adotar operação documental leve neste repositório
 
-- **Status:** Aceito
+- **Status:** Aceito — a dualidade de famílias que motivou esta escolha foi removida pelo [[0002-remover-familia-padrao|ADR 0002]] (2026-07-16). A operação adotada aqui continua valendo: deixou de ser "uma família entre duas" e passou a ser a via única da stack.
 - **Data:** 2026-06-12
 - **Decisor:** LuisVogelDS
 - **Princípios aplicáveis:** nº 19 ([[vogel-stack/principios|Problema, não tecnologia]]) e nº 11 ([[vogel-stack/principios|Modos de execução suportados devem ser explícitos]])

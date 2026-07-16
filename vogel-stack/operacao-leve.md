@@ -1,139 +1,62 @@
-# Operação Leve — Sem Graphify e Sem Obsidian Versionado
+# Operação Documental
 
-Este documento define um caminho **alternativo ao fluxo Codex-led + Graphify-assisted** do [[quickstart|quickstart]] padrão. Aplica-se a projetos que conseguem resolver os mesmos problemas com ferramentas mais simples.
+> **Nota de nome:** o arquivo se chama `operacao-leve.md` por razão histórica — nasceu como alternativa "leve" a um caminho pesado que a stack não oferece mais ([[0002-remover-familia-padrao|ADR 0002]]). O nome foi mantido de propósito: os projetos consumidores linkam para ele, e renomear quebraria a malha de todos de uma vez. É resquício histórico, não descrição.
 
-A escolha entre os dois caminhos é declarada por projeto, em coerência com o princípio nº 19 ([[principios|Problema, não tecnologia]]) e nº 11 ([[principios|Modos de execução suportados devem ser explícitos]]).
+Este documento define **a operação documental da Vogel Stack**: como a malha de documentos se mantém navegável, íntegra e auditável — para humanos e para agentes.
 
-## Quando o caminho leve faz sentido
+A operação se apoia em três peças, e só nelas:
 
-Adote este caminho quando, **simultaneamente**, valerem todos os pontos abaixo:
+1. **Wikilinks curados** — a malha. Explícita, escrita por quem conhece a relação real.
+2. **Link checker determinístico** — o piso. Script sem LLM, roda em CI, falha em link quebrado.
+3. **Agente de IA sob demanda** — a auditoria. Órfão, weak link e comunidade isolada viram pedido explícito, não relatório materializado.
 
-- O projeto tem **menos de ~80 documentos** ou **~500KB de markdown**. O hub humano cabe na cabeça e em uma leitura do agente.
-- Existe **agente de IA forte** com acesso constante ao repo (Claude Code Max ou High, GPT Codex pago) capaz de fazer auditoria estrutural sob demanda.
-- A **maioria dos consumidores** do repo entra com agente já carregado ou lê hub humano curado. Não há fluxo recorrente de "agente frio que precisa de mapa pronto".
-- A **volatilidade documental é alta** (fase de arranque, refactor pesado, brainstorm contínuo) — regenerar grafo em cada mudança paga LLM sem retorno proporcional.
-- Não há **material bruto extenso** em `docs/raw/` ou `intake/` precisando de inferência LLM para conectar com docs canônicos.
-
-Quando qualquer um desses pontos deixar de valer, mude para o caminho do [[quickstart|quickstart]] (Codex-led + Graphify-assisted).
-
-## O que o caminho leve adota
+## O que a operação adota
 
 | Problema | Solução |
 |---|---|
-| Relacionamento entre docs | Wikilinks curados (estilo Obsidian, sintaxe `[[node]]`) |
-| Detecção de link quebrado | Link checker determinístico + GitHub Action (sem LLM) |
-| Hub navegável | `docs/README.md` curado |
+| Relacionamento entre docs | Wikilinks curados, sintaxe `[[node]]` |
+| Detecção de link quebrado | Link checker determinístico + CI (sem LLM) |
+| Hub navegável | `docs/README.md` curado (ou equivalente do projeto) |
 | Síntese semântica do projeto | `docs/contexto.md` curado |
-| Mapa rápido para agente | `AGENTS.md` curado |
-| Auditoria estrutural (órfão, weak link, comunidade) | Agente IA sob demanda, com prompt explícito |
-| Visualização gráfica | Obsidian local do usuário, **não versionado** |
+| Mapa rápido para agente | `AGENTS.md` / `CLAUDE.md` curado |
+| Auditoria estrutural (órfão, weak link, comunidade) | Agente de IA sob demanda, com prompt explícito |
+| Visualização gráfica | Ferramenta local do usuário, **não versionada** |
 
-O submódulo da Vogel Stack continua presente — princípios, templates, operação de agentes e registro/evidências continuam herdados. Só a camada de Graphify + Obsidian versionado é substituída.
+Os princípios herdados continuam valendo integralmente: [[principios|Princípios Gerais]], [[templates|Templates de Documentação]], [[operacao-agentes|Operação de Agentes]] e [[registro-e-evidencias|Registro e Evidências Operacionais]].
 
-## O que o caminho leve **não** entrega
+## Limites conhecidos
 
-Sou honesto sobre as perdas:
+Honestidade sobre o que esta operação **não** entrega:
 
-- **Disponibilidade do mapa sem agente.** Sem `GRAPH_REPORT.md`, qualquer auditoria fora de uma sessão de agente vira leitura manual.
-- **Visualização interativa "para todos".** Obsidian fica como ferramenta de um humano específico, não de todos os consumidores.
-- **Edges inferidas (relações implícitas).** Wikilinks são explícitos; nada além disso é detectado automaticamente.
-- **Detecção de comunidades isoladas** sem agente. Em projeto pequeno, isso se vê na estrutura de pastas; em projeto grande, deixa de funcionar.
+- **Mapa disponível sem agente.** Não há sumário materializado: auditoria fora de uma sessão de agente vira leitura manual.
+- **Visualização interativa "para todos".** Quem quiser grafo visual usa ferramenta local; ela não é contrato do repositório.
+- **Edges inferidas.** Wikilinks são explícitos — relação que ninguém escreveu não é detectada sozinha.
+- **Detecção automática de comunidade isolada.** Em projeto pequeno isso se vê na estrutura de pastas; em projeto grande, deixaria de funcionar.
 
-Se essas perdas começarem a doer, é hora de migrar para o caminho do [[quickstart|quickstart]].
+Esses limites são aceitáveis no perfil dos projetos que a stack atende: poucos documentos, agente forte constantemente disponível e alta volatilidade documental.
 
-## Receita: remover Graphify e Obsidian versionado de um projeto existente
+## Quando esta operação deixa de bastar
 
-Use esta receita quando o projeto já adotou o caminho padrão e quer migrar para o caminho leve. Pode ser executado por agente de IA ou humano.
+Se algum destes disparar, o projeto tem um **problema novo** e declara a solução em ADR próprio (princípio nº 19 — [[principios|Problema, não tecnologia]]). A stack não reintroduz ferramenta por antecipação:
 
-### Pré-condições
+1. Volume cruza ~80 documentos ou ~500KB de markdown.
+2. `docs/raw/` ou `intake/` passa a ter material bruto extenso precisando ser conectado aos docs canônicos.
+3. Múltiplos agentes externos frios passam a consumir o repo sem contexto carregado.
+4. Auditoria estrutural vira pedido frequente o suficiente para que materializar um cache compense o custo.
 
-- Repo tem submódulo Vogel Stack em `vogel-stack/` (ou caminho equivalente).
-- Repo tem ao menos um dos seguintes: `graphify-out/`, `.obsidian/` versionado, regra de "ler GRAPH_REPORT.md" no `AGENTS.md` / `CLAUDE.md`.
+## Piso de integridade — o link checker
 
-### Passo 1 — Validar que o caminho leve faz sentido
+Todo projeto que use wikilinks como contrato de navegação deve manter:
 
-Conferir os 5 critérios da seção "Quando o caminho leve faz sentido" acima. Se algum não bater, **não migrar**.
+- `scripts/check-wikilinks.ps1` (ou equivalente) — valida que todo `[[wikilink]]` aponta para arquivo existente; suporta `[[alvo|alias]]` e `[[alvo#secao]]`; ignora blocos de código; sai com código 1 em quebra.
+- Uma Action de CI (`check-malha` ou equivalente) rodando em push/PR para `main`.
+- Execução local antes de fechar qualquer rodada que tenha tocado em `.md`.
 
-### Passo 2 — Registrar a decisão como ADR
-
-Criar um ADR no projeto (numerar conforme a sequência local) com:
-
-- Contexto (estado atual com Graphify/Obsidian).
-- Decisão (adotar caminho leve, listar substituições).
-- Gatilhos para reabrir (~80 docs, raw/ extenso, agentes externos sem contexto, auditoria frequente).
-- Consequências (sem `graphify-out/`, sem `.obsidian/` versionado).
-- Referenciar este documento ([[operacao-leve]]) e o princípio nº 19 de [[principios]].
-
-### Passo 3 — Remover artefatos
-
-Deletar do controle de versão:
-
-```powershell
-# Remover artefatos do Graphify (se versionados)
-git rm -rf graphify-out/
-
-# Remover vault Obsidian se estiver versionado
-git rm -rf .obsidian/
-
-# Atualizar .gitignore para ignorar futuras gerações locais
-@'
-
-# Operação leve: artefatos locais que não vão para o repo
-graphify-out/
-.obsidian/
-'@ | Add-Content -Path .gitignore -Encoding UTF8
-```
-
-### Passo 4 — Adicionar link checker
-
-Criar `scripts/check-wikilinks.ps1` (referência: a versão usada no projeto Alquimia, que valida `[[wikilink]]`, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, ignora blocos de código, exit code 1 em quebra).
-
-Criar `.github/workflows/check-malha.yml` que roda o checker em push/PR para `main`.
-
-Rodar o checker localmente — corrigir todo wikilink quebrado **antes do commit de migração**. É comum encontrar links que dependiam do `GRAPH_REPORT.md` ou de seções do vault `.obsidian/`.
-
-### Passo 5 — Atualizar `AGENTS.md` / `CLAUDE.md`
-
-Substituir regras que pressupõem Graphify por regras do caminho leve.
-
-Antes (típico):
-
-```markdown
-- ALWAYS read graphify-out/GRAPH_REPORT.md before reading source files...
-- For cross-module questions, prefer graphify query / path / explain over grep.
-```
-
-Depois:
-
-```markdown
-- Entrar pelo docs/contexto.md (síntese) e docs/README.md (hub).
-- Para auditoria estrutural (órfão, weak link, comunidade), pedir explicitamente
-  ao agente com escopo claro. Este projeto não materializa GRAPH_REPORT.md.
-- Antes de fechar rodada que tocou em .md, rodar:
-    pwsh ./scripts/check-wikilinks.ps1
-```
-
-### Passo 6 — Atualizar documentação do projeto
-
-- `docs/operacao.md` ganha seção sobre o checker e o template de prompt para auditoria sob demanda (ver exemplo no Alquimia).
-- `docs/reference-vogelstack.md` (ou equivalente) ganha tabela "o que este projeto adota diferente da stack", com justificativa.
-- `docs/changelog.md` recebe entrada nova no topo descrevendo a migração.
-- Documentos que linkavam para Graphify ou Obsidian-vault ficam atualizados para refletir o novo estado.
-
-### Passo 7 — Commit e validação
-
-```powershell
-pwsh ./scripts/check-wikilinks.ps1   # tem que passar
-git add scripts/ .github/ AGENTS.md CLAUDE.md docs/ .gitignore
-git commit -m "X.Y.Z — Migrar para operação leve (sem Graphify e sem Obsidian versionado)"
-git push
-```
-
-CI deve passar no primeiro push. Se não passar, é wikilink quebrado — corrigir.
+Detalhes operacionais em [[operacao-agentes#7.4 Link checker determinístico como piso da malha|operacao-agentes seção 7.4]].
 
 ## Prompt-template para auditoria estrutural sob demanda
 
-Quando o caminho leve está adotado e você precisa do equivalente a um `GRAPH_REPORT.md`, pedir ao agente:
+Quando precisar do equivalente a um relatório de grafo, pedir ao agente:
 
 ```text
 Audite a malha de documentação deste projeto:
@@ -148,22 +71,8 @@ Audite a malha de documentação deste projeto:
 Escopo: docs/ + AGENTS.md + README.md raiz. Ignorar vogel-stack/.
 ```
 
-Saída desejada: relatório textual que humano (ou outro agente) revisa antes de aplicar.
+Saída desejada: relatório textual que um humano (ou outro agente) revisa antes de aplicar.
 
-## Custo comparativo
+## Custo
 
-- **Graphify-assisted:** custo de LLM cada `graphify extract .` + ruído de diff + setup de CLI/env/API key. Em troca: cache de sumário sempre fresco e disponível sem agente.
-- **Operação leve:** custo de tokens cada vez que pedimos auditoria ao agente + risco de não detectar weak link entre auditorias. Em troca: zero ferramenta extra, zero ruído de diff, qualidade semântica superior na auditoria.
-
-A escolha não é "qual é melhor", é **qual encaixa no contexto deste projeto**.
-
-## Quando voltar para o caminho padrão
-
-Reverter para [[quickstart|quickstart]] (Codex-led + Graphify-assisted) quando qualquer um disparar:
-
-1. Volume cruza ~80 docs ou ~500KB de markdown.
-2. `docs/raw/` (ou `intake/`) passa de 5 itens com volume não trivial.
-3. Múltiplos agentes externos passam a consumir o repo sem contexto carregado.
-4. Auditoria estrutural vira pedido frequente o suficiente para que materializar valha o custo de regeneração.
-
-Quando o gatilho disparar, materializar Graphify é trivial: rodar `graphify extract .` uma vez, remover `graphify-out/` do `.gitignore`, ajustar `AGENTS.md` para a regra original. Não há barreira irreversível.
+O custo desta operação é de tokens, cada vez que se pede auditoria ao agente — mais o risco de não detectar um weak link entre auditorias. Em troca: zero ferramenta extra, zero ruído de diff, e qualidade semântica superior na auditoria (o agente entende o projeto; um extrator estrutural não).
