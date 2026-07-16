@@ -1,5 +1,5 @@
-# Operação leve: artefatos locais que não vão para o repo
-# (ver vogel-stack/operacao-leve.md). Graphify e Obsidian, se usados,
-# ficam como ferramentas locais não-versionadas.
+# Artefatos de ferramentas locais do usuário (visualizador de grafo, vault de
+# notas, etc.) não são contrato do repositório — ver vogel-stack/operacao-leve.md.
+# As regras ficam aqui só para que um uso local nunca vaze para o repo.
 graphify-out/
 .obsidian/

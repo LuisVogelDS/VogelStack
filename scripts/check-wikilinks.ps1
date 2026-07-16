@@ -1,17 +1,17 @@
 #!/usr/bin/env pwsh
 # ---------------------------------------------------------------------------
-# check-wikilinks.ps1 — piso determinístico da malha de wikilinks (caminho leve).
+# check-wikilinks.ps1 — piso determinístico da malha de wikilinks.
 #
-# Valida wikilinks estilo Obsidian em todos os .md do repositório:
+# Valida wikilinks em todos os .md do repositório:
 #   [[alvo]]            [[alvo|alias]]            [[alvo#secao]]            [[#secao]]
 #
-# Resolve o alvo por caminho relativo OU por basename (como o Obsidian com a
-# opção "shortest path when possible", que é o default). Não valida a âncora
+# Resolve o alvo por caminho relativo OU por basename (o menor caminho que
+# identifica o arquivo sem ambiguidade). Não valida a âncora
 # #secao — só a existência do arquivo-alvo. Ignora código (blocos cercados e
 # inline) para não acusar exemplos.
 #
 # Exit 1 se houver qualquer wikilink quebrado; exit 0 caso contrário.
-# Ver vogel-stack/operacao-leve.md (Passo 4) e princípio nº 18.
+# Ver vogel-stack/operacao-leve.md e princípio nº 18.
 #
 # Projetos que consomem a stack como submódulo devem excluir vogel-stack/ do
 # escopo (lá a malha é responsabilidade da própria stack).

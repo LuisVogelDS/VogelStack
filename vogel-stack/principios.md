@@ -188,9 +188,9 @@ Antes de implementar novos serviços, painéis, integrações ou mudanças estru
 
 Essa etapa revela dependências, decisões antigas, hipóteses já testadas e relações que uma busca textual comum não mostra.
 
-A malha de navegação é feita por **wikilinks curados** (o mapa), com **link checker determinístico** garantindo a integridade e **auditoria estrutural por agente sob demanda** quando preciso — sem ferramentas externas obrigatórias. Detalhes em [[operacao-leve|Operação Documental]].
+**A ferramenta que materializa essa descoberta é escolha do projeto** — ver princípio nº 19 ([[principios|Problema, não tecnologia]]). A solução que a stack descreve e adota: wikilinks curados servem de mapa; agente de IA faz auditoria estrutural sob demanda; link checker determinístico valida a integridade da malha. Detalhes em [[operacao-leve|Operação Documental]].
 
-**O princípio se mantém**: descoberta semântica não elimina análise técnica, mas melhora seu ponto de partida.
+Um projeto que precise de outra solução declara a sua em ADR próprio. Em qualquer caso, **o princípio se mantém**: descoberta semântica não elimina análise técnica, mas melhora seu ponto de partida.
 
 ## 18. Documentos novos já devem nascer conectados
 
@@ -204,28 +204,32 @@ Regra prática:
 - ligar contratos, fontes de verdade, identificadores, observabilidade e semântica de saída a este documento;
 - ligar decisões de produto, dashboards e evolução arquitetural a [[evolucao-produto|Evolução de Produto e Arquitetura]].
 
-O objetivo é reduzir retrabalho: cada documento novo deve entrar no repositório já rastreável e navegável — pronto para ser consumido por humano ou agente sem investigação extra. Os wikilinks já são o contrato de navegação suficiente.
+O objetivo é reduzir retrabalho: cada documento novo deve entrar no repositório já rastreável e navegável — pronto para ser consumido por humano ou agente sem investigação extra. Os wikilinks **são** o contrato de navegação: não há camada posterior que reconstrua a malha por inferência.
 
 Links não devem ser decorativos. Cada wikilink precisa representar uma relação real de dependência, explicação, evidência, contrato, origem ou continuidade operacional.
 
 ## 19. Problema, não tecnologia
 
-Cada projeto adota a **solução mais simples que resolve o problema operacional real** — não herda ferramenta por convenção nem por hype.
+Cada projeto declara, de forma explícita, qual **solução adota para cada problema operacional** — não herda ferramenta por convenção da stack.
 
 Regra prática:
 
-- Antes de adotar qualquer ferramenta (Graphify, Obsidian versionado, um banco a mais, etc.), conferir que o **problema** que ela resolve existe no projeto em magnitude suficiente para justificar o custo.
-- A Vogel Stack resolve a navegação documental com o modelo leve (wikilinks + link checker + agente sob demanda — ver [[operacao-leve|Operação Documental]]); ferramentas mais pesadas **não são orientadas pela stack**.
-- Se um projeto adotar algo diferente, **declarar em ADR**, listar a substituição problema-a-problema e referenciar este princípio — em coerência com o princípio nº 1 ([[principios|comportamento documentado reflete o sistema real]]).
+- Antes de adotar uma ferramenta sugerida, conferir que o **problema** que ela resolve existe no projeto em magnitude suficiente para justificar o custo.
+- Quando o projeto adota solução diferente da que a stack descreve, **declarar a decisão em ADR**, listar a substituição problema-a-problema, e referenciar este princípio.
+- Quando uma decisão dessas existir, ela vence o que a stack indica por convenção — em coerência com o princípio nº 1 ([[principios|comportamento documentado reflete o sistema real]]).
+- A stack indica **problemas e a solução que adota**; o projeto confirma ou declara a sua.
 
-Como a stack resolve cada problema de navegação documental:
+Os problemas que este princípio cobre, e a solução que a stack adota para cada um:
 
-| Problema | Solução da stack |
+| Problema | Solução adotada |
 |---|---|
-| Sumário canônico para agente | Hub humano (`README`/índice) + agente sob demanda |
-| Detecção de link quebrado | Link checker determinístico (`check-wikilinks.ps1`) |
-| Visualização do grafo | App local do usuário (ex.: Obsidian), opcional e **não-versionado** |
-| Auditoria estrutural | Agente de IA com prompt explícito ([[operacao-leve]]) |
+| Sumário canônico para agente | Hub curado (`AGENTS.md`/`CLAUDE.md`) + agente sob demanda |
+| Relacionamento entre docs | Wikilinks curados |
+| Detecção de link quebrado | Link checker determinístico em CI |
+| Auditoria estrutural | Agente de IA com prompt explícito |
+| Visualização gráfica | Ferramenta local do usuário, não versionada |
+
+Este princípio é o que autoriza um projeto a **divergir** da solução descrita — e é o mesmo que levou a stack a abandonar uma família inteira de ferramentas que o problema real não justificava. A escolha se declara junto com o princípio nº 11 ([[principios|modos de execução suportados devem ser explícitos]]). Detalhes operacionais em [[operacao-leve|Operação Documental]]; adoção em [[quickstart]].
 
 ## 20. Integrações de dados devem partir da fonte primária
 

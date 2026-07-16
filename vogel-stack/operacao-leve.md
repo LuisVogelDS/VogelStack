@@ -1,26 +1,62 @@
 # Operação Documental
 
-Este documento define **o modelo de operação documental da Vogel Stack**: wikilinks curados + link checker determinístico + auditoria por agente sob demanda. É um modelo **leve por design** — resolve relacionamento entre docs, detecção de link quebrado e auditoria estrutural **sem ferramentas externas obrigatórias** (sem Graphify, sem Obsidian versionado).
+> **Nota de nome:** o arquivo se chama `operacao-leve.md` por razão histórica — nasceu como alternativa "leve" a um caminho pesado que a stack não oferece mais ([[0002-remover-familia-padrao|ADR 0002]]). O nome foi mantido de propósito: os projetos consumidores linkam para ele, e renomear quebraria a malha de todos de uma vez. É resquício histórico, não descrição.
 
-A escolha por esse modelo é coerente com o princípio nº 19 ([[principios|Problema, não tecnologia]]) e nº 11 ([[principios|Modos de execução suportados devem ser explícitos]]): ferramenta é meio, não fim — adota-se a mais simples que resolve o problema real.
+Este documento define **a operação documental da Vogel Stack**: como a malha de documentos se mantém navegável, íntegra e auditável — para humanos e para agentes.
 
-## O que o modelo adota
+A operação se apoia em três peças, e só nelas:
+
+1. **Wikilinks curados** — a malha. Explícita, escrita por quem conhece a relação real.
+2. **Link checker determinístico** — o piso. Script sem LLM, roda em CI, falha em link quebrado.
+3. **Agente de IA sob demanda** — a auditoria. Órfão, weak link e comunidade isolada viram pedido explícito, não relatório materializado.
+
+## O que a operação adota
 
 | Problema | Solução |
 |---|---|
-| Relacionamento entre docs | Wikilinks curados (sintaxe `[[node]]`) |
-| Detecção de link quebrado | Link checker determinístico + GitHub Action (sem LLM) |
-| Hub navegável | `README`/índice de docs curado |
-| Síntese do projeto | `README` + docs canônicos curados |
-| Backlog | Quadro único `docs/handoffs/_QUADRO.md` (ver [[operacao-agentes]]) |
-| Auditoria estrutural (órfão, weak link, comunidade) | Agente IA sob demanda, com prompt explícito |
-| Visualização gráfica (opcional) | App local do usuário (ex.: Obsidian), **não versionado** |
+| Relacionamento entre docs | Wikilinks curados, sintaxe `[[node]]` |
+| Detecção de link quebrado | Link checker determinístico + CI (sem LLM) |
+| Hub navegável | `docs/README.md` curado (ou equivalente do projeto) |
+| Síntese semântica do projeto | `docs/contexto.md` curado |
+| Mapa rápido para agente | `AGENTS.md` / `CLAUDE.md` curado |
+| Auditoria estrutural (órfão, weak link, comunidade) | Agente de IA sob demanda, com prompt explícito |
+| Visualização gráfica | Ferramenta local do usuário, **não versionada** |
 
-Premissa: existe um **agente de IA forte** com acesso ao repo (Claude Code, Codex) capaz de fazer auditoria estrutural sob demanda quando preciso — em vez de manter um mapa materializado sempre atualizado.
+Os princípios herdados continuam valendo integralmente: [[principios|Princípios Gerais]], [[templates|Templates de Documentação]], [[operacao-agentes|Operação de Agentes]] e [[registro-e-evidencias|Registro e Evidências Operacionais]].
 
-## Auditoria estrutural sob demanda (prompt-template)
+## Limites conhecidos
 
-Quando precisar do equivalente a um relatório de grafo, peça ao agente:
+Honestidade sobre o que esta operação **não** entrega:
+
+- **Mapa disponível sem agente.** Não há sumário materializado: auditoria fora de uma sessão de agente vira leitura manual.
+- **Visualização interativa "para todos".** Quem quiser grafo visual usa ferramenta local; ela não é contrato do repositório.
+- **Edges inferidas.** Wikilinks são explícitos — relação que ninguém escreveu não é detectada sozinha.
+- **Detecção automática de comunidade isolada.** Em projeto pequeno isso se vê na estrutura de pastas; em projeto grande, deixaria de funcionar.
+
+Esses limites são aceitáveis no perfil dos projetos que a stack atende: poucos documentos, agente forte constantemente disponível e alta volatilidade documental.
+
+## Quando esta operação deixa de bastar
+
+Se algum destes disparar, o projeto tem um **problema novo** e declara a solução em ADR próprio (princípio nº 19 — [[principios|Problema, não tecnologia]]). A stack não reintroduz ferramenta por antecipação:
+
+1. Volume cruza ~80 documentos ou ~500KB de markdown.
+2. `docs/raw/` ou `intake/` passa a ter material bruto extenso precisando ser conectado aos docs canônicos.
+3. Múltiplos agentes externos frios passam a consumir o repo sem contexto carregado.
+4. Auditoria estrutural vira pedido frequente o suficiente para que materializar um cache compense o custo.
+
+## Piso de integridade — o link checker
+
+Todo projeto que use wikilinks como contrato de navegação deve manter:
+
+- `scripts/check-wikilinks.ps1` (ou equivalente) — valida que todo `[[wikilink]]` aponta para arquivo existente; suporta `[[alvo|alias]]` e `[[alvo#secao]]`; ignora blocos de código; sai com código 1 em quebra.
+- Uma Action de CI (`check-malha` ou equivalente) rodando em push/PR para `main`.
+- Execução local antes de fechar qualquer rodada que tenha tocado em `.md`.
+
+Detalhes operacionais em [[operacao-agentes#7.4 Link checker determinístico como piso da malha|operacao-agentes seção 7.4]].
+
+## Prompt-template para auditoria estrutural sob demanda
+
+Quando precisar do equivalente a um relatório de grafo, pedir ao agente:
 
 ```text
 Audite a malha de documentação deste projeto:
@@ -35,24 +71,8 @@ Audite a malha de documentação deste projeto:
 Escopo: docs/ + AGENTS.md + README.md raiz. Ignorar vogel-stack/.
 ```
 
-Saída desejada: relatório textual que humano (ou outro agente) revisa antes de aplicar.
+Saída desejada: relatório textual que um humano (ou outro agente) revisa antes de aplicar.
 
-## Link checker
+## Custo
 
-Cada projeto mantém `scripts/check-wikilinks.ps1` (valida `[[wikilink]]`, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, ignora blocos de código, exit code 1 em quebra) e uma GitHub Action (`check-malha.yml`) que roda em push/PR para `main`. Antes de fechar rodada que tocou em `.md`, rodar o checker localmente e corrigir todo link quebrado.
-
-## Apêndice — migrar um projeto que ainda tenha Graphify/Obsidian versionado
-
-Se um projeto legado ainda versiona `graphify-out/` ou `.obsidian/`, remova-os:
-
-```powershell
-git rm -rf graphify-out/ .obsidian/    # se versionados
-@'
-
-# Ferramentas locais não versionadas
-graphify-out/
-.obsidian/
-'@ | Add-Content -Path .gitignore -Encoding UTF8
-```
-
-Depois: garanta o `scripts/check-wikilinks.ps1` + a Action, rode o checker e religue todo wikilink que dependia de artefatos removidos (era comum links apontarem para `GRAPH_REPORT.md` ou seções do vault). Registre a remoção no `docs/changelog.md`. Veja o histórico dessa migração na própria stack em [[docs/adr/0001-adotar-operacao-leve|ADR 0001]] e [[docs/adr/0002-aposentar-familia-graphify|ADR 0002]].
+O custo desta operação é de tokens, cada vez que se pede auditoria ao agente — mais o risco de não detectar um weak link entre auditorias. Em troca: zero ferramenta extra, zero ruído de diff, e qualidade semântica superior na auditoria (o agente entende o projeto; um extrator estrutural não).

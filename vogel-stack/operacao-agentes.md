@@ -19,6 +19,30 @@ Esse fluxo é o padrão quando a etapa for:
 - dependente do ambiente local do usuário;
 - sensível do ponto de vista operacional.
 
+## 1.1 Checklist antes de começar uma alteração
+
+A [[operacao-agentes#8. Checklist antes de concluir uma alteração|§8]] valida a **saída** de uma alteração. Ela não protege contra o caso inverso: a alteração é impecável, mas o **ponto de partida** estava errado. Trabalho correto sobre base velha sobrescreve trabalho novo — e passa em todo teste de saída, porque nada nele está errado.
+
+Em projeto tocado de mais de uma máquina (ou por mais de um agente), o estado local **não sabe** o que foi publicado de outro lugar até alguém perguntar ao remoto. E o Git **não avisa por conta própria**: `git status` só reporta `behind` quando a branch tem upstream configurado. Sem upstream ele diz `working tree clean` — que se lê como "estou em dia", mas significa apenas "não modifiquei nada". A falha é **silenciosa**, contra o [[principios#3. Clareza operacional é tão importante quanto correção técnica|princípio nº 3]] (erros precisam ser visíveis), e a divergência local↔remoto vira dívida **invisível**, contra o [[principios#1. O comportamento documentado deve refletir o sistema real|princípio nº 1]].
+
+Antes de implementar, editar código que vai para produção, ou deployar, confirmar:
+
+1. **houve `git fetch` nesta sessão** — sem isso `origin/<branch>` é uma foto velha, e qualquer comparação mente com cara de verdade;
+2. **a branch não está atrás**: `git log --oneline HEAD..origin/<branch>` sai **vazio**. Não usar o `git status` para responder isto;
+3. **a branch tem upstream**: `git rev-parse --abbrev-ref '@{u}'` responde. Se não responde, o Git nunca reportará `behind` nessa branch — configurar com `git branch --set-upstream-to=origin/<branch>` antes de seguir. Clone sem upstream é dívida, não detalhe;
+4. **o trabalho não commitado é meu**: pendência no working tree pode ser de outra frente ou sessão; separar antes de misturar com a alteração nova;
+5. **ao chegar numa máquina**, `pull` antes de qualquer coisa — é o passo 0 da rotina, não uma otimização.
+
+Sinal de perigo, a combinação que mais engana: **working tree limpo + branch sem upstream**. É o estado que mais parece seguro e menos garante que é.
+
+Este piso é verificável por lint determinístico: `check-sync.ps1` (irmão do [[operacao-agentes#7.4 Link checker determinístico como piso da malha|link checker]]) falha quando a branch está sem upstream ou atrás do remoto. Disciplina humana não escala entre máquinas — script escala.
+
+Projeto que consome a stack como submódulo **não precisa copiar o script**: roda direto do submódulo (`./vogel-stack/scripts/check-sync.ps1`), que detecta o superprojeto e checa **o projeto**, não a stack. Copiar criaria uma cópia por repositório para divergir depois — e a prática mostra que o método não pega: na adoção medida em 07/2026, o link checker estava copiado em 2 de 6 consumidores e o `check-quadro` em nenhum, apesar de ambos existirem há tempo. Distribuir pelo submódulo é o mesmo raciocínio do princípio nº 1 aplicado à ferramenta: uma fonte, sem cópia que envelhece calada.
+
+Ao contrário do link checker, **este não é um checker de CI**: no CI o checkout é sempre fresco, e "atrás do remoto" nunca dispararia lá. É uma trava **local**, na máquina de quem vai implementar, antes de começar — que é exatamente onde a falha acontece.
+
+O caso que originou esta seção mostra o custo: um agente preparou uma alteração sobre um working tree 23 commits atrás; subi-la teria revertido uma poda de payload já em produção, inflando os artefatos cerca de 7x, no momento exato em que se adicionava a maior carga da base. Nada teria acusado o erro: **teria parecido um sucesso**.
+
 ## 2. Política de custo e uso de recursos
 
 Regras:
@@ -208,15 +232,16 @@ Isso reduz retrabalho e evita que o agente trate como desconhecido algo que já 
 
 ## 7.2.1 Regra de Juros Compostos
 
-Quando o agente criar ou orientar a criação de um diretório `reports/runs/<run_id>/`, ele deve tratar essa run como memória futura do projeto e entrada para o Knowledge Graph.
+Quando o agente criar ou orientar a criação de um diretório `reports/runs/<run_id>/`, ele deve tratar essa run como memória futura do projeto e entrada para a malha de documentação.
 
 Regras:
 
 - criar ou atualizar um resumo legível dentro da run;
 - registrar quais artefatos foram finais, auxiliares, parciais ou ausentes;
 - garantir que o `registry` aponte para o diretório da run;
-- escrever nomes e descrições legíveis e rastreáveis por humanos e agentes;
-- deixar explícitas relações com decisões, hipóteses, métricas, erros ou serviços avaliados.
+- escrever nomes e descrições que humanos e agentes consigam encontrar depois;
+- deixar explícitas relações com decisões, hipóteses, métricas, erros ou serviços avaliados;
+- conectar esses artefatos à malha por wikilinks reais.
 
 A disciplina de log continua rígida, mas agora tem um ganho acumulativo: cada execução bem registrada vira material de aprendizado para a próxima varredura semântica.
 
@@ -238,14 +263,14 @@ Regra recomendada:
 
 ## 7.4 Link checker determinístico como piso da malha
 
-Wikilink quebrado é dívida visível. Recomendação base para qualquer projeto que use wikilinks como contrato de navegação:
+Wikilink quebrado é dívida visível ([[principios|princípio nº 19]]). Recomendação base para qualquer projeto que use wikilinks como contrato de navegação:
 
 - manter um **link checker determinístico** (script, sem dependência de LLM) que valida que todo `[[wikilink]]` aponta para arquivo existente;
 - rodar o checker localmente antes de fechar rodada documental;
 - rodar o checker em CI (GitHub Action ou equivalente) em push/PR para branch principal;
 - falhar a CI em link quebrado — wikilink que aponta para nada confunde tanto humano quanto agente.
 
-Como não há mapa materializado, o checker é o que garante que a malha de wikilinks não quebre. Ver [[operacao-leve|Operação Documental]].
+Esse piso é essencial, não acessório: não há relatório materializado para acusar inconsistência, então o checker é a única rede automática da malha ([[operacao-leve|Operação Documental]]).
 
 Implementação de referência (PowerShell, ignora blocos de código, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, com resolução em três pontos âncora) disponível em `scripts/check-wikilinks.ps1` no projeto Alquimia, que pode servir de template para outros projetos.
 

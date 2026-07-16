@@ -104,7 +104,7 @@ reports/
     <run_id>/
 ```
 
-o agente responsável deve garantir que esse resultado possa ser lido pela próxima indexação do Knowledge Graph.
+o agente responsável deve garantir que esse resultado possa ser lido depois por humanos e agentes.
 
 Regras práticas:
 
@@ -112,7 +112,7 @@ Regras práticas:
 - `artifacts.json` ou equivalente deve apontar os arquivos finais, auxiliares, parciais e ausentes;
 - artefatos binários importantes devem ter uma descrição textual mínima;
 - o `registry.csv` deve referenciar o diretório da run;
-- o resumo deve deixar explícita a relação entre run, escopo, decisão, métrica, relatório e artefato (rastreável por humanos e agentes);
+- o resumo deve deixar explícita a relação entre run, escopo, decisão, métrica, relatório e artefato;
 - se uma run corrigiu, confirmou ou contradisse uma hipótese anterior, essa relação deve aparecer no resumo.
 
 Esse é o efeito de juros compostos da stack: execuções operacionais passadas deixam de ser arquivos mortos e passam a funcionar como memória de longo prazo.
