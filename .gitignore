@@ -3,3 +3,7 @@
 # As regras ficam aqui só para que um uso local nunca vaze para o repo.
 graphify-out/
 .obsidian/
+
+# Config e worktrees de ferramenta local de sessao — nunca versionar.
+# O repositorio nao depende de nada daqui.
+.claude/
