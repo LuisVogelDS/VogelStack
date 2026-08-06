@@ -20,6 +20,7 @@
 |---|---|---|
 | **Segurança e Privacidade na stack** — promovida a documento de 1ª classe | commit `633bc48` | Recém-adicionada (`vogel-stack/seguranca.md`); avaliar cobertura e adoção pelos consumidores. |
 | **`check-sync` deterministico rodando do submódulo** (sem cópia por projeto) | commits `cc7524d`/`8f1780a` | Garantir que todos os consumidores (PlacarBI, CartaoVermelho, ScoutCamisa10, Memória Ram, guaraci, Bem-te-vi, website…) usem a via única. |
+| **Princípio nº 21 (ambiente reconstruível a partir do repo)** — adoção pelos consumidores | pedido do dono via PlacarBI, 05/08 | Nasceu de um caso concreto: config de nginx viva na EC2 divergindo da versionada, e `refresh-data.sh` rodando fora do repo. **Verificar se os outros consumidores têm o mesmo buraco** — o padrão "script/config só na máquina" tende a se repetir onde há servidor próprio. |
 
 ## 🗄️ Parking
 - _(nada por enquanto)_

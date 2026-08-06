@@ -252,3 +252,28 @@ Regras práticas:
 - preferir formato cru oficial mesmo que exija pós-processamento local sobre formato pré-tratado por terceiros que possa ter perdido fidelidade.
 
 A vantagem operacional do intermediário (filtro server-side, SQL, UX) deve ser reconstruída no próprio projeto quando relevante, em vez de ser razão para abandonar a fonte primária. Ver [[operacao-agentes|Operação de Agentes]] para a política de handoff em coletas custosas a partir de fontes primárias instáveis.
+
+## 21. O ambiente de execução deve ser reconstruível a partir do repositório
+
+Tudo que roda no servidor deve ser rastreado e versionado no repositório. Se um artefato decide o comportamento do sistema em produção — script, configuração de servidor web, unidade de `cron` ou `systemd`, migração, job agendado — e ele existe **só** na máquina, o projeto perdeu a governança sobre ele sem que nada tenha quebrado ainda.
+
+O critério de pronto é objetivo: **alguém que só tem o repositório consegue reconstruir o ambiente.** Não "consegue entender"; consegue reconstruir.
+
+Este princípio complementa o nº 6 ([[principios#6. Configuração deve ser centralizada e auditável|configuração centralizada e auditável]]), que trata de onde a configuração *da aplicação* vive, estendendo a mesma exigência para a configuração *do ambiente* — e o nº 1 ([[principios#1. O comportamento documentado deve refletir o sistema real|comportamento documentado reflete o sistema real]]), porque um artefato que só existe no servidor é documentação que ninguém escreveu.
+
+Motivação — o custo aparece tarde e concentrado:
+
+- a divergência entre o que está no repositório e o que está rodando é **silenciosa**: os dois lados funcionam, e o problema só se materializa quando alguém aplica a versão do repositório por cima da versão viva;
+- reconstruir o procedimento a partir de `changelog`, histórico de commits ou memória de quem operou é arqueologia, e arqueologia erra;
+- a alternativa prática costuma ser não mexer — o ambiente vira intocável porque ninguém sabe o que exatamente há nele;
+- agentes que operam o projeto só enxergam o repositório: o que não está versionado, para eles, não existe.
+
+Regras práticas:
+
+- **inventariar** o que roda no ambiente e trazer cada artefato para o repositório;
+- quando um artefato **não puder** ser versionado, registrar a exceção com o motivo — o caso legítimo é segredo, e aí o que se versiona é o **template** (ver princípio nº 7);
+- artefato **gerado** por script continua versionado: geração não é razão para tirar do controle de versão, é razão para versionar também o gerador;
+- **conferir antes de sobrescrever.** Aplicar a versão do repositório sobre um ambiente cuja divergência não foi verificada é a forma mais direta de materializar o estrago que o princípio existe para evitar;
+- registrar o procedimento de deploy e de rollback como runbook em [[documentacao-e-versionamento|documentação do projeto]], não espalhado no `changelog`.
+
+Quando o projeto executa pipelines ou jobs recorrentes, este princípio anda junto do nº 16 ([[principios#16. Evidência operacional deve ser persistida|evidência operacional persistida]]): o primeiro garante que dá para reconstruir **como** o sistema roda; o segundo, **o que** ele rodou. Detalhes de registro em [[registro-e-evidencias|Registro e Evidências Operacionais]]; a política de quem executa e quem prepara comando está em [[operacao-agentes|Operação de Agentes]].
