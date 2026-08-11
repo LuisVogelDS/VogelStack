@@ -19,7 +19,7 @@ $MaxDays = 45
 Push-Location $root
 try {
     $quadros = Get-ChildItem -Recurse -Filter '_QUADRO.md' -File |
-        Where-Object { ($_.FullName -replace '\\', '/') -notmatch '/(\.git|\.obsidian|node_modules)/' }
+        Where-Object { ($_.FullName -replace '\\', '/') -notmatch '/(\.git|\.obsidian|node_modules|vogel-stack)/' }
 
     if (-not $quadros) {
         Write-Host "OK  nenhum _QUADRO.md no repo — nada a checar." -ForegroundColor Green
@@ -32,7 +32,7 @@ try {
 
     foreach ($q in $quadros) {
         $rel = (((Resolve-Path -Relative $q.FullName) -replace '\\', '/') -replace '^\./', '')
-        $raw = Get-Content -Raw -LiteralPath $q.FullName
+        $raw = Get-Content -Raw -Encoding utf8 -LiteralPath $q.FullName
 
         # 1. Contrato de frescor: "Última reconciliação: AAAA-MM-DD" na mesma linha.
         $m = [regex]::Match($raw, '(?im)reconcilia[çc][ãa]o[^0-9\r\n]*(\d{4}-\d{2}-\d{2})')
