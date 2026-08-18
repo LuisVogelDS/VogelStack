@@ -181,7 +181,7 @@ Atualizar docs no mesmo ciclo sempre que houver:
 
 ## 3.05 Workflows com commit automático e mensagem genérica
 
-Alguns projetos usam scripts de sincronização que executam `git add -A`, `git commit` e `git push` em lote, normalmente com mensagem genérica do tipo `sync: <maquina> <data>`. Exemplos: o script `sync-2ms-repos.ps1` da stack 2morrow, automações de backup local, hooks de "save on quit".
+Alguns projetos usam scripts de sincronização que executam `git add -A`, `git commit` e `git push` em lote, normalmente com mensagem genérica do tipo `sync: <maquina> <data>`. Exemplos: scripts de sincronização multi-repositório (`sync-repos.ps1`), automações de backup local, hooks de "save on quit".
 
 Quando esse tipo de workflow estiver em uso:
 
