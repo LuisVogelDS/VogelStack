@@ -43,6 +43,22 @@ Ao contrário do link checker, **este não é um checker de CI**: no CI o checko
 
 O caso que originou esta seção mostra o custo: um agente preparou uma alteração sobre um working tree 23 commits atrás; subi-la teria revertido uma poda de payload já em produção, inflando os artefatos cerca de 7x, no momento exato em que se adicionava a maior carga da base. Nada teria acusado o erro: **teria parecido um sucesso**.
 
+## 1.2 Mudança que exige ação na outra máquina
+
+O git carrega código e configuração versionada entre máquinas. Não carrega o resto — e é no resto que a troca de máquina quebra em silêncio:
+
+- pasta de projeto renomeada ou movida (qualquer ferramenta que case projeto por nome ou caminho de pasta perde o projeto do outro lado);
+- diretório de dados ou configuração que vive **fora** do repositório e mudou de lugar;
+- repositório novo que ainda precisa ser clonado do outro lado;
+- dependência de ambiente nova (driver, runtime, chave, credencial em cofre local);
+- dado que não pode atravessar por git e precisa chegar por outra via.
+
+Nada disso aparece num `git status`, num `pull` ou num diff. A regra: **toda mudança dessa natureza deixa um recado num registro versionado, na origem, antes de encerrar a sessão** — com o que fazer do outro lado e, quando couber, uma verificação de disco que prove que foi feito (a pasta existe, a antiga não existe). O registro viaja com o repositório que o hospeda; na chegada à outra máquina, o passo 0 (`pull`) traz o recado, e um ritual de chegada o lê e confere contra o disco real. Recado que depende de alguém lembrar de abrir um arquivo não é recado — a entrega tem de ser ativa (impressa pela rotina de sync, mostrada no painel).
+
+O que o hub do usuário adota para isso é um **relator** (no Cantin do Fôgueu, o `pombo-correio/`): um ledger com `feito` por máquina, uma CLI de chegada, e um parágrafo curto que todo agente recebe no prompt para saber que precisa avisar. Projeto que consome esta stack e opera de mais de uma máquina segue o mesmo desenho — o essencial é a regra, não a ferramenta.
+
+Complementar à [[operacao-agentes#1.1 Checklist antes de começar uma alteração|§1.1]]: ela protege o ponto de partida do **código**; esta protege o ponto de partida do **ambiente**.
+
 ## 2. Política de custo e uso de recursos
 
 Regras:
