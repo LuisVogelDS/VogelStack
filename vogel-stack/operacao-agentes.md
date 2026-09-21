@@ -286,7 +286,8 @@ Antes de encerrar uma entrega, validar:
 6. se o projeto usa workflow de commit automático com mensagem genérica (ver [[documentacao-e-versionamento#3.05 Workflows com commit automático e mensagem genérica|Workflows com commit automático]]), entrada nova no topo de `docs/changelog.md` é parte do encerramento e deve sair antes do sync;
 7. se o projeto tem submódulos e o script de sync não entra neles, o `git push` dentro do submódulo precisa ser feito manualmente antes do sync principal, ou o repositório pai vai empurrar um ponteiro para commit inexistente no remoto;
 8. se a rodada tocou em `.md`, o **link checker** ([[operacao-agentes#7.4 Link checker determinístico como piso da malha|seção 7.4]]) passou — wikilinks novos resolvem para arquivos reais;
-9. se a rodada criou ou alterou algo que passa a **rodar no ambiente** (script de deploy, config de servidor web, `cron`, `systemd`, job agendado), o artefato entrou versionado no repositório — ou a exceção ficou registrada com o motivo. Ver [[principios#21. O ambiente de execução deve ser reconstruível a partir do repositório|princípio nº 21]].
+9. se a rodada criou ou alterou algo que passa a **rodar no ambiente** (script de deploy, config de servidor web, `cron`, `systemd`, job agendado), o artefato entrou versionado no repositório — ou a exceção ficou registrada com o motivo. Ver [[principios#21. O ambiente de execução deve ser reconstruível a partir do repositório|princípio nº 21]];
+10. se a rodada escreveu texto para humano (documentação, mensagem de commit, relatório, página publicada), ele saiu **sem travessão** e sem os tiques vizinhos, pelo [[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]. Um `grep` por `—` antes de fechar resolve.
 
 ## 9. Resultado esperado de uma boa operação com agentes
 

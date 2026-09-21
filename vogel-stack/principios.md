@@ -277,3 +277,26 @@ Regras práticas:
 - registrar o procedimento de deploy e de rollback como runbook em [[documentacao-e-versionamento|documentação do projeto]], não espalhado no `changelog`.
 
 Quando o projeto executa pipelines ou jobs recorrentes, este princípio anda junto do nº 16 ([[principios#16. Evidência operacional deve ser persistida|evidência operacional persistida]]): o primeiro garante que dá para reconstruir **como** o sistema roda; o segundo, **o que** ele rodou. Detalhes de registro em [[registro-e-evidencias|Registro e Evidências Operacionais]]; a política de quem executa e quem prepara comando está em [[operacao-agentes|Operação de Agentes]].
+
+## 22. Texto que chega a humano não deve carregar assinatura de máquina
+
+Hoje boa parte do texto de um projeto passa por agente: mensagem de commit, documentação, relatório de rodada, resposta a chamado, proposta enviada a cliente. Quem lê não audita a origem, ele reconhece o padrão. E existe um conjunto pequeno de marcas de superfície que o público já associa a texto gerado, sendo a mais forte delas o **travessão** (`—` e `–`).
+
+O motivo é mecânico, não estilístico: o travessão é correto em português e ninguém o digita, porque o teclado ABNT não tem a tecla. Quem escreve à mão usa vírgula, dois-pontos ou parêntese. Quando o travessão aparece três vezes na mesma página, o leitor conclui, certo ou errado, que ninguém escreveu aquilo.
+
+O custo não é de estética. É de crédito:
+
+- em texto que vai a cliente, a desconfiança contamina o resto da entrega: se a redação parece automática, o diagnóstico e a medição parecem automáticos também;
+- em documentação interna, o leitor passa a tratar o documento como enchimento e para de lê-lo, o que corrói na prática o princípio nº 1 ([[principios#1. O comportamento documentado deve refletir o sistema real|documentação que reflete o sistema real]]) sem que uma linha sequer esteja errada;
+- em mensagem de commit, o histórico deixa de funcionar como registro de decisão e vira ruído a ser pulado.
+
+Regras práticas:
+
+- **nenhum travessão** em texto destinado a leitura humana: documentação, commit, issue, relatório, e-mail, página publicada;
+- escolher o substituto pela função que o travessão exercia: **aposto entre vírgulas** quando explica o termo anterior, **dois-pontos** quando o que vem depois é a consequência ou a lista, **ponto final** quando as duas metades ficam de pé sozinhas, **parênteses** quando o trecho é dispensável, **ponto e vírgula** quando as duas metades se equilibram;
+- quando nenhum couber, o problema é a frase, não a pontuação: reescrever com conector explícito ou cortar em duas;
+- **não** confundir com hífen de palavra composta, com operador em código, com intervalo dentro de valor técnico nem com citação literal de terceiro, que se preserva como veio;
+- cuidar dos tiques vizinhos, que sozinhos entregam o mesmo: tríade de adjetivos genéricos, parágrafos seguidos abertos por conectivo, negrito espalhado, simetria perfeita entre itens de lista, frase sem sujeito concreto;
+- quando o projeto tem superfície publicada, transformar a regra em verificação automática sobre o artefato **montado**, não sobre o fonte, e deixar de fora o que estiver dentro de `<script>` e `<style>`.
+
+O acervo escrito antes da adoção não invalida a regra, e limpar tudo de uma vez costuma ser pior do que priorizar: o que sai para fora do repositório vem primeiro, a documentação interna vai depois, e a fila fica registrada no quadro do projeto ([[operacao-leve|Operação Documental]]). O fechamento de rodada de agente confere este ponto junto dos demais ([[operacao-agentes#8. Checklist antes de concluir uma alteração|checklist de encerramento]]), e o padrão de mensagem de commit segue em [[documentacao-e-versionamento|Documentação e Versionamento]].
