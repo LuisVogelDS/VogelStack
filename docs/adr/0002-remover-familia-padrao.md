@@ -15,7 +15,7 @@ Desde 2026-05-28 a stack oferecia **duas famílias de operação documental**:
 - **padrão** — knowledge graph materializado em `graphify-out/`, com vault visual versionado;
 - **leve** — wikilinks curados + link checker determinístico + agente sob demanda.
 
-Na prática, **nenhum projeto do ecossistema adotou a família padrão**. O próprio repositório da stack migrou para a leve em 2026-06-12 ([[0001-adotar-operacao-leve|ADR 0001]]), e os consumidores (PlacarBI, CartaoVermelho, ScoutCamisa10, MemoriaRam, guaraci e demais) operam todos na leve.
+Na prática, **nenhum projeto do ecossistema adotou a família padrão**. O próprio repositório da stack migrou para a leve em 2026-06-12 ([[0001-adotar-operacao-leve|ADR 0001]]), e os consumidores operam todos na leve.
 
 O custo da dualidade era real e recorrente:
 

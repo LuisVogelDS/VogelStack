@@ -59,6 +59,46 @@ O que o hub do usuário adota para isso é um **relator** (no Cantin do Fôgueu,
 
 Complementar à [[operacao-agentes#1.1 Checklist antes de começar uma alteração|§1.1]]: ela protege o ponto de partida do **código**; esta protege o ponto de partida do **ambiente**.
 
+## 1.3 Convivência: mais de um agente no mesmo projeto
+
+A [[operacao-agentes#1.1 Checklist antes de começar uma alteração|§1.1]] trata do outro que trabalhou **antes** de você, noutra máquina. Esta trata do outro que está trabalhando **agora**, no mesmo disco. É o caso mais perigoso dos dois, porque o Git não separa nada: dois agentes no mesmo clone dividem working tree, índice, branch, `node_modules`, pasta de build, porta do servidor de desenvolvimento, arquivo de lock e conexão de banco. Nenhuma ferramenta avisa que há outro ali. O primeiro sinal costuma ser o estrago: um `git add -A` que leva junto o trabalho pela metade do vizinho, um `git stash` que o faz sumir, um servidor derrubado no meio do teste de outro.
+
+A regra de fundo é uma só: **o que você não começou não é seu.** Arquivo, processo, porta, pendência no working tree ou branch que outro agente abriu se lê, não se mexe, até ficar claro de quem é.
+
+### Antes de começar: olhar e anunciar
+
+1. **Procurar sinais de outro agente**: pendência no `git status` que esta sessão não fez, processo ou porta já ocupados, arquivo de lock recente, sessão ativa no painel ou no registro de presença.
+2. **Anunciar a própria presença** num registro de presença local do projeto (arquivo fora do versionamento, por exemplo `.agentes/presenca.md` no `.gitignore`, ou o equivalente que o painel do usuário mantenha). Uma linha basta: quem é, qual frente, **quais arquivos ou áreas** vai tocar, **quais recursos** vai ocupar (porta, servidor, banco, migração) e desde quando. É o canal pelo qual os agentes se falam: quem chega lê, quem sai apaga a própria linha.
+3. **Se houver sobreposição, resolver antes de editar**: escolher outra área, esperar, ou perguntar ao usuário. Nunca resolver editando por cima.
+
+### Durante: dividir território, não disputar
+
+- **Um dono por arquivo de cada vez.** A divisão ideal é por fronteira natural (módulo, pasta, camada) e não por tarefa miúda que atravessa tudo.
+- **Arquivo comum a todos** (changelog, quadro, índice, manifesto de dependências, lockfile) recebe edição pequena e localizada, relida **imediatamente antes** de escrever. Nunca reescrever o arquivo inteiro a partir de uma leitura antiga.
+- **Recurso compartilhado tem um dono só.** Quem subiu o servidor é quem o reinicia; quem precisa de outro usa outra porta. Não matar processo que você não iniciou. Migração de banco, instalação de dependência e build limpo (`clean`, apagar pasta de saída) são operações de um agente de cada vez, anunciadas antes.
+- **No Git, só o que é seu**: commit por caminho, nunca `git add -A` às cegas; conferir o diff antes e depois de commitar; `git stash`, `reset`, `checkout -- <arquivo>`, `clean` e troca de branch afetam o vizinho e ficam proibidos enquanto houver outro agente ativo no clone. Antes do push, `pull --rebase`; conflito com trabalho alheio se reporta, não se "conserta".
+- **Quando a sobreposição for grande, isolar em vez de coordenar**: um `git worktree` por agente dá a cada um seu próprio working tree e índice, e a conversa passa a acontecer só no merge. Isolamento é a coordenação mais barata que existe.
+
+### Quando quem dispara é um orquestrador
+
+Se um agente (ou o usuário) distribui trabalho para vários, o plano vem **antes** do disparo: frentes disjuntas, a ordem das que dependem uma da outra, e o dono de cada recurso compartilhado já decididos. Frente que precisa do resultado de outra espera por ele, não adivinha. O orquestrador é quem junta as partes e resolve os conflitos; os agentes da ponta não se corrigem entre si.
+
+### Ao sair
+
+Apagar a própria linha do registro de presença, liberar o que ocupou (parar o servidor que subiu, se ninguém mais o usa) e deixar dito o que ficou pela metade. Presença esquecida vale como área bloqueada para sempre.
+
+O custo desta seção é uma linha num arquivo e alguns segundos de leitura. O custo de ignorá-la é trabalho alheio perdido sem rastro, que é o pior tipo de erro pelo [[principios#3. Clareza operacional é tão importante quanto correção técnica|princípio nº 3]]: não aparece, só falta.
+
+## 1.4 Commit e publicação seguem o dono do repositório
+
+Quando e quanto um agente commita e publica não é uma regra única: depende de **quem é dono do repositório**, e o dono se lê no remote, nunca no nome ou na posição da pasta.
+
+- **Repositório próprio do usuário**: commitar e publicar ao fechar cada entrega coerente, sem esperar pedido. Trabalho que fica só no working tree, ou só num commit local, é trabalho que a outra máquina não vê e que um disco perdido leva junto. Commit por entrega, com mensagem que diga o que mudou; publicar logo em seguida; nunca force push.
+- **Repositório de terceiros** (empregador, cliente, organização): commit e publicação só sob pedido explícito, seguindo a convenção da casa (código de ticket na mensagem, branch, revisão). Na dúvida sobre a convenção, perguntar; nunca inventar um código de ticket.
+- **Em qualquer caso**: só o que a sessão tocou (ver [[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]]), nada de segredo ou dado pessoal ([[seguranca|Segurança e Privacidade]]), e mensagem sem assinatura de máquina ([[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]).
+
+A política concreta, com a lista de quais remotes são de quem, vive nas instruções locais do usuário, não aqui: esta stack é pública e não deve carregar o mapa de onde ele trabalha.
+
 ## 2. Política de custo e uso de recursos
 
 Regras:
@@ -304,6 +344,8 @@ Antes de encerrar uma entrega, validar:
 8. se a rodada tocou em `.md`, o **link checker** ([[operacao-agentes#7.4 Link checker determinístico como piso da malha|seção 7.4]]) passou — wikilinks novos resolvem para arquivos reais;
 9. se a rodada criou ou alterou algo que passa a **rodar no ambiente** (script de deploy, config de servidor web, `cron`, `systemd`, job agendado), o artefato entrou versionado no repositório — ou a exceção ficou registrada com o motivo. Ver [[principios#21. O ambiente de execução deve ser reconstruível a partir do repositório|princípio nº 21]];
 10. se a rodada escreveu texto para humano (documentação, mensagem de commit, relatório, página publicada), ele saiu **sem travessão** e sem os tiques vizinhos, pelo [[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]. Um `grep` por `—` antes de fechar resolve.
+11. se a rodada dividiu o projeto com outro agente, a linha no registro de presença foi apagada e os recursos ocupados foram liberados ([[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]]);
+12. se o repositório é do próprio usuário, a entrega saiu commitada **e publicada** ([[operacao-agentes#1.4 Commit e publicação seguem o dono do repositório|§1.4]]).
 
 ## 9. Resultado esperado de uma boa operação com agentes
 
