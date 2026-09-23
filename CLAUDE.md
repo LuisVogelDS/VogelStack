@@ -12,6 +12,7 @@ Vogel Stack é um conjunto de documentos-base para projetos que usam agentes de 
 - [[vogel-stack/templates|Templates de Documentação]]
 - [[vogel-stack/operacao-leve|Operação Documental]]
 - [[vogel-stack/seguranca|Segurança e Privacidade]]
+- [[vogel-stack/apresentacoes|Apresentações que mostram de onde vem cada número]]
 
 ## Como projetos consomem a Vogel Stack
 

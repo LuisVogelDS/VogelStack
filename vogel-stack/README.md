@@ -29,6 +29,7 @@ Esta stack ajuda a manter:
 - [[vogel-stack/vogel-stack/templates]]: modelos de documentos para iniciar novos repositórios com o mesmo padrão.
 - [[vogel-stack/vogel-stack/operacao-leve]]: a operação documental da stack — wikilinks curados + link checker determinístico + agente sob demanda.
 - [[vogel-stack/vogel-stack/seguranca]]: guardrails de segurança e privacidade, com os quatro princípios de fronteira e a checagem objetiva que precede qualquer exposição.
+- [[vogel-stack/vogel-stack/apresentacoes]]: método para a apresentação de uma reunião de decisão, com cada número saindo da medição e variantes por público conferidas no arquivo entregue.
 
 ## Descoberta semântica
 

@@ -15,6 +15,7 @@ Se o projeto tiver um problema que essa operação não resolve, o princípio n�
 - [[vogel-stack/evolucao-produto|Evolução de Produto e Arquitetura]]
 - [[vogel-stack/templates|Templates de Documentação]]
 - [[vogel-stack/operacao-leve|Operação Documental]]
+- [[vogel-stack/apresentacoes|Apresentações que mostram de onde vem cada número]]
 
 ## 1. Instalar a stack como submódulo
 
