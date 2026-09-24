@@ -13,8 +13,21 @@
 #
 # Exit 1 se houver qualquer erro; exit 0 caso contrário (avisos não falham).
 # ---------------------------------------------------------------------------
+[CmdletBinding()]
+param([string]$RepoPath)
+
 $ErrorActionPreference = 'Stop'
-$root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$PSNativeCommandUseErrorActionPreference = $false
+
+# Mesma regra de raiz do check-sync.ps1: vindo do submódulo
+# (./vogel-stack/scripts/check-quadro.ps1), checar o quadro do PROJETO.
+$root =
+    if ($RepoPath) { (Resolve-Path $RepoPath).Path }
+    else {
+        $cand  = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+        $super = (git -C $cand rev-parse --show-superproject-working-tree 2>$null)
+        if ($LASTEXITCODE -eq 0 -and $super) { (Resolve-Path $super).Path } else { $cand }
+    }
 $MaxDays = 45
 Push-Location $root
 try {

@@ -85,13 +85,25 @@ encontradas e comandos recomendados para validar.
 
 A malha só é contrato se link quebrado quebrar a build.
 
-- Criar `scripts/check-wikilinks.ps1` — valida todo `[[wikilink]]`, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, ignora blocos de código e sai com código 1 em quebra. A implementação de referência é a deste repositório.
-- Criar `.github/workflows/check-malha.yml` para rodar o checker em push/PR para `main`.
+- **Não copiar o checker.** O `check-wikilinks.ps1` roda direto do submódulo e, chamado de lá, checa o projeto (não a stack): valida todo `[[wikilink]]`, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, ignora blocos de código e sai com código 1 em quebra. O mesmo vale para `check-quadro.ps1` e `check-sync.ps1`. Cópia por projeto envelhece calada ([[vogel-stack/operacao-agentes#1.1 Checklist antes de começar uma alteração|Operação de Agentes §1.1]]).
+- Criar `.github/workflows/check-malha.yml` para rodar o checker em push/PR para `main`. O checkout precisa trazer o submódulo:
+
+```yaml
+- uses: actions/checkout@v4
+  with:
+    submodules: true
+- name: Validar malha de wikilinks
+  shell: pwsh
+  run: ./vogel-stack/scripts/check-wikilinks.ps1
+```
+
 - Rodar localmente e corrigir tudo **antes** do commit:
 
 ```powershell
-pwsh ./scripts/check-wikilinks.ps1
+pwsh ./vogel-stack/scripts/check-wikilinks.ps1
 ```
+
+Projeto que já tem uma cópia em `scripts/` troca a chamada (local e CI) pela do submódulo e apaga a cópia.
 
 ## 4. Declarar as decisões do projeto em ADR
 

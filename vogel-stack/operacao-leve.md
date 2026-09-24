@@ -48,7 +48,7 @@ Se algum destes disparar, o projeto tem um **problema novo** e declara a soluç�
 
 Todo projeto que use wikilinks como contrato de navegação deve manter:
 
-- `scripts/check-wikilinks.ps1` (ou equivalente) — valida que todo `[[wikilink]]` aponta para arquivo existente; suporta `[[alvo|alias]]` e `[[alvo#secao]]`; ignora blocos de código; sai com código 1 em quebra.
+- `check-wikilinks.ps1` (rodado do submódulo, `./vogel-stack/scripts/`, ou equivalente): valida que todo `[[wikilink]]` aponta para arquivo existente; suporta `[[alvo|alias]]` e `[[alvo#secao]]`; ignora blocos de código; sai com código 1 em quebra.
 - Uma Action de CI (`check-malha` ou equivalente) rodando em push/PR para `main`.
 - Execução local antes de fechar qualquer rodada que tenha tocado em `.md`.
 

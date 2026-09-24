@@ -377,7 +377,7 @@ Wikilink quebrado é dívida visível ([[principios|princípio nº 19]]). Recome
 
 Esse piso é essencial, não acessório: não há relatório materializado para acusar inconsistência, então o checker é a única rede automática da malha ([[operacao-leve|Operação Documental]]).
 
-Implementação de referência (PowerShell, ignora blocos de código, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, com resolução em três pontos âncora) disponível em `scripts/check-wikilinks.ps1` no projeto Alquimia, que pode servir de template para outros projetos.
+Implementação de referência (PowerShell, ignora blocos de código, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, com resolução em três pontos âncora) disponível em `scripts/check-wikilinks.ps1` desta stack. Projeto que a consome como submódulo roda o script de lá (`./vogel-stack/scripts/check-wikilinks.ps1`), sem copiar: chamado do submódulo, ele checa o projeto e trata os documentos da stack só como alvo de link.
 
 ## 8. Checklist antes de concluir uma alteração
 
