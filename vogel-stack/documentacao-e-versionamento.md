@@ -248,6 +248,21 @@ Padrão recomendado:
 - `docs/versionamento.md` posiciona o que é estável, alpha ou futuro;
 - documentos de exploração, concepção e wireframe ficam separados quando a solução futura ainda está sendo desenhada.
 
+## 4.1 O que foi removido de propósito
+
+A seção anterior separa o que opera do que ainda vai existir. Falta uma quarta camada: o que existiu e saiu por decisão. É a que mais se perde, porque remoção não deixa arquivo para ser lido. O agente que chega depois vê a ausência, supõe esquecimento e reconstrói o que alguém tirou de propósito, muitas vezes com cuidado e com teste, e a entrega parece um sucesso.
+
+Regra: a remoção intencional de algo que alguém plausivelmente recriaria (módulo, rota, dependência, script, integração, documento, regra) deixa registro no mesmo ciclo, num lugar que quem chega lê antes de implementar:
+
+- **o que saiu**, pelo caminho ou nome com que seria procurado;
+- **por quê**, numa frase;
+- **o que ficou no lugar**, se algo ficou;
+- **se é definitivo** ou se volta sob alguma condição.
+
+Onde registrar: em ADR quando a decisão é difícil de reverter (esta stack fez assim ao remover a família apoiada em grafo materializado, no ADR 0002); nos demais casos, numa lista curta de "removido de propósito" em `docs/versionamento.md` ou no quadro de trabalho. O changelog registra a entrega, mas ninguém o lê antes de implementar; a lista é lida. A entrada sai da lista quando recriar deixou de ser risco realista.
+
+Não vale para toda linha apagada: refatoração, código morto trivial e arquivo temporário ficam de fora. O critério é uma pergunta: outro agente, sem este contexto, poderia achar que isto está faltando?
+
 ## 5. Política prática de versionamento
 
 Regras recomendadas:

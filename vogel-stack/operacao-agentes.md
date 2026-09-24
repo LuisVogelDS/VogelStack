@@ -395,7 +395,8 @@ Antes de encerrar uma entrega, validar:
 10. se a rodada escreveu texto para humano (documentação, mensagem de commit, relatório, página publicada), ele saiu **sem travessão** e sem os tiques vizinhos, pelo [[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]. Um `grep` por `—` antes de fechar resolve.
 11. se a rodada dividiu o projeto com outro agente, a linha no registro de presença foi apagada e os recursos ocupados foram liberados ([[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]]);
 12. se o repositório é do próprio usuário, a entrega saiu commitada **e publicada** ([[operacao-agentes#1.4 Commit e publicação seguem o dono do repositório|§1.4]]);
-13. se a rodada foi orquestrada em frentes, nenhuma ficou rodando sem ser recolhida, e a entrega que sai da máquina passou por revisão de contexto limpo ([[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]]).
+13. se a rodada foi orquestrada em frentes, nenhuma ficou rodando sem ser recolhida, e a entrega que sai da máquina passou por revisão de contexto limpo ([[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]]);
+14. se a rodada removeu de propósito algo que outro agente poderia recriar, a remoção ficou registrada onde se lê antes de implementar ([[documentacao-e-versionamento#4.1 O que foi removido de propósito|Documentação e Versionamento §4.1]]).
 
 ## 9. Resultado esperado de uma boa operação com agentes
 
