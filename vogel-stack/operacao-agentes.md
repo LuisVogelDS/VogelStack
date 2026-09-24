@@ -81,7 +81,7 @@ A regra de fundo é uma só: **o que você não começou não é seu.** Arquivo,
 
 ### Quando quem dispara é um orquestrador
 
-Se um agente (ou o usuário) distribui trabalho para vários, o plano vem **antes** do disparo: frentes disjuntas, a ordem das que dependem uma da outra, e o dono de cada recurso compartilhado já decididos. Frente que precisa do resultado de outra espera por ele, não adivinha. O orquestrador é quem junta as partes e resolve os conflitos; os agentes da ponta não se corrigem entre si.
+Se um agente (ou o usuário) distribui trabalho para vários, o plano vem **antes** do disparo: frentes disjuntas, a ordem das que dependem uma da outra, e o dono de cada recurso compartilhado já decididos. Frente que precisa do resultado de outra espera por ele, não adivinha. O orquestrador é quem junta as partes e resolve os conflitos; os agentes da ponta não se corrigem entre si. Como dividir, planejar e recolher está na [[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]].
 
 ### Ao sair
 
@@ -98,6 +98,54 @@ Quando e quanto um agente commita e publica não é uma regra única: depende de
 - **Em qualquer caso**: só o que a sessão tocou (ver [[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]]), nada de segredo ou dado pessoal ([[seguranca|Segurança e Privacidade]]), e mensagem sem assinatura de máquina ([[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]).
 
 A política concreta, com a lista de quais remotes são de quem, vive nas instruções locais do usuário, não aqui: esta stack é pública e não deve carregar o mapa de onde ele trabalha.
+
+## 1.5 Orquestração: várias frentes em paralelo
+
+A [[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]] trata dos agentes que se encontram por acaso no mesmo projeto. Esta trata do caso deliberado: um trabalho que rende mais dividido em frentes simultâneas, sob um orquestrador (um agente ou o próprio usuário). Quando as frentes são independentes, paralelizar é o padrão. Fazer em fila o que não depende de fila não é prudência, é tempo do usuário jogado fora.
+
+O nome das peças muda de ferramenta para ferramenta (subagente, sessão paralela, worktree, workflow). O que segue vale para qualquer uma delas, e é de propósito que não cita nenhuma.
+
+### Quando dividir
+
+Compensa dividir quando:
+
+- as frentes não dependem do resultado uma da outra, ou só se encontram no fim;
+- cada frente cabe inteira num contexto e volta como conclusão curta: pesquisa ampla, varredura de muitos arquivos, revisão por dimensões, implementação em módulos separados;
+- o contexto de quem orquestra ganha mais com a conclusão do que com o material bruto.
+
+Não compensa quando:
+
+- a tarefa já cabe num contexto só. Dividir aí só acrescenta custo de costura;
+- as frentes tocariam os mesmos arquivos o tempo todo;
+- cada passo depende do anterior. Isso é sequência, não paralelo.
+
+### Planejar junto, antes do disparo
+
+O plano é a peça que mais pesa. Para cada frente, o orquestrador escreve um contrato curto:
+
+1. **entrega**: o que volta, numa frase;
+2. **território**: os arquivos, pastas ou recursos que só essa frente altera, e o que ela pode apenas ler;
+3. **formato de retorno**: conclusão, lista estruturada ou diff. Despejo de arquivo nunca;
+4. **critério de pronto**: como o orquestrador vai saber que a frente terminou bem.
+
+Frente que altera arquivos em território vizinho de outra trabalha isolada num worktree próprio ([[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]]). Frente que só lê não precisa de isolamento.
+
+Planejar em conjunto também serve para decidir, não só para executar. Numa pergunta de desenho, algumas frentes independentes, com ângulos diferentes (custo, risco, simplicidade, o que já existe no projeto) e sem ver umas às outras, seguidas de uma síntese do orquestrador, reduzem o viés de uma leitura única. Discordância entre elas é informação: vai para o usuário, não é apagada na síntese.
+
+### Quem delega recolhe
+
+- A entrega do orquestrador é o resultado integrado, não "disparei e estou aguardando". Encerrar com frentes ainda rodando deixa o trabalho delas órfão.
+- O que volta é conferido antes de ser repassado. Frente que diz "pronto" sem evidência (teste, saída, caminho do arquivo) conta como não verificada.
+- O relato de cada frente chega ao orquestrador, não ao usuário. O que importa ao usuário precisa ser repassado na síntese.
+- Delegar de novo o que já cabe numa frente só é profundidade sem ganho.
+
+### Revisar com olhos que não escreveram
+
+Quem produziu uma entrega carrega os mesmos vieses que a produziram, e a autocrítica tende a aprovar. Para entrega que sai da máquina (publicação, deploy, texto para cliente, mudança em área sensível), a revisão fica com uma frente de contexto limpo, que recebe só o pedido original e o resultado. Checagem determinística (teste, lint, link checker) vem antes e continua valendo: a revisão independente pega o que o script não pega, não substitui o script.
+
+### Custo
+
+Frentes em paralelo multiplicam o gasto. O orçamento da [[operacao-agentes#2.1 Orçamento de tokens e alerta antecipado|§2.1]] é da orquestração inteira, não de cada frente: antes de disparar, dizer ao usuário quantas frentes e a ordem de grandeza do custo. O custo não barra a orquestração; o que não pode é o usuário ser surpreendido por ele.
 
 ## 2. Política de custo e uso de recursos
 
@@ -117,6 +165,7 @@ O custo de uma tarefa deve ser previsto, não descoberto no fim. Regras:
 - se a projeção for alta (regra prática: acima de ~70k tokens, ou muito acima da média de tarefas similares), **avisar o usuário logo no início** — antes de executar — explicando o porquê e oferecendo recortes menores;
 - deixar a decisão de gastar com o usuário; não assumir que escopo grande está autorizado só porque foi pedido em uma frase;
 - calibração de referência: tarefas bem escopadas (uma feature, um bug, um conjunto coerente de edições) custam tipicamente uma fração disso. Estouro muito acima da média quase sempre indica escopo grande demais **ou** atrito de ambiente (ver 2.2), não trabalho útil;
+- em orquestração com várias frentes ([[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]]), a estimativa é do conjunto. Tarefa paralelizada ultrapassa o limiar com facilidade, e o aviso existe para o usuário decidir sabendo, não para desestimular a divisão;
 - o usuário reduz custo declarando a barra de aceitação no próprio pedido (ex.: "build verde basta"), apontando arquivos/caminhos relevantes e fatiando entregas grandes.
 
 ## 2.2 Resiliência a instabilidade de runtime
@@ -345,7 +394,8 @@ Antes de encerrar uma entrega, validar:
 9. se a rodada criou ou alterou algo que passa a **rodar no ambiente** (script de deploy, config de servidor web, `cron`, `systemd`, job agendado), o artefato entrou versionado no repositório — ou a exceção ficou registrada com o motivo. Ver [[principios#21. O ambiente de execução deve ser reconstruível a partir do repositório|princípio nº 21]];
 10. se a rodada escreveu texto para humano (documentação, mensagem de commit, relatório, página publicada), ele saiu **sem travessão** e sem os tiques vizinhos, pelo [[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]. Um `grep` por `—` antes de fechar resolve.
 11. se a rodada dividiu o projeto com outro agente, a linha no registro de presença foi apagada e os recursos ocupados foram liberados ([[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]]);
-12. se o repositório é do próprio usuário, a entrega saiu commitada **e publicada** ([[operacao-agentes#1.4 Commit e publicação seguem o dono do repositório|§1.4]]).
+12. se o repositório é do próprio usuário, a entrega saiu commitada **e publicada** ([[operacao-agentes#1.4 Commit e publicação seguem o dono do repositório|§1.4]]);
+13. se a rodada foi orquestrada em frentes, nenhuma ficou rodando sem ser recolhida, e a entrega que sai da máquina passou por revisão de contexto limpo ([[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]]).
 
 ## 9. Resultado esperado de uma boa operação com agentes
 

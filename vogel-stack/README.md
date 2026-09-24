@@ -71,3 +71,5 @@ Ela define:
 - disciplina de contratos, schemas e identificadores canônicos;
 - método de evolução de produto;
 - guardrails para evitar desperdício, opacidade e retrabalho.
+
+Ela não define catálogo de agentes, escolha de modelo, nem ferramenta de orquestração ou de harness. O filtro para o que entra aqui: **a regra continua certa se a ferramenta for trocada amanhã?** Se sim, é orientação e cabe na stack. Se depende de uma ferramenta, mora no projeto ou nas instruções locais de quem adota, e a escolha se declara em ADR (princípio nº 19).
