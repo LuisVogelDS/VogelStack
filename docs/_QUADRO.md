@@ -6,10 +6,11 @@
 
 **Legenda:** 🔴 prioridade · 🟡 em andamento · ⚪ backlog válido · 🗄️ parking.
 
+Última reconciliação: 2026-09-24 · fontes: git (branches e ADRs) e a rodada de adoção nos 14 consumidores de 2026-09-24. A via "ciclo-de-vida do quadro" saiu da prioridade: a branch `docs/quadro-ciclo-de-vida` já está contida na `main` (`git merge-base --is-ancestor`).
+
 ## 🔴 Prioridade
 | Item | Origem | Próxima ação / nota |
 |---|---|---|
-| **Levar a via "ciclo-de-vida do quadro" pra `main`** — a branch `docs/quadro-ciclo-de-vida` tem o `scripts/check-quadro.ps1` + mudanças em AGENTS/CLAUDE/ADR 0002/check-sync/docs da stack, ainda **fora da main** | diagnóstico do hub (Cantin) 17/07 · confirmado 21/07 | Avaliar o merge na `main` **com o dono** (a versão de 16/07 já venceu num merge anterior — `d4d1d5f`). **Isto destrava** o item do Cantin "VogelStack no hub: submódulo" (que espera a via limpa na main). |
 
 ## 🟡 Em andamento
 | Item | Origem | Próxima ação / nota |
@@ -19,6 +20,7 @@
 | Item | Origem | Nota |
 |---|---|---|
 | **Segurança e Privacidade na stack** — promovida a documento de 1ª classe | commit `633bc48` | Recém-adicionada (`vogel-stack/seguranca.md`); avaliar cobertura e adoção pelos consumidores. |
+| **Checadores rodando do submódulo nos consumidores** (`check-wikilinks`, `check-quadro`) | rodada de adoção, 24/09 | Até 24/09 os dois resolviam a raiz pela pasta do script e, rodados de `vogel-stack/scripts/`, checavam a própria stack (OK falso). Corrigidos para detectar o superprojeto, como o `check-sync`. Falta: consumidores com cópia local (Volvo, MemoriasPostumas, vitrine, Alquimia, Memória Ram, IntraAct) trocarem a cópia pela chamada ao submódulo, e CI de consumidor fazer checkout com `submodules: true`. |
 | **`check-sync` deterministico rodando do submódulo** (sem cópia por projeto) | commits `cc7524d`/`8f1780a` | Garantir que todos os consumidores usem a via única. |
 | **Princípio nº 21 (ambiente reconstruível a partir do repo)** — adoção pelos consumidores | pedido do dono, 05/08 | Nasceu de um caso concreto: config de servidor web viva na máquina de produção divergindo da versionada, e `refresh-data.sh` rodando fora do repo. **Verificar se os outros consumidores têm o mesmo buraco** — o padrão "script/config só na máquina" tende a se repetir onde há servidor próprio. |
 
