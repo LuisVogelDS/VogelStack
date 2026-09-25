@@ -39,6 +39,8 @@ vogel-stack/
     evolucao-produto.md
     templates.md
     operacao-leve.md
+    seguranca.md
+    apresentacoes.md
 ```
 
 Por causa dessa pasta interna, os wikilinks do projeto-alvo usam o prefixo `vogel-stack/vogel-stack/` — por exemplo `[[vogel-stack/vogel-stack/principios]]`. O que importa é que o link aponte para um arquivo real que o checker consiga resolver.
@@ -76,6 +78,8 @@ Destinos-guia:
 - [[vogel-stack/registro-e-evidencias]] — registry, manifestos por run, rastreabilidade.
 - [[vogel-stack/evolucao-produto]] — mudanças de produto, dashboards, concepção.
 - [[vogel-stack/templates]] — criar ou corrigir documentos padrão.
+- [[vogel-stack/apresentacoes]] — apresentação de reunião: registrar no `AGENTS.md` onde
+  fica o kit e o acervo, para o agente seguir o método quando o pedido chegar.
 
 Ao terminar, liste: arquivos alterados, links adicionados, lacunas documentais
 encontradas e comandos recomendados para validar.

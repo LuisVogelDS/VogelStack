@@ -104,3 +104,26 @@ interna, só agregados.
   de cliente.
 - A **stack** guarda só este método. Nenhum deck real, nenhum dado de cliente, nenhum
   exemplo que identifique alguém.
+
+## 7. Como o agente chega aqui
+
+O método só serve se o agente o encontra **no momento do pedido**, e o pedido quase nunca
+diz "use o método de apresentações". Diz "monta uma apresentação", "faz um HTML para eu
+visualizar", "prepara uns slides". Sem um apontamento, o agente resolve com o que tem à mão:
+uma página de painel, rolável, com gráficos, que não anda por fases, não segue o arco e
+não tem apêndice de fontes. Foi o que aconteceu na primeira adoção medida (09/2026): o
+método estava no submódulo e o kit no repositório de quem adota, e nada no projeto em que
+o pedido chegou apontava para nenhum dos dois.
+
+Por isso, quem adota registra, **no `AGENTS.md` de cada projeto** e, se tiver, nas
+instruções globais do seu agente:
+
+- que pedido de apresentação, deck, slides ou "HTML para uma reunião" segue este método;
+- **onde fica o kit** (caminho local e, se houver, o repositório), porque a stack não o
+  carrega;
+- onde fica o acervo de decks já apresentados, para o agente ver o padrão antes de montar.
+
+E o agente, diante de um pedido assim, **procura o método e o kit antes de escolher o
+formato**. Se não achar o kit, pergunta onde ele está, em vez de improvisar uma página.
+Uma página de painel pode ser o que se quer, mas é uma escolha dita, não o padrão silencioso.
+

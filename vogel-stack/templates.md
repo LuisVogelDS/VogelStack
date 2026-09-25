@@ -81,20 +81,26 @@ Conexões fortes do grafo:
 - política para arquivos privados de AI stack, prompts e apoio pessoal
 - todo documento novo deve nascer com wikilinks reais para a Vogel Stack, documentos canônicos, processos, artefatos e evidências relacionadas
 
-## 11. Evidência operacional
+## 11. Apresentações de reunião
+
+- pedido de apresentação, deck, slides ou "HTML para reunião" segue [[apresentacoes|o método de apresentações]]
+- onde fica o kit (caminho local e repositório) e o acervo de decks já apresentados
+- onde o deck deste projeto mora e qual script gera os dados dele
+
+## 12. Evidência operacional
 
 - onde vive o [[registro-e-evidencias|registry de execuções]], se existir
 - como runs e artefatos são identificados
 - como localizar [[registro-e-evidencias|manifestos]] e saídas por rodada
 
-## 12. Regras de mudança segura
+## 13. Regras de mudança segura
 
 - validar contratos
 - validar auth
 - validar impacto funcional
 - validar necessidade de update documental
 
-## 13. Checklist final
+## 14. Checklist final
 
 - app abre
 - imports válidos
