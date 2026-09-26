@@ -86,6 +86,7 @@ Conexões fortes do grafo:
 - pedido de apresentação, deck, slides ou "HTML para reunião" segue [[apresentacoes|o método de apresentações]]
 - onde fica o kit (caminho local e repositório) e o acervo de decks já apresentados
 - onde o deck deste projeto mora e qual script gera os dados dele
+- que o deck começa pela ficha de cada slide (mecanismo, objeto, prova; §3 do método), nunca pela cópia de um deck anterior
 
 ## 12. Evidência operacional
 
