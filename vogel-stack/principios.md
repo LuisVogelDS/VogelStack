@@ -300,3 +300,19 @@ Regras práticas:
 - quando o projeto tem superfície publicada, transformar a regra em verificação automática sobre o artefato **montado**, não sobre o fonte, e deixar de fora o que estiver dentro de `<script>` e `<style>`.
 
 O acervo escrito antes da adoção não invalida a regra, e limpar tudo de uma vez costuma ser pior do que priorizar: o que sai para fora do repositório vem primeiro, a documentação interna vai depois, e a fila fica registrada no quadro do projeto ([[operacao-leve|Operação Documental]]). O fechamento de rodada de agente confere este ponto junto dos demais ([[operacao-agentes#8. Checklist antes de concluir uma alteração|checklist de encerramento]]), e o padrão de mensagem de commit segue em [[documentacao-e-versionamento|Documentação e Versionamento]].
+
+## 23. Exemplo passa adiante o porquê, não a forma
+
+Quando um projeto guarda exemplos de artefato autoral (uma apresentação, uma proposta, uma página), o agente que recebe o próximo pedido parte do exemplo mais parecido e troca o conteúdo. O resultado passa em toda verificação e perde exatamente o que fazia o original funcionar: a forma tinha sido inventada **para aquele caso**. Um tanque explica bem um banco que cobra por ficar ligado; o mesmo tanque, num deck sobre perecível vencendo na gôndola, é enfeite.
+
+Isso tende a piorar com o acervo: cada artefato copiado vira mais um exemplo da mesma forma, e a forma passa a parecer regra.
+
+Regras práticas:
+
+- **o método descreve perguntas, não formas.** "Onde cada um está hoje" é pergunta; "barra empilhada com tabela" é uma resposta que funcionou uma vez. Quando o documento lista formas, deixar explícito de qual caso cada uma saiu e o que a tornou certa ali;
+- **exemplo é catalogado pelo mecanismo que ele tornou visível**, não pelo componente que usou: "o livro relido inteiro para achar a página nova" ensina a pensar; "SVG com feixe animado" ensina a copiar;
+- **artefato novo começa pelo domínio dele, não por cópia de pasta.** Antes de abrir o editor, escrever para cada peça principal qual mecanismo do negócio ela mostra e com que objeto. Copia-se o andaime (motor, verificação, configuração), nunca o conteúdo de outro caso;
+- **o teste do vizinho:** trocando o nome do cliente e os números, a peça serviria para outro negócio de outro ramo? Se serve, ela não foi pensada para este. Componente genérico cabe no apoio (tabela de fontes, número exato), não como protagonista;
+- **o que é lúdico muda com o domínio.** O que diverte e ensina num custo de banco (o taxímetro correndo) não é o que diverte e ensina num estoque de perecível. A generalização é a pergunta "qual objeto do mundo desse cliente se comporta como o número?", nunca o objeto.
+
+Este princípio não dispensa as verificações de piso (o artefato ainda precisa passar nelas); ele diz que passar nelas não prova que o artefato foi feito para quem vai recebê-lo. O método que o aplica às apresentações está em [[apresentacoes|Apresentações]], §3.

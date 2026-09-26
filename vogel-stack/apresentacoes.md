@@ -22,29 +22,78 @@ Não vale quando a mensagem cabe num texto de cinco linhas, quando não há núm
 disputa ou quando o público só precisa de um status. Uma planilha resolve melhor um
 relatório de acompanhamento.
 
-## 2. O arco
+## 2. As perguntas
 
-A ordem abaixo funcionou para decisões sobre uma base (clientes, assinantes, contratos).
-Cada passo responde a uma pergunta que, sem ele, volta como interrupção no meio da reunião.
+Cada passo abaixo responde a uma pergunta que, sem ele, volta como interrupção no meio da
+reunião. **O que se reaproveita de um deck para o outro são as perguntas.** A forma entre
+parênteses é a que funcionou no primeiro caso (uma decisão sobre a base de sócios de um
+clube) e está aqui para mostrar que a pergunta tem resposta visual, não para ser repetida:
+a forma de cada deck sai do §3.
 
-1. **O que aconteceu.** Linha do tempo com o volume de cada evento. Serve para quem chegou
-   agora entender por que a base está como está.
-2. **Onde cada um está hoje.** Composição do todo em caixas **mutuamente exclusivas**: cada
-   unidade cai em exatamente uma, e as caixas somam o total da base. Se somam mais, há
-   dupla contagem; se somam menos, há alguém fora de todas. Barra empilhada para a
-   proporção, tabela para o número exato, painel de detalhe ao clicar numa caixa.
-3. **O que se dizia e o que os dados mostram.** Cada frase dita antes (na reunião
-   anterior, no e-mail) num cartão; virado, o cartão mostra o número medido e se confere,
-   confere em parte ou não confere. É o slide que mais muda a decisão.
-4. **O caminho de cada caso.** Para cada tipo de unidade, o que acontece com ela a partir
-   da decisão, passo a passo. Mapa de estados com um marcador que anda pelas setas, ou
-   simulador quando há parâmetro a escolher.
-5. **O que precisamos.** Três colunas: o que é nosso, o que precisa do OK de alguém, o que
-   ainda precisa ser decidido e até quando.
+1. **O que aconteceu.** Serve para quem chegou agora entender por que a situação está como
+   está. (Lá: linha do tempo com o volume de cada evento.)
+2. **Onde cada um está hoje.** A composição do todo em partes **mutuamente exclusivas**:
+   cada unidade cai em exatamente uma, e as partes somam o total. Se somam mais, há dupla
+   contagem; se somam menos, há alguém fora de todas. Essa regra vale sempre; a forma não.
+   (Lá: barra empilhada, tabela e painel de detalhe.)
+3. **O que se dizia e o que os dados mostram.** A frase dita antes (na reunião anterior, no
+   e-mail) contra o número medido. É o slide que mais muda a decisão, e só existe quando
+   houve frase de verdade: frase inventada para ter o que desmentir é espantalho.
+   (Lá: cartões que viram.)
+4. **Como a coisa funciona, ou o caminho de cada caso.** O mecanismo que produz o número:
+   por que custa o que custa, para onde cada unidade vai depois da decisão. É aqui que o
+   deck mais ganha com o §3. (Lá: mapa de estados com um marcador andando pelas setas.)
+5. **O que precisamos.** O que é nosso, o que precisa do OK de alguém, o que ainda precisa
+   ser decidido e até quando.
 6. **Apêndice de fontes.** Cada número com a regra que o define e a consulta que o
    produziu. Ninguém lê durante a reunião; todo mundo abre depois.
 
-## 3. Regras
+Nem todo deck tem as seis, e a ordem pode mudar. Um deck sobre custo pode ser quase todo
+passo 4, um slide por mecanismo.
+
+## 3. A forma sai do mecanismo
+
+O slide que fica na memória de quem assistiu é o que transforma o mecanismo por trás do
+número num **objeto do mundo do cliente que se comporta como o número**. Não é
+decoração: o objeto é o argumento. Um deck sobre o custo de um banco de dados gerenciado
+achou quatro, e cada um responde a uma pergunta diferente:
+
+| o mecanismo | o objeto | o que ele prova sem legenda |
+|---|---|---|
+| o banco cobra por ficar ligado, e só uma fatia é trabalho | um **tanque** com piso cinza fixo e a parte do trabalho por cima, na proporção medida | cortar frequência só mexe na fatia de cima |
+| o extrator relê a tabela inteira a cada rodada para achar o que mudou | um **livro** de páginas empilhadas com um feixe varrendo todas, e uma única página nova acesa | a razão entre o lido e o mudado, antes do número aparecer |
+| pagar por operação contra plano fechado | dois **taxímetros**: um correndo, outro parado no valor fixo | onde fica o ponto de virada |
+| um cliente novo tem quantas vezes o tamanho do anterior | dois **prédios** na mesma escala | o custo de entrada escala com a altura |
+
+Nenhum desses quatro serve a outro domínio. O que se transporta é o jeito de chegar a eles:
+
+1. **Qual é o mecanismo?** Não o número: o que no mundo real faz o número ser esse.
+   "Paga-se por hora ligado", "compra-se pela intuição e o que sobra vence", "relê-se tudo".
+2. **Que objeto do mundo do cliente se comporta assim?** De preferência algo que quem
+   assiste já viu funcionar: gôndola, balança, taxímetro, livro, caixa, fila, relógio de
+   ponto. Objeto do mundo **dele**, não do nosso: para um mercado, o que ele vê todo dia.
+3. **O objeto obedece aos dados?** Tamanho, quantidade e velocidade saem do `dados`, na
+   proporção medida. Um tanque desenhado à mão que não muda quando a medição roda de novo é
+   ilustração, e ilustração mente quando o número mudar.
+4. **O que cada fase faz o objeto fazer?** As fases andam o mecanismo (o feixe varre, a
+   página nova acende, o número conta), não revelam blocos de texto.
+5. **O que ele prova?** Dá para dizer o título do slide só olhando o objeto na última
+   fase. Se não dá, ele é enfeite e o slide volta a ser tabela.
+6. **Qual é a versão parada?** Na impressão e sob movimento reduzido, o estado final
+   desenhado de uma vez.
+
+**Componente genérico é apoio, não protagonista.** Barra, tabela, cartão e três colunas
+resolvem o número exato, o apêndice e o fechamento. Quando mais da metade dos slides é
+componente pronto com dado trocado, o deck foi montado por cópia (princípio nº 23,
+[[principios#23. Exemplo passa adiante o porquê, não a forma|exemplo passa adiante o porquê]]),
+e vai parecer com o anterior mesmo que cada número esteja certo.
+
+**A ficha vem antes do código.** Para cada slide que responde a uma pergunta, anotar
+mecanismo, objeto e o que ele prova, e só então abrir o template. É nessa ficha que quem
+encomendou o deck consegue dizer "isso não é a cara deles" antes de o trabalho estar
+feito.
+
+## 4. Regras
 
 - **O número sai da medição, nunca do texto.** Um script mede na fonte primária
   ([[principios#20. Integrações de dados devem partir da fonte primária|princípio nº 20]])
@@ -64,7 +113,7 @@ Cada passo responde a uma pergunta que, sem ele, volta como interrupção no mei
 - **Texto sem assinatura de máquina** ([[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]),
   conferido no artefato montado.
 
-## 4. Públicos e variantes
+## 5. Públicos e variantes
 
 A mesma apresentação costuma ter mais de um público: a equipe interna, o cliente, às
 vezes outro idioma. Cada variante:
@@ -82,7 +131,7 @@ O que separa a versão interna da externa é uma fronteira de exposição e segu
 [[seguranca|Segurança e Privacidade]]: dado pessoal de terceiro não entra nem na versão
 interna, só agregados.
 
-## 5. Antes de sair da máquina
+## 6. Antes de sair da máquina
 
 1. Rodar a medição de novo e remontar todas as variantes.
 2. Verificar cada arquivo montado: nenhum travessão no texto (incluindo as strings do
@@ -92,16 +141,18 @@ interna, só agregados.
    é clicável, e reprovar se a página lançar erro.
 4. Tirar print de cada slide no estado final e olhar. Sobreposição de texto, rótulo que
    quebra e barra que não cresce só aparecem assim.
+5. Olhando os prints em sequência, aplicar o teste do vizinho: trocando o nome do cliente,
+   esse deck serviria a outro negócio de outro ramo? Se serve, a forma não saiu do §3.
 
-## 6. Onde cada coisa fica
+## 7. Onde cada coisa fica
 
 - O **deck** mora no projeto que ele descreve, ao lado do script de medição, porque a
   medição usa as regras e o acesso daquele projeto.
 - O **kit** (estilo, motor, montagem, verificação) mora num repositório de quem adota,
   que pode ser o mesmo dos outros artefatos visuais dele. Se ele guarda também o acervo
-  de decks já apresentados, que é o que torna o kit útil de verdade, esse repositório é
-  **privado**, e o acervo fica fora de qualquer rotina de publicação: tem números reais
-  de cliente.
+  de decks já apresentados, esse repositório é **privado**, e o acervo fica fora de
+  qualquer rotina de publicação: tem números reais de cliente. O acervo se consulta pelo
+  mecanismo que cada slide tornou visível (§3), nunca como pasta a copiar.
 - A **stack** guarda só este método. Nenhum deck real, nenhum dado de cliente, nenhum
   exemplo que identifique alguém.
 
