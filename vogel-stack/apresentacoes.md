@@ -78,7 +78,9 @@ Nenhum desses quatro serve a outro domínio. O que se transporta é o jeito de c
    A cor também: se o público reconhece uma cor como "nós" (a farda, o uniforme, a
    embalagem), a pessoa ou o produto sem categoria veste essa cor, e o destaque sai da
    identidade do cliente, nunca do deck anterior. Cor que o cliente nomeia (verde-bandeira,
-   azul celeste) vai no tom que o nome diz, não numa versão mais fechada e "elegante".
+   azul celeste) diz a família, não o código: o tom literal costuma brilhar demais ao lado
+   do resto, e o tom certo sai da harmonia entre as cores do deck (croma parecido, mesma
+   luminosidade para o mesmo papel).
 3. **O objeto obedece aos dados?** Tamanho, quantidade e velocidade saem do `dados`, na
    proporção medida. Um tanque desenhado à mão que não muda quando a medição roda de novo é
    ilustração, e ilustração mente quando o número mudar. Obedecer também é não afirmar o
