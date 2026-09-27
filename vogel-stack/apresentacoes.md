@@ -35,7 +35,10 @@ a forma de cada deck sai do §3.
 2. **Onde cada um está hoje.** A composição do todo em partes **mutuamente exclusivas**:
    cada unidade cai em exatamente uma, e as partes somam o total. Se somam mais, há dupla
    contagem; se somam menos, há alguém fora de todas. Essa regra vale sempre; a forma não.
-   (Lá: barra empilhada, tabela e painel de detalhe.)
+   Cuidado quando o dado vem exclusivo e o domínio é aninhado (todo mestre também é
+   conselheiro): perguntar a quem conhece o domínio se alguma categoria contém outra e,
+   se contém, mostrar os dois recortes, o exclusivo com nota de quem ficou de fora e o
+   agregado que inclui. (Lá: barra empilhada, tabela e painel de detalhe.)
 3. **O que se dizia e o que os dados mostram.** A frase dita antes (na reunião anterior, no
    e-mail) contra o número medido. É o slide que mais muda a decisão, e só existe quando
    houve frase de verdade: frase inventada para ter o que desmentir é espantalho.
@@ -72,9 +75,17 @@ Nenhum desses quatro serve a outro domínio. O que se transporta é o jeito de c
 2. **Que objeto do mundo do cliente se comporta assim?** De preferência algo que quem
    assiste já viu funcionar: gôndola, balança, taxímetro, livro, caixa, fila, relógio de
    ponto. Objeto do mundo **dele**, não do nosso: para um mercado, o que ele vê todo dia.
+   A cor também: se o público reconhece uma cor como "nós" (a farda, o uniforme, a
+   embalagem), a pessoa ou o produto sem categoria veste essa cor, e o destaque sai da
+   identidade do cliente, nunca do deck anterior.
 3. **O objeto obedece aos dados?** Tamanho, quantidade e velocidade saem do `dados`, na
    proporção medida. Um tanque desenhado à mão que não muda quando a medição roda de novo é
-   ilustração, e ilustração mente quando o número mudar.
+   ilustração, e ilustração mente quando o número mudar. Obedecer também é não afirmar o
+   que o dado não afirma: contagens independentes não se desenham uma dentro da outra, e
+   unidade arredondada (uma cadeira a cada cinco pessoas) nunca apaga um grupo que existe,
+   que ganha ao menos uma unidade e o número exato no ⓘ. Um objeto tem um acabamento só:
+   se um elemento ganha brilho, degradê ou sombra que os irmãos não têm, ele vira outro
+   objeto.
 4. **O que cada fase faz o objeto fazer?** As fases andam o mecanismo (o feixe varre, a
    página nova acende, o número conta), não revelam blocos de texto.
 5. **O que ele prova?** Dá para dizer o título do slide só olhando o objeto na última
@@ -108,6 +119,15 @@ feito.
 - **Detalhe mora atrás de um ícone.** O cartão tem título, número e até três tópicos; a
   explicação longa abre ao passar o mouse no ⓘ. Tópico em vez de frase emendada com
   ponto e vírgula.
+- **A frase não afirma o que o dado não afirma.** "Uma criança para cada três sócios"
+  sugere vínculo; "cerca de uma a cada três pessoas" diz a razão. Vale o mesmo para
+  posse, causa e sequência.
+- **Retratos de datas diferentes não se cruzam em silêncio.** Se um número vem de outro
+  levantamento, a data de cada um aparece na tela, porque os totais não vão bater. Se o
+  foco muda para o dado novo, é outro deck.
+- **A interação responde à próxima pergunta de quem assiste.** Numa composição por grupos,
+  passar o mouse numa categoria (ou na legenda) destaca a mesma categoria em todos os
+  grupos, com a contagem. Complementa as fases, não as substitui.
 - **Cor diz o que significa.** Um conjunto pequeno de cores semânticas (bom, atenção,
   alerta, neutro) usado igual em todos os slides, inclusive nos gráficos.
 - **Texto sem assinatura de máquina** ([[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]),
@@ -125,6 +145,9 @@ vezes outro idioma. Cada variante:
   interno, slide de trabalho (um simulador, um calendário). A checagem roda no **arquivo**
   entregue, não só na tela, porque o código-fonte de uma página HTML é legível por quem a
   recebe. Um nome que só existe nos dados de um cartão ainda vai junto;
+- não carrega o que **ainda não foi aprovado** por quem decide: projeto do autor em
+  gestação, proposta que ainda não foi feita. Nem no rodapé nem em "próximos passos". O
+  nome do projeto entra na lista de proibidos, porque mistura o levantamento com um pedido;
 - nunca é editada à mão depois de gerada.
 
 O que separa a versão interna da externa é uma fronteira de exposição e segue
@@ -142,7 +165,9 @@ interna, só agregados.
 4. Tirar print de cada slide no estado final e olhar. Sobreposição de texto, rótulo que
    quebra e barra que não cresce só aparecem assim.
 5. Olhando os prints em sequência, aplicar o teste do vizinho: trocando o nome do cliente,
-   esse deck serviria a outro negócio de outro ramo? Se serve, a forma não saiu do §3.
+   esse deck serviria a outro negócio de outro ramo? Se serve, a forma não saiu do §3. Vale
+   também para a cor: nenhum token de identidade do deck de onde veio o andaime, e o nome
+   daquele cliente na lista de proibidos.
 
 ## 7. Onde cada coisa fica
 
