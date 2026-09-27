@@ -77,7 +77,8 @@ Nenhum desses quatro serve a outro domínio. O que se transporta é o jeito de c
    ponto. Objeto do mundo **dele**, não do nosso: para um mercado, o que ele vê todo dia.
    A cor também: se o público reconhece uma cor como "nós" (a farda, o uniforme, a
    embalagem), a pessoa ou o produto sem categoria veste essa cor, e o destaque sai da
-   identidade do cliente, nunca do deck anterior.
+   identidade do cliente, nunca do deck anterior. Cor que o cliente nomeia (verde-bandeira,
+   azul celeste) vai no tom que o nome diz, não numa versão mais fechada e "elegante".
 3. **O objeto obedece aos dados?** Tamanho, quantidade e velocidade saem do `dados`, na
    proporção medida. Um tanque desenhado à mão que não muda quando a medição roda de novo é
    ilustração, e ilustração mente quando o número mudar. Obedecer também é não afirmar o
