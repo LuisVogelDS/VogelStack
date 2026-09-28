@@ -316,3 +316,35 @@ Regras práticas:
 - **o que é lúdico muda com o domínio.** O que diverte e ensina num custo de banco (o taxímetro correndo) não é o que diverte e ensina num estoque de perecível. A generalização é a pergunta "qual objeto do mundo desse cliente se comporta como o número?", nunca o objeto.
 
 Este princípio não dispensa as verificações de piso (o artefato ainda precisa passar nelas); ele diz que passar nelas não prova que o artefato foi feito para quem vai recebê-lo. O método que o aplica às apresentações está em [[apresentacoes|Apresentações]], §3.
+
+## 24. Construir só o que o problema pede
+
+Agente escreve código rápido, e isso baratiou a produção sem baratear a manutenção. Cada linha, dependência ou camada nova é algo que alguém vai ler, atualizar, auditar e depurar depois, geralmente sem o contexto de quem escreveu. O desvio típico de agente não é escrever pouco: é instalar biblioteca para o que a linguagem já faz, criar interface para uma implementação só e reescrever um utilitário que mora dois arquivos adiante.
+
+Antes de escrever, parar no primeiro degrau que resolve:
+
+1. **precisa existir?** Necessidade especulativa não entra. O que ficou de fora se diz em uma linha, com a condição que o traria de volta;
+2. **já existe no projeto?** Função, tipo ou padrão que o repositório já tem se reusa. Procurar antes de escrever é a mesma disciplina do princípio nº 17 ([[principios#17. Descoberta semântica deve anteceder implementações relevantes|descoberta semântica]]), aplicada ao código;
+3. **a biblioteca padrão da linguagem resolve?** Usar;
+4. **um recurso nativo da plataforma resolve?** Campo de data do navegador em vez de componente de calendário, CSS em vez de JavaScript, restrição no banco em vez de checagem na aplicação;
+5. **uma dependência já instalada resolve?** Usar. Dependência nova é adoção de ferramenta e passa pelo filtro do princípio nº 19 ([[principios#19. Problema, não tecnologia|problema, não tecnologia]]): o que poucas linhas resolvem não justifica mais um pacote para atualizar e auditar;
+6. **só então**, o mínimo que funciona.
+
+A escada vem depois de entender o problema, não no lugar disso. Ler o código que a mudança toca e seguir o fluxo real de ponta a ponta vem antes de escolher o degrau ([[operacao-agentes#1.1 Checklist antes de começar uma alteração|Operação de Agentes §1.1]]). O menor diff no lugar errado não é economia, é o segundo bug.
+
+Regras práticas:
+
+- **nenhuma abstração que ninguém pediu**: interface com uma implementação, fábrica de um produto só, configuração para valor que nunca muda, camada com um único chamador. Quando aparecer a segunda implementação, a abstração nasce com um caso real para servir;
+- **nada de andaime "para depois"**. O depois, quando chegar, sabe o que precisa;
+- **apagar vale mais que acrescentar**, e a solução comum vale mais que a engenhosa: engenhosidade é o que alguém vai ter que decifrar num incidente. Remoção feita de propósito se registra ([[documentacao-e-versionamento#4.1 O que foi removido de propósito|Documentação e Versionamento §4.1]]) para ninguém reconstruir o que saiu;
+- **entre duas soluções do mesmo tamanho, a que acerta nos casos de borda.** Escrever menos não autoriza escolher o algoritmo mais frágil;
+- **correção de defeito vai na causa, não no sintoma.** O chamado descreve onde o erro apareceu. Antes de editar uma função, levantar todos os seus chamadores: uma guarda na função compartilhada é diff menor que uma guarda em cada chamador, e corrigir só o caminho citado deixa os vizinhos quebrados;
+- **atalho deliberado fica marcado no código**, com o limite que ele tem e o sinal que manda revisitar: `# atalho: lock global; trocar por lock por conta quando a vazão importar`. Atalho sem gatilho é dívida que ninguém vê, contra o princípio nº 1 ([[principios#1. O comportamento documentado deve refletir o sistema real|dívida visível]]); com um prefixo fixo, uma busca textual reúne todos, e os que pedem ação entram no quadro do projeto ([[operacao-agentes#7.1.1 Quadro de trabalho conciliado a partir das fontes de demanda|Operação de Agentes §7.1.1]]);
+- **lógica não trivial sai com uma verificação executável**: uma ramificação, um laço, um parser, um caminho que mexe com dinheiro ou permissão deixa para trás o menor teste que falha se a lógica quebrar. Uma linha óbvia não precisa de teste; o mesmo critério de necessidade vale para os testes;
+- **pedido grande recebe a versão enxuta e a pergunta na mesma resposta**: o que foi feito, o que cobre o resto, o que ficou de fora e quando acrescentar. Não travar esperando resposta quando existe um padrão razoável. Se o pedido insistir na versão completa, ela se constrói, sem reabrir a discussão.
+
+O que nunca se corta em nome do tamanho: validação na fronteira de confiança, tratamento de erro que evita perda de dado, as fronteiras de [[seguranca|Segurança e Privacidade]], acessibilidade básica, margem de ajuste onde o sistema toca o mundo físico (relógio deriva, sensor lê torto) e qualquer coisa pedida explicitamente.
+
+Alcance: o princípio governa o que o projeto constrói (código, script, configuração, componente, página). Ele não se aplica à documentação e ao registro que esta stack exige: ADR, changelog e registry são rastreabilidade mínima, não excesso ([[documentacao-e-versionamento|Documentação e Versionamento]], [[registro-e-evidencias|Registro e Evidências Operacionais]]). Também não autoriza economizar leitura: pouco código só é virtude quando vem de entender o problema inteiro.
+
+O fechamento de rodada confere este ponto ([[operacao-agentes#8. Checklist antes de concluir uma alteração|checklist de encerramento]]), e a revisão de excesso sob demanda tem prompt próprio em [[operacao-agentes#8.1 Revisão de excesso sob demanda|Operação de Agentes §8.1]].

@@ -397,6 +397,36 @@ Antes de encerrar uma entrega, validar:
 12. se o repositório é do próprio usuário, a entrega saiu commitada **e publicada** ([[operacao-agentes#1.4 Commit e publicação seguem o dono do repositório|§1.4]]);
 13. se a rodada foi orquestrada em frentes, nenhuma ficou rodando sem ser recolhida, e a entrega que sai da máquina passou por revisão de contexto limpo ([[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]]);
 14. se a rodada removeu de propósito algo que outro agente poderia recriar, a remoção ficou registrada onde se lê antes de implementar ([[documentacao-e-versionamento#4.1 O que foi removido de propósito|Documentação e Versionamento §4.1]]).
+15. se a rodada construiu código, não entrou dependência nova nem abstração sem uso presente, o que já existia no projeto foi reusado, e correção de defeito foi feita na causa, conferidos os chamadores ([[principios#24. Construir só o que o problema pede|princípio nº 24]]);
+16. se a rodada deixou atalho deliberado, ele ficou marcado no código com o limite e o gatilho de revisão; e se escreveu lógica não trivial, ela saiu com pelo menos uma verificação executável.
+
+## 8.1 Revisão de excesso sob demanda
+
+A revisão de correção pergunta se o código faz o que devia. Esta pergunta o que dá para tirar sem perder nada, e por isso fica separada: misturadas, a segunda perde para a primeira. Vale aplicar ao diff de uma rodada ou, de tempos em tempos, ao repositório inteiro. Se a entrega sai da máquina, quem revisa é uma frente de contexto limpo ([[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]]).
+
+```text
+Revise <o diff atual | o repositório> só quanto a excesso, pelo princípio
+nº 24 da Vogel Stack. Uma linha por achado, do maior corte para o menor:
+
+  <arquivo>:<linha>: <tipo> <o que sai>. <o que entra no lugar>.
+
+Tipos:
+- remover: código morto, flexibilidade sem uso, recurso especulativo.
+- reusar: reimplementa algo que o projeto já tem. Diga onde está.
+- padrao: reimplementa a biblioteca padrão. Diga a função.
+- nativo: dependência ou código fazendo o que a plataforma já faz.
+- abstracao: interface com uma implementação, config que ninguém muda,
+  camada com um chamador só.
+- encurtar: mesma lógica em menos linhas. Mostre a forma curta.
+
+Fora de escopo: defeito, segurança, desempenho (vão para revisão normal).
+Não marque como excesso validação de entrada, tratamento de erro, controle
+de segurança, acessibilidade nem a verificação mínima de lógica não trivial.
+Não edite nada, só liste. Termine com o total de linhas e dependências
+que dá para tirar, ou com "nada a cortar".
+```
+
+A saída é lista para humano (ou outro agente) aprovar antes de aplicar, como no prompt de auditoria estrutural de [[operacao-leve|Operação Documental]].
 
 ## 9. Resultado esperado de uma boa operação com agentes
 

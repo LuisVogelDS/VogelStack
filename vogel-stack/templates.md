@@ -54,6 +54,7 @@ Conexões fortes do grafo:
 - mudanças de fonte, auth e deploy exigem atualização documental
 - fluxo oficialmente suportado não pode ficar ambíguo
 - semântica de saída precisa permanecer estável
+- construir só o que o problema pede: reusar o que o projeto já tem, biblioteca padrão, recurso nativo e dependência instalada antes de código ou pacote novo; correção de defeito na causa
 - conexões relevantes devem ser materializadas no Knowledge Graph
 
 ## 7. Política de execução
@@ -108,6 +109,7 @@ Conexões fortes do grafo:
 - docs coerentes
 - sem segredos expostos
 - sem regressão óbvia
+- sem dependência ou abstração nova sem uso presente; lógica não trivial com verificação executável
 ```
 
 ## 2. Template de `quickstart.md`
