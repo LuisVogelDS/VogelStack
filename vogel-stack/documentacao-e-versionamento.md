@@ -124,7 +124,7 @@ Boas práticas:
 
 ## 2.2 Pasta de entrada bruta: `docs/raw/` ou `intake/`
 
-Projetos que usam agentes e Knowledge Graph devem ter um lugar explícito para despejar material ainda desorganizado.
+Projetos que usam agentes e malha de wikilinks devem ter um lugar explícito para despejar material ainda desorganizado.
 
 Essa pasta serve para receber:
 

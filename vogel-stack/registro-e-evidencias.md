@@ -94,7 +94,7 @@ Projetos agent-friendly ganham muito quando o registry já existe, porque o agen
 
 ## 7.1 Regra de Juros Compostos
 
-Cada execução registrada deve aumentar o valor do segundo cérebro do projeto e reforçar o Knowledge Graph.
+Cada execução registrada deve aumentar o valor do segundo cérebro do projeto e reforçar a malha de wikilinks.
 
 Sempre que um novo diretório de artefato for criado em:
 

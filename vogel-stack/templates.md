@@ -2,14 +2,14 @@
 
 Este arquivo traz modelos mínimos para iniciar novos repositórios com o padrão da [[README|Vogel Stack]].
 
-Conexões fortes do grafo:
+Conexões fortes da malha (wikilinks curados, ver [[operacao-leve|Operação Documental]]):
 
-- AGENTS.md Document Pattern
+- [[documentacao-e-versionamento|Padrão de documento AGENTS.md]]
 - [[registro-e-evidencias|Registry de Execuções]]
 - [[registro-e-evidencias|Manifesto por Run]]
-- Handoff Padrão de Execução
-- PowerShell Logging Pattern
-- Método Brainstorm-Concepção-Wireframe-Implementação
+- [[operacao-agentes#5.2 Padrão de handoff para execução custosa|Handoff padrão de execução]]
+- [[operacao-agentes#5.2 Padrão de handoff para execução custosa|Padrão de logging em PowerShell]]
+- [[evolucao-produto#2. Método recomendado para dashboards|Método Brainstorm-Concepção-Wireframe-Implementação]]
 
 ## 1. Template de `AGENTS.md`
 
@@ -54,7 +54,9 @@ Conexões fortes do grafo:
 - mudanças de fonte, auth e deploy exigem atualização documental
 - fluxo oficialmente suportado não pode ficar ambíguo
 - semântica de saída precisa permanecer estável
-- conexões relevantes devem ser materializadas no Knowledge Graph
+- documentos novos nascem conectados por wikilinks reais (princípio nº 18)
+- link checker determinístico roda antes de fechar rodada que tocou em `.md` e em CI; link quebrado não entra
+- auditoria estrutural (órfão, weak link, comunidade isolada) é pedido explícito ao agente, com o prompt-template da Operação Documental
 
 ## 7. Política de execução
 
