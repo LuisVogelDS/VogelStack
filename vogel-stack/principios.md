@@ -316,3 +316,20 @@ Regras práticas:
 - **o que é lúdico muda com o domínio.** O que diverte e ensina num custo de banco (o taxímetro correndo) não é o que diverte e ensina num estoque de perecível. A generalização é a pergunta "qual objeto do mundo desse cliente se comporta como o número?", nunca o objeto.
 
 Este princípio não dispensa as verificações de piso (o artefato ainda precisa passar nelas); ele diz que passar nelas não prova que o artefato foi feito para quem vai recebê-lo. O método que o aplica às apresentações está em [[apresentacoes|Apresentações]], §3.
+
+## 24. Interface não deve ter a cara média de máquina, nem trocá-la por um molde
+
+O que vale para o texto (princípio nº 22) vale para a forma. Interface gerada tem uma cara que o público já reconhece: fileira de cápsulas, cartão de canto arredondado em tudo, sombra grande sobre degradê, vidro fosco sobre o nada, roxo saturado, a tela explicando o próprio funcionamento. Nenhum desses elementos é errado sozinho; juntos, dizem que ninguém decidiu nada, e o custo é o mesmo do travessão: crédito.
+
+A saída não é um padrão novo. Molde fixo repete o problema com outra cara. O que se adota é o hábito de **decidir cada elemento pelo lugar onde ele está**, com liberdade para a escolha arbitrária e com personalidade, desde que feita olhando.
+
+Regras práticas:
+
+- os tiques da cara média são **padrão a evitar, não proibição**: pílula e squircle valem quando alguém consegue dizer por que aquele lugar pede aquilo;
+- expor só o necessário: até três opções reconhecíveis ficam à vista, de preferência como ícone; mais que isso vai para um dropdown que em repouso mostra só o valor;
+- separar com fio, não com caixa; o raio é decidido por lugar, não por token global;
+- textura e vidro só onde servem: textura procedural que lê a cor da superfície e nunca compete com o texto, vidro só quando há algo atrás para ver;
+- claro e escuro se calibram separados;
+- a decisão visual se toma olhando uma prancha lado a lado, e quem decide é uma pessoa.
+
+O método completo, com a tabela de recusas, os valores que funcionaram e onde estão as implementações de referência, está em [[interface|Interface com assinatura própria]].

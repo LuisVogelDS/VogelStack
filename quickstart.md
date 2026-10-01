@@ -16,6 +16,7 @@ Se o projeto tiver um problema que essa operação não resolve, o princípio n�
 - [[vogel-stack/templates|Templates de Documentação]]
 - [[vogel-stack/operacao-leve|Operação Documental]]
 - [[vogel-stack/apresentacoes|Apresentações que mostram de onde vem cada número]]
+- [[vogel-stack/interface|Interface com assinatura própria]]
 
 ## 1. Instalar a stack como submódulo
 
@@ -41,6 +42,7 @@ vogel-stack/
     operacao-leve.md
     seguranca.md
     apresentacoes.md
+    interface.md
 ```
 
 Por causa dessa pasta interna, os wikilinks do projeto-alvo usam o prefixo `vogel-stack/vogel-stack/` — por exemplo `[[vogel-stack/vogel-stack/principios]]`. O que importa é que o link aponte para um arquivo real que o checker consiga resolver.
@@ -80,6 +82,8 @@ Destinos-guia:
 - [[vogel-stack/templates]] — criar ou corrigir documentos padrão.
 - [[vogel-stack/apresentacoes]] — apresentação de reunião: registrar no `AGENTS.md` onde
   fica o kit e o acervo, para o agente seguir o método quando o pedido chegar.
+- [[vogel-stack/interface]]: qualquer superfície visual: painel, página, deck,
+  ferramenta interna. Recusas da cara média de máquina e como decidir a forma.
 
 Ao terminar, liste: arquivos alterados, links adicionados, lacunas documentais
 encontradas e comandos recomendados para validar.
