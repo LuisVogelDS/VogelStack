@@ -10,6 +10,8 @@ Abrir o editor custa perto de um minuto (carregar o projeto, recompilar, abrir a
 
 No Slime, três roteiros saíram em 1 min 38 s, dos quais 56 s eram de jogo: a abertura passou a ser paga uma vez.
 
+O mesmo vale para o que vem antes do teste. Gerar cena e prefab (o bootstrap) e testar em seguida são **uma sessão**, não duas: o executor monta e já roda a lista. Montar só uma parte das etapas economiza mais, mas só quando a frente não mexe no que as outras etapas consomem (a cena principal, por exemplo); na dúvida, monta tudo, ainda na mesma sessão.
+
 ## 2. Regressão seletiva durante a rodada, completa no fechamento
 
 Cada frente tem um **grupo de roteiros** que cobre o território dela, registrado num lugar só (o script da bateria). Durante a rodada, a frente roda só o próprio grupo e o roteiro novo que escreveu. A bateria inteira é do orquestrador e roda **uma vez, no fechamento**, depois da montagem de todas as frentes.
