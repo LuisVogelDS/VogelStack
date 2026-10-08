@@ -17,6 +17,7 @@ Se o projeto tiver um problema que essa operação não resolve, o princípio n�
 - [[vogel-stack/operacao-leve|Operação Documental]]
 - [[vogel-stack/apresentacoes|Apresentações que mostram de onde vem cada número]]
 - [[vogel-stack/interface|Interface com assinatura própria]]
+- [[vogel-stack/gamedev|Desenvolvimento de jogos com agentes]]
 
 ## 1. Instalar a stack como submódulo
 
@@ -43,6 +44,7 @@ vogel-stack/
     seguranca.md
     apresentacoes.md
     interface.md
+    gamedev.md
 ```
 
 Por causa dessa pasta interna, os wikilinks do projeto-alvo usam o prefixo `vogel-stack/vogel-stack/` — por exemplo `[[vogel-stack/vogel-stack/principios]]`. O que importa é que o link aponte para um arquivo real que o checker consiga resolver.
@@ -84,6 +86,9 @@ Destinos-guia:
   fica o kit e o acervo, para o agente seguir o método quando o pedido chegar.
 - [[vogel-stack/interface]]: qualquer superfície visual: painel, página, deck,
   ferramenta interna. Recusas da cara média de máquina e como decidir a forma.
+- [[vogel-stack/gamedev]]: projeto de jogo em motor com editor pesado (Unity): bateria
+  de testes numa sessão só, regressão seletiva por frente, fila e cópias do projeto,
+  painel de regulagem de gosto dentro do jogo.
 
 Ao terminar, liste: arquivos alterados, links adicionados, lacunas documentais
 encontradas e comandos recomendados para validar.

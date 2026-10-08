@@ -30,6 +30,7 @@ Esta stack ajuda a manter:
 - [[vogel-stack/vogel-stack/operacao-leve]]: a operação documental da stack — wikilinks curados + link checker determinístico + agente sob demanda.
 - [[vogel-stack/vogel-stack/seguranca]]: guardrails de segurança e privacidade, com os quatro princípios de fronteira e a checagem objetiva que precede qualquer exposição.
 - [[vogel-stack/vogel-stack/apresentacoes]]: método para a apresentação de uma reunião de decisão, com cada número saindo da medição e variantes por público conferidas no arquivo entregue.
+- [[vogel-stack/vogel-stack/gamedev]]: diretrizes para jogos em motor com editor pesado: bateria de testes numa sessão só, regressão seletiva por frente com a completa no fechamento, a instância do motor como recurso com fila e cópias, regulagem de gosto num painel dentro do jogo.
 - [[vogel-stack/vogel-stack/interface]]: método para decidir a forma de uma interface sem a cara média de máquina e sem trocá-la por um molde: recusas, textura, vidro, claro e escuro, prancha de decisão.
 
 ## Descoberta semântica
