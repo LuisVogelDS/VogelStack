@@ -145,7 +145,7 @@ Quem produziu uma entrega carrega os mesmos vieses que a produziram, e a autocr�
 
 ### Custo
 
-Frentes em paralelo multiplicam o gasto, e frente longa multiplica mais ainda: a escolha de modelo e o revezamento estão na [[operacao-agentes#2.3 Modelo por tarefa e revezamento de contexto|§2.3]]. O orçamento da [[operacao-agentes#2.1 Orçamento de tokens e alerta antecipado|§2.1]] é da orquestração inteira, não de cada frente: antes de disparar, dizer ao usuário quantas frentes e a ordem de grandeza do custo. O custo não barra a orquestração; o que não pode é o usuário ser surpreendido por ele.
+Frentes em paralelo multiplicam o gasto, e frente longa multiplica mais ainda: a escolha de modelo e esforço e o revezamento estão na [[operacao-agentes#2.3 Modelo, esforço e revezamento de contexto|§2.3]]. O orçamento da [[operacao-agentes#2.1 Orçamento de tokens e alerta antecipado|§2.1]] é da orquestração inteira, não de cada frente: antes de disparar, dizer ao usuário quantas frentes e a ordem de grandeza do custo. O custo não barra a orquestração; o que não pode é o usuário ser surpreendido por ele.
 
 ## 2. Política de custo e uso de recursos
 
@@ -168,25 +168,45 @@ O custo de uma tarefa deve ser previsto, não descoberto no fim. Regras:
 - em orquestração com várias frentes ([[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]]), a estimativa é do conjunto. Tarefa paralelizada ultrapassa o limiar com facilidade, e o aviso existe para o usuário decidir sabendo, não para desestimular a divisão;
 - o usuário reduz custo declarando a barra de aceitação no próprio pedido (ex.: "build verde basta"), apontando arquivos/caminhos relevantes e fatiando entregas grandes.
 
-## 2.3 Modelo por tarefa e revezamento de contexto
+## 2.3 Modelo, esforço e revezamento de contexto
 
-*Adotada em 08/10/2026, em observação: mede-se de novo depois de alguns dias de uso. Origem: a medição de 238 agentes de dois projetos de jogo ([[gamedev#6. O custo de tokens está no tamanho do agente|gamedev §6]]).*
+*Adotada em 09/10/2026 como hipótese em medição; os números são revistos com o medidor antes de virar regra firme. Origem: a medição de 240 agentes de dois projetos de jogo ([[gamedev#6. O custo de tokens está no tamanho do agente|gamedev §6]]) e o guia de custo do fornecedor do modelo.*
 
-Num agente que trabalha por muitas chamadas, quase todo o gasto é o próprio contexto relido a cada chamada, e não o que ele escreve nem as ferramentas que roda. O contexto cresce com cada arquivo lido, cada busca e cada saída de comando, e o custo do agente cresce mais ou menos com o quadrado do número de chamadas. Na medição, os agentes acima de 100 chamadas eram um quarto do total e respondiam por 62% do gasto, e 96% do gasto tinha ido para o modelo mais caro. Daí duas regras, que valem para **toda delegação**: a do orquestrador às frentes, a de uma frente a um subagente dela e a de qualquer agente que dispare outro.
+Num agente que trabalha por muitas chamadas, quase todo o gasto é o próprio contexto relido a cada chamada, e não o que ele escreve nem as ferramentas que roda. O contexto cresce com cada arquivo lido, cada busca e cada saída de comando, e o custo do agente cresce mais ou menos com o quadrado do número de chamadas. Na medição, os agentes acima de 100 chamadas respondiam por 62% do gasto, e 95% tinha ido para o modelo maior, quase sempre por herança de quem delegou, e não por escolha. As regras abaixo valem para **toda delegação**: do orquestrador às frentes, de uma frente a um subagente dela e de qualquer agente que dispare outro.
 
-**Modelo pela tarefa, não pelo hábito.** Quem delega escolhe o modelo de cada agente ao disparar:
+### Tipo de trabalho define modelo e esforço
 
-| Modelo | Para quê |
-|---|---|
-| O maior | Plano e contrato entre frentes; sistema difícil ou sem precedente no projeto; depuração que já falhou duas vezes; revisão de área sensível. |
-| O intermediário | Implementação com contrato pronto (uma feature, uma tela, um módulo que segue um padrão que o projeto já tem); escrever e ajustar teste; integração de peças já feitas. |
-| O menor | Trabalho mecânico: ler a saída de uma bateria e listar as falhas, atualizar registro (changelog, quadro), renomear e organizar arquivos, conferir uma lista pronta, buscas amplas que voltam como conclusão curta. |
+Cada delegação tem um tipo, e o tipo traz o padrão de modelo e de esforço de raciocínio:
 
-Na dúvida entre dois, começa pelo mais barato e sobe se a entrega voltar fraca. A troca fica registrada no relatório da frente, para a tabela ser recalibrada com caso real.
+| Tipo | Para quê | Modelo · esforço |
+|---|---|---|
+| executor | implementação com plano pronto, teste, integração com contrato | intermediário · médio |
+| corretor | o que a bateria, o build ou o teste reprovou | intermediário · alto |
+| leitor | levantamento, busca, diagnóstico que volta como conclusão curta | menor · médio |
+| mecânico | changelog, quadro, organizar arquivos | menor · baixo |
+| especialista | sistema difícil, depuração que já falhou | maior · médio |
+| arquiteto | planejamento de uma implementação grande | maior · alto |
+| validador | conferir uma lista pronta e devolver laudo curto | menor · médio |
 
-**Revezamento em vez de agente longo.** Uma frente grande continua uma frente só, com o mesmo escopo e a mesma ordem, mas roda em turnos de até umas 80 chamadas. No fim do turno, o agente para e escreve uma nota de passagem curta: o que fez, o que falta, os arquivos e trechos que importam e o que já se descartou. O turno seguinte é um agente novo, que começa por essa nota, de contexto limpo. O tempo de relógio fica o mesmo e o custo cai perto da metade. Vale também para o subagente de um subagente: ninguém leva o contexto inteiro do começo ao fim de um trabalho longo.
+Brainstorming, orquestração e planejamento, que ficam com quem conversa com o usuário, usam o modelo maior em esforço alto. Os tipos são **tipos de trabalho, não etapas obrigatórias**: o plano decide item a item, e uma tarefa pode não ter arquiteto, validador ou corretor nenhum.
 
-Duas práticas de leitura completam as duas regras:
+### O plano manda, e subir de degrau pede sinal
+
+- O plano traz, em cada item delegado, o tipo, ou então o modelo e o esforço, e o disparo segue o plano. Sem tipo nem modelo, vale o padrão do executor.
+- Quem discordar do plano no disparo escreve o motivo na descrição da delegação (por exemplo, `[opus: física do corpo]`). Escolha sem motivo é registrada como tal, para a medição mostrar se a regra está sendo seguida.
+- **Sobe-se um degrau só por sinal objetivo**: bateria ou teste reprovado, build quebrado, recusa do usuário. É a forma de "começar barato e subir" que se sustenta: tudo roda no padrão, e só o que falhou volta com mais esforço (o corretor) ou com o modelo de cima.
+- **Esforço antes de modelo.** Para baratear um tipo, primeiro se baixa o esforço no modelo atual; trocar de modelo é o último passo, um degrau de cada vez, medindo.
+- **Cadeia dependente se faz direto, sem delegar.** Orquestrador e trabalhadores só compensam com volume de peças independentes. Quando cada passo depende do anterior, ou o trabalho cabe num contexto só, quem já está com o contexto faz, com esforço menor.
+
+### Revezamento em vez de agente longo
+
+Uma frente grande continua uma frente só, com o mesmo escopo e a mesma ordem, mas roda em turnos de até umas 80 chamadas. Perto disso, o agente para e escreve uma nota de passagem curta: o que fez, o que falta, os arquivos e trechos que importam e o que já se descartou. A nota leva o mesmo item do plano, e o turno seguinte é um agente novo, de contexto limpo, que nasce dela. O tempo de relógio fica o mesmo e o custo cai perto da metade. Quem lembra o agente de revezar é o motor de orquestração, quando existe, porque aviso ao orquestrador não basta: na medição, poucos alarmes enviados a ele terminaram com o agente parado.
+
+### Medir por entrega
+
+A régua é a tarefa concluída, e não o token: o custo de levar um item do plano até o critério de pronto, contando turnos de revezamento e retrabalho, e olhando também a cauda (o décimo mais difícil), não só a média. Para isso, cada disparo registra o item do plano, o tipo, o modelo e o esforço pedidos e os finais, e a origem da escolha (tipo, plano, padrão, explícita com motivo, explícita sem motivo). O item do plano é a chave que junta a frente, os turnos dela e a correção que nasceu da bateria.
+
+Duas práticas de leitura completam as regras:
 - ler o trecho, não o arquivo: busca com contexto e leitura por faixa de linhas no lugar do arquivo inteiro;
 - um mapa curto por pasta de sistema (o que mora em cada arquivo, as entradas, os pontos de extensão), atualizado pela frente que mexeu ali, junto com o relatório.
 
