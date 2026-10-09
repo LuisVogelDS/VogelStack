@@ -1,6 +1,6 @@
 # Desenvolvimento de jogos com agentes
 
-Diretrizes permanentes para projetos de jogo em motor com editor pesado (Unity hoje, qualquer um que trave o projeto numa instância só). Nasceram na rodada 7 do Slime, da Cajuice Games, em 07/10/2026. Com cinco frentes de agentes dividindo uma única instância do Unity, cada frente passou de uma hora na fila, e a bateria de 28 testes pagou a abertura do projeto 28 vezes. Como em [[apresentacoes|Apresentações]], a stack descreve o método; a implementação de referência mora no projeto que a criou (§6).
+Diretrizes permanentes para projetos de jogo em motor com editor pesado (Unity hoje, qualquer um que trave o projeto numa instância só). Nasceram na rodada 7 do Slime, da Cajuice Games, em 07/10/2026. Com cinco frentes de agentes dividindo uma única instância do Unity, cada frente passou de uma hora na fila, e a bateria de 28 testes pagou a abertura do projeto 28 vezes. Como em [[apresentacoes|Apresentações]], a stack descreve o método; a implementação de referência mora no projeto que a criou (§7).
 
 Complementam a [[operacao-agentes|Operação de Agentes]], que já manda tirar do agente as execuções caras e deixar script e log persistentes.
 
@@ -44,7 +44,19 @@ O relatório da frente lista as regulagens que ela deixou no painel, para o dono
 
 Tempo de bateria, de build e de frente sai do log (horário de início e fim de cada passo), não de impressão. Na rodada 7 a estimativa dita foi de duas horas para a bateria e a build. O log mostrou 44 min e 3 min, e o que pesava de verdade era a fila dividida (§3), não os testes. Estimativa errada leva a otimizar o lugar errado.
 
-## 6. Implementação de referência
+## 6. O custo de tokens está no tamanho do agente
+
+Na rodada 11 do Slime, as transcrições das quatro frentes foram medidas (08/10/2026). Somaram uns 19 milhões de tokens equivalentes, contra 1,4 milhão do orquestrador. Dentro das frentes, a escrita de código direta foi 1% e o motor quase nada: abrir o Unity, rodar teste, ler log e olhar foto somaram uns 5%. O resto é o contexto do agente relido a cada chamada, que cresceu até 300 a 470 mil tokens. Por isso o custo de uma frente cresce mais ou menos com o quadrado do número de chamadas: a de 204 chamadas custou 7,3 milhões, e as de 104 a 115, de 3 a 5 milhões. Do que se vê nesse contexto, uns dois terços são arquivos lidos inteiros e resultados de busca.
+
+Daí as regras:
+- **Frente pequena e fechada, não frente grande.** Juntar entregas numa frente só economiza aberturas do motor (§1), mas encarece os tokens. A meta é de até umas 100 chamadas por agente; o que passar disso vira duas frentes, ou uma passagem de bastão, em que o agente escreve uma nota curta do que fez e do que falta e um agente novo, de contexto limpo, segue. A economia de motor vem de juntar os testes numa sessão, que o orquestrador pode fazer por várias frentes, e não de juntar as frentes.
+- **Ler o trecho, não o arquivo.** Busca com contexto e leitura por faixa de linhas no lugar do arquivo inteiro, e um mapa curto por pasta de sistema (o que mora em cada arquivo, as entradas, os pontos de extensão), que a frente atualiza junto com o relatório.
+- **O teste não é o problema.** Rodar e ler a bateria custa pouco; otimizar a saída dela rende pouco.
+- **Medir de novo depois de mudar**, com o mesmo medidor.
+
+O medidor é o `Ferramentas/medir_tokens.py` do Slime: lê as transcrições dos subagentes e reparte o custo entre releitura do contexto, leitura de arquivo, busca, log, imagem e motor.
+
+## 7. Implementação de referência
 
 No Slime (`github.com/cajuice/game-slime`), a ordem segue a das seções:
 
@@ -52,5 +64,6 @@ No Slime (`github.com/cajuice/game-slime`), a ordem segue a das seções:
 - **§2:** `Ferramentas/testar.py` (grupos por frente, `todos` para o fechamento).
 - **§3:** `Ferramentas/unity_batch.py` (a fila).
 - **§4:** `Assets/_Slime/Scripts/Nucleo/AjustesDev.cs` com `Scripts/UI/PainelDev.cs` (painel no F1).
+- **§6:** `Ferramentas/medir_tokens.py`.
 
 O contrato de uso está em `docs/arquitetura.md` do projeto.
