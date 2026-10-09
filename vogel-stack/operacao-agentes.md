@@ -145,7 +145,7 @@ Quem produziu uma entrega carrega os mesmos vieses que a produziram, e a autocr�
 
 ### Custo
 
-Frentes em paralelo multiplicam o gasto. O orçamento da [[operacao-agentes#2.1 Orçamento de tokens e alerta antecipado|§2.1]] é da orquestração inteira, não de cada frente: antes de disparar, dizer ao usuário quantas frentes e a ordem de grandeza do custo. O custo não barra a orquestração; o que não pode é o usuário ser surpreendido por ele.
+Frentes em paralelo multiplicam o gasto, e frente longa multiplica mais ainda: a escolha de modelo e o revezamento estão na [[operacao-agentes#2.3 Modelo por tarefa e revezamento de contexto|§2.3]]. O orçamento da [[operacao-agentes#2.1 Orçamento de tokens e alerta antecipado|§2.1]] é da orquestração inteira, não de cada frente: antes de disparar, dizer ao usuário quantas frentes e a ordem de grandeza do custo. O custo não barra a orquestração; o que não pode é o usuário ser surpreendido por ele.
 
 ## 2. Política de custo e uso de recursos
 
@@ -167,6 +167,30 @@ O custo de uma tarefa deve ser previsto, não descoberto no fim. Regras:
 - calibração de referência: tarefas bem escopadas (uma feature, um bug, um conjunto coerente de edições) custam tipicamente uma fração disso. Estouro muito acima da média quase sempre indica escopo grande demais **ou** atrito de ambiente (ver 2.2), não trabalho útil;
 - em orquestração com várias frentes ([[operacao-agentes#1.5 Orquestração: várias frentes em paralelo|§1.5]]), a estimativa é do conjunto. Tarefa paralelizada ultrapassa o limiar com facilidade, e o aviso existe para o usuário decidir sabendo, não para desestimular a divisão;
 - o usuário reduz custo declarando a barra de aceitação no próprio pedido (ex.: "build verde basta"), apontando arquivos/caminhos relevantes e fatiando entregas grandes.
+
+## 2.3 Modelo por tarefa e revezamento de contexto
+
+*Adotada em 08/10/2026, em observação: mede-se de novo depois de alguns dias de uso. Origem: a medição de 238 agentes de dois projetos de jogo ([[gamedev#6. O custo de tokens está no tamanho do agente|gamedev §6]]).*
+
+Num agente que trabalha por muitas chamadas, quase todo o gasto é o próprio contexto relido a cada chamada, e não o que ele escreve nem as ferramentas que roda. O contexto cresce com cada arquivo lido, cada busca e cada saída de comando, e o custo do agente cresce mais ou menos com o quadrado do número de chamadas. Na medição, os agentes acima de 100 chamadas eram um quarto do total e respondiam por 62% do gasto, e 96% do gasto tinha ido para o modelo mais caro. Daí duas regras, que valem para **toda delegação**: a do orquestrador às frentes, a de uma frente a um subagente dela e a de qualquer agente que dispare outro.
+
+**Modelo pela tarefa, não pelo hábito.** Quem delega escolhe o modelo de cada agente ao disparar:
+
+| Modelo | Para quê |
+|---|---|
+| O maior | Plano e contrato entre frentes; sistema difícil ou sem precedente no projeto; depuração que já falhou duas vezes; revisão de área sensível. |
+| O intermediário | Implementação com contrato pronto (uma feature, uma tela, um módulo que segue um padrão que o projeto já tem); escrever e ajustar teste; integração de peças já feitas. |
+| O menor | Trabalho mecânico: ler a saída de uma bateria e listar as falhas, atualizar registro (changelog, quadro), renomear e organizar arquivos, conferir uma lista pronta, buscas amplas que voltam como conclusão curta. |
+
+Na dúvida entre dois, começa pelo mais barato e sobe se a entrega voltar fraca. A troca fica registrada no relatório da frente, para a tabela ser recalibrada com caso real.
+
+**Revezamento em vez de agente longo.** Uma frente grande continua uma frente só, com o mesmo escopo e a mesma ordem, mas roda em turnos de até umas 80 chamadas. No fim do turno, o agente para e escreve uma nota de passagem curta: o que fez, o que falta, os arquivos e trechos que importam e o que já se descartou. O turno seguinte é um agente novo, que começa por essa nota, de contexto limpo. O tempo de relógio fica o mesmo e o custo cai perto da metade. Vale também para o subagente de um subagente: ninguém leva o contexto inteiro do começo ao fim de um trabalho longo.
+
+Duas práticas de leitura completam as duas regras:
+- ler o trecho, não o arquivo: busca com contexto e leitura por faixa de linhas no lugar do arquivo inteiro;
+- um mapa curto por pasta de sistema (o que mora em cada arquivo, as entradas, os pontos de extensão), atualizado pela frente que mexeu ali, junto com o relatório.
+
+Juntar trabalho para poupar recurso caro de máquina (uma sessão de motor, um build, uma bateria) é outra conta: junta-se a execução, numa sessão só, e não o contexto de quem escreve.
 
 ## 2.2 Resiliência a instabilidade de runtime
 
