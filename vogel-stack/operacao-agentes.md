@@ -151,6 +151,10 @@ Planejar em conjunto também serve para decidir, não só para executar. Numa pe
 
 Quem produziu uma entrega carrega os mesmos vieses que a produziram, e a autocrítica tende a aprovar. Para entrega que sai da máquina (publicação, deploy, texto para cliente, mudança em área sensível), a revisão fica com uma frente de contexto limpo, que recebe só o pedido original e o resultado. Checagem determinística (teste, lint, link checker) vem antes e continua valendo: a revisão independente pega o que o script não pega, não substitui o script.
 
+### Correção do dono vira regra no mesmo dia
+
+Quando o dono aponta um defeito numa revisão e a correção melhora a entrega, o aprendizado vai por escrito, na mesma sessão, para o documento que vale para todas as entregas daquele tipo (o ofício, os preceitos, o guia de estilo), com data, exemplo e porquê. Corrigir só a entrega da vez deixa o próximo agente repetir o erro, e o dono passa a revisar a mesma coisa duas vezes. Antes de fechar, pergunte de cada correção pedida: isso era do caso ou é do ofício? Se for do ofício, vira regra. Exemplo: em 09/10/2026, as correções do amendoim e do café da Cajuice (texto em caixa sobre o desenho, terra em linhas paralelas, fim sem consequência prática) consertaram os dois vídeos, mas só entraram no ofício de vídeo dois dias depois, quando o dono perguntou se tinham sido gravadas.
+
 ### Custo
 
 Frentes em paralelo multiplicam o gasto, e frente longa multiplica mais ainda: a escolha de modelo e esforço e o revezamento estão na [[operacao-agentes#2.3 Modelo, esforço e revezamento de contexto|§2.3]]. O orçamento da [[operacao-agentes#2.1 Orçamento de tokens e alerta antecipado|§2.1]] é da orquestração inteira, não de cada frente: antes de disparar, dizer ao usuário quantas frentes e a ordem de grandeza do custo. O custo não barra a orquestração; o que não pode é o usuário ser surpreendido por ele.
