@@ -18,6 +18,8 @@ Cada frente tem um **grupo de roteiros** que cobre o território dela, registrad
 
 Assim, cada frente deixa de pagar os testes das outras, e o fechamento ainda pega a interação entre elas. Roteiro novo entra no grupo da frente no mesmo commit em que nasce.
 
+Isso vale com poucas frentes. Já numa rodada com várias frentes e uma fila só (§3), as frentes não abrem o motor: fecham o código com a compilação fora do editor, deixam os roteiros no grupo delas e relatam o que esperam de cada um. O orquestrador monta e roda todos os grupos numa sessão só, no fim, e chama um corretor só para o que falhar ([[operacao-agentes#Recurso caro de máquina é do orquestrador|Operação de Agentes §2.3]]). Na rodada 12 do Slime, nove frentes na mesma fila esperavam de 15 a 20 minutos cada e quebravam a execução umas das outras.
+
 ## 3. A instância do motor é um recurso com fila
 
 O editor trava o projeto: dois processos no mesmo projeto se atropelam ou deixam o motor órfão. Daí três regras.

@@ -134,7 +134,8 @@ O plano é a peça que mais pesa. Para cada frente, o orquestrador escreve um co
 1. **entrega**: o que volta, numa frase;
 2. **território**: os arquivos, pastas ou recursos que só essa frente altera, e o que ela pode apenas ler;
 3. **formato de retorno**: conclusão, lista estruturada ou diff. Despejo de arquivo nunca;
-4. **critério de pronto**: como o orquestrador vai saber que a frente terminou bem.
+4. **critério de pronto**: como o orquestrador vai saber que a frente terminou bem;
+5. **orçamento**: o teto de turnos (em geral dois, e o segundo fecha sem pedir terceiro), quantas vezes cada teste roda (uma), quantas imagens a frente lê (poucas) e o que se corta primeiro se faltar fôlego. Vai no prompt do primeiro disparo, não depois que o gasto aparece.
 
 Frente que altera arquivos em território vizinho de outra trabalha isolada num worktree próprio ([[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]]). Frente que só lê não precisa de isolamento.
 
@@ -214,6 +215,8 @@ Brainstorming, orquestração e planejamento, que ficam com quem conversa com o 
 
 Uma frente grande continua uma frente só, com o mesmo escopo e a mesma ordem, mas roda em turnos de até umas 80 chamadas. Perto disso, o agente para e escreve uma nota de passagem curta: o que fez, o que falta, os arquivos e trechos que importam e o que já se descartou. A nota leva o mesmo item do plano, e o turno seguinte é um agente novo, de contexto limpo, que nasce dela. O tempo de relógio fica o mesmo e o custo cai perto da metade. Quem lembra o agente de revezar é o motor de orquestração, quando existe, porque aviso ao orquestrador não basta: na medição, poucos alarmes enviados a ele terminaram com o agente parado.
 
+O tipo vale por turno, e não pela frente inteira. O turno que só compila, testa e relata é trabalho de executor e desce para ele, mesmo quando a frente nasceu especialista, com o motivo na descrição (por exemplo, `[sonnet: turno 2 é compilar, testar e relatar]`).
+
 ### Diagnóstico por território, com reaproveitamento
 
 Na rodada 12 do Slime (11/10/2026), o diagnóstico foi disparado a cada onda de feedback, com um leitor por pedido. Os 8 leitores, todos no modelo menor, custaram 1,71 milhão de tokens equivalentes. Entre 37 e 49% disso foi releitura de contexto, e 17 dos 60 arquivos lidos passaram por mais de um agente: o arquivo do personagem foi lido quatro vezes, porque pedidos diferentes moravam nele. Já delegar a leitura funcionou, pois no contexto do orquestrador entrou só a conclusão de cada leitor, umas 40 linhas. Sendo assim:
@@ -229,7 +232,11 @@ Duas práticas de leitura completam as regras:
 - ler o trecho, não o arquivo: busca com contexto e leitura por faixa de linhas no lugar do arquivo inteiro;
 - um mapa curto por pasta de sistema (o que mora em cada arquivo, as entradas, os pontos de extensão), atualizado pela frente que mexeu ali, junto com o relatório.
 
-Juntar trabalho para poupar recurso caro de máquina (uma sessão de motor, um build, uma bateria) é outra conta: junta-se a execução, numa sessão só, e não o contexto de quem escreve.
+### Recurso caro de máquina é do orquestrador
+
+Juntar trabalho para poupar recurso caro de máquina (uma sessão de motor, um build, uma bateria) é outra conta: junta-se a execução, numa sessão só, e não o contexto de quem escreve. Por isso, quando várias frentes dividem um recurso desses, elas não o usam. Cada uma escreve o código e os testes, confere com a checagem barata (compilar fora do editor, lint, teste de unidade), deixa os testes registrados e entrega dizendo o que espera de cada um. O orquestrador roda tudo numa sessão só, no fim, e chama um corretor só para o que falhar. Essa instrução vai no prompt de disparo de cada frente.
+
+Na execução da rodada 12 do Slime (11/10/2026), nove frentes abriam o motor de jogo cada uma por si, numa fila única. Ficavam de 15 a 20 minutos esperando a vez, e as execuções esbarravam na compilação pela metade de outra frente: uma delas gastou a única execução que tinha num erro alheio. Em meia hora, os agentes somaram 10,2 milhões de tokens equivalentes, boa parte em espera e retrabalho.
 
 ## 2.2 Resiliência a instabilidade de runtime
 
