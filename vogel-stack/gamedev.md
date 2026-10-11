@@ -40,6 +40,8 @@ Agente não acerta feel por tentativa: forma, força, tempos de reação, alcanc
 
 O relatório da frente lista as regulagens que ela deixou no painel, para o dono saber o que julgar.
 
+O gosto também pesa antes de implementar. Quando o dono manda o feedback de uma rodada, o item que depende de gosto (o ícone de agarrar, a pose de luta, a sensação de um golpe) não é classificado como barato: entra no plano como pergunta de design, e o custo dos outros sai do diagnóstico no código. A ordem da rodada (coletar a lista inteira, diagnosticar por território de código e só então planejar) está na [[operacao-agentes#Coletar, diagnosticar e planejar, nessa ordem|Operação de Agentes §1.5]].
+
 ## 5. Medir antes de estimar
 
 Tempo de bateria, de build e de frente sai do log (horário de início e fim de cada passo), não de impressão. Na rodada 7 a estimativa dita foi de duas horas para a bateria e a build. O log mostrou 44 min e 3 min, e o que pesava de verdade era a fila dividida (§3), não os testes. Estimativa errada leva a otimizar o lugar errado.

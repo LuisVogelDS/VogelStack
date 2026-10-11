@@ -119,6 +119,14 @@ Não compensa quando:
 - as frentes tocariam os mesmos arquivos o tempo todo;
 - cada passo depende do anterior. Isso é sequência, não paralelo.
 
+### Coletar, diagnosticar e planejar, nessa ordem
+
+*Correções do usuário na rodada 12 do Slime, 11/10/2026.*
+
+Quando o usuário manda uma lista de pedidos ou de feedback em várias mensagens, a sessão está em **coleta**. Nessa fase, o agente registra as palavras do usuário num documento do projeto (o brainstorm, por exemplo), commita e espera. A avaliação começa quando o usuário disser que a lista acabou e pedir para avaliar. Na dúvida se ela acabou, o agente pergunta. Diagnosticar cada onda assim que ela chega reparte o trabalho pela ordem em que os pedidos vieram, e não pelo código que eles tocam, e daí vem a releitura descrita na [[operacao-agentes#Diagnóstico por território, com reaproveitamento|§2.3]].
+
+O custo de cada item sai do diagnóstico no código, nunca de palpite. Antes de planejar não há "barato", "médio" ou "caro": há o que ainda não se olhou. O plano mostra o custo de cada item já medido, justificado pelo que o código tem ou não tem (no Slime, os graus foram ajuste, ligação, sistema e desenho). Item que depende de gosto (que ícone, que sensação, que forma) não é barato nem caro: é uma pergunta de design ao dono, e entra no plano assim. Planejar tudo de uma vez pode valer a pena mesmo quando implementar tudo não vale, porque o plano é o que deixa o dono escolher sabendo.
+
 ### Planejar junto, antes do disparo
 
 O plano é a peça que mais pesa. Para cada frente, o orquestrador escreve um contrato curto:
@@ -201,6 +209,13 @@ Brainstorming, orquestração e planejamento, que ficam com quem conversa com o 
 ### Revezamento em vez de agente longo
 
 Uma frente grande continua uma frente só, com o mesmo escopo e a mesma ordem, mas roda em turnos de até umas 80 chamadas. Perto disso, o agente para e escreve uma nota de passagem curta: o que fez, o que falta, os arquivos e trechos que importam e o que já se descartou. A nota leva o mesmo item do plano, e o turno seguinte é um agente novo, de contexto limpo, que nasce dela. O tempo de relógio fica o mesmo e o custo cai perto da metade. Quem lembra o agente de revezar é o motor de orquestração, quando existe, porque aviso ao orquestrador não basta: na medição, poucos alarmes enviados a ele terminaram com o agente parado.
+
+### Diagnóstico por território, com reaproveitamento
+
+Na rodada 12 do Slime (11/10/2026), o diagnóstico foi disparado a cada onda de feedback, com um leitor por pedido. Os 8 leitores, todos no modelo menor, custaram 1,71 milhão de tokens equivalentes. Entre 37 e 49% disso foi releitura de contexto, e 17 dos 60 arquivos lidos passaram por mais de um agente: o arquivo do personagem foi lido quatro vezes, porque pedidos diferentes moravam nele. Já delegar a leitura funcionou, pois no contexto do orquestrador entrou só a conclusão de cada leitor, umas 40 linhas. Sendo assim:
+- o diagnóstico sai numa leva só, depois da coleta ([[operacao-agentes#Coletar, diagnosticar e planejar, nessa ordem|§1.5]]), com um leitor por **território de código** e não por pedido, para cada arquivo ser lido por um agente só;
+- pergunta nova sobre um território já lido vai por mensagem ao agente que o leu, que já pagou o aquecimento, em vez de um agente novo;
+- a continuidade para quem implementa vem do plano escrito com arquivo:linha, e não do agente que leu.
 
 ### Medir por entrega
 
