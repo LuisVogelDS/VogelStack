@@ -211,6 +211,18 @@ Brainstorming, orquestração e planejamento, que ficam com quem conversa com o 
 - **Esforço antes de modelo.** Para baratear um tipo, primeiro se baixa o esforço no modelo atual; trocar de modelo é o último passo, um degrau de cada vez, medindo.
 - **Cadeia dependente se faz direto, sem delegar.** Orquestrador e trabalhadores só compensam com volume de peças independentes. Quando cada passo depende do anterior, ou o trabalho cabe num contexto só, quem já está com o contexto faz, com esforço menor.
 
+### O orquestrador orquestra
+
+*Do relatório da sessão do Fang You Very Much e do Slime, 13/10/2026.*
+
+"Cabe num contexto só" não tem medida, e o orquestrador, no modelo maior e com o contexto cheio, sempre acha que cabe. No Fang You Very Much, a primeira fase inteira (visual, animação, ferramenta de build) saiu da conversa principal em umas 150 chamadas, cada uma relendo um contexto pesado de imagens. A medida passa a ser esta: o orquestrador faz direto só o que fecha em umas **15 chamadas** e não passa por recurso caro de máquina. Acima disso, vai para um tipo. O motor de orquestração, quando existe, avisa quando a conversa principal passa de 15 edições de código num turno sem delegar. Com isso:
+- correção depois da execução vai para o corretor, com a evidência (foto, log, saída do teste), e as falhas da mesma rodada vão juntas para ele. A exceção é o ajuste trivial de integração, de poucas linhas e sem lógica;
+- falha do próprio teste também é do corretor;
+- ferramenta de verificação (sonda, medição, roteiro de foto) é trabalho de executor e, numa frente, é escrita por ela no mesmo turno da feature;
+- se o corretor falhou duas vezes, a segunda já com a evidência nova, sobe-se para o especialista, sem tentativa do orquestrador no meio;
+- o prompt de quem corrige traz sintoma e evidência, e a hipótese de quem delega vai marcada como hipótese. No Fang, um "é o atlas" escrito como fato levou o corretor a procurar no lugar errado;
+- inspecionar muitas imagens (folhas de quadros, catálogos, fotos de bateria) vai para um leitor, que devolve a conclusão, e não para o contexto do orquestrador.
+
 ### Revezamento em vez de agente longo
 
 Uma frente grande continua uma frente só, com o mesmo escopo e a mesma ordem, mas roda em turnos de até umas 80 chamadas. Perto disso, o agente para e escreve uma nota de passagem curta: o que fez, o que falta, os arquivos e trechos que importam e o que já se descartou. A nota leva o mesmo item do plano, e o turno seguinte é um agente novo, de contexto limpo, que nasce dela. O tempo de relógio fica o mesmo e o custo cai perto da metade. Quem lembra o agente de revezar é o motor de orquestração, quando existe, porque aviso ao orquestrador não basta: na medição, poucos alarmes enviados a ele terminaram com o agente parado.

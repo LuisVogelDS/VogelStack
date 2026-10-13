@@ -61,6 +61,17 @@ A medição foi estendida depois a 238 agentes do Slime e do GobbleGoblin, com o
 
 O medidor é o `Ferramentas/medir_tokens.py` do Slime: lê as transcrições dos subagentes e reparte o custo entre releitura do contexto, leitura de arquivo, busca, log, imagem e motor.
 
+### A rodada, de ponta a ponta
+
+Consolidada em 13/10/2026 pelos orquestradores do Slime e do Fang You Very Much:
+
+1. O feedback vai literal para um documento. O diagnóstico começa quando o dono fecha a lista, com um leitor por território, e pergunta nova sobre território já lido volta ao mesmo leitor.
+2. O orquestrador escreve o plano da rodada, com um arquiteto quando a parte é grande, e faz o passo 0: os contratos mínimos compartilhados (evento, enum, assinatura, grupo de roteiros) para as frentes não colidirem.
+3. As frentes são executores sem motor: compilam fora do editor e escrevem, no mesmo turno, os roteiros de teste ou de foto da própria feature.
+4. O orquestrador roda uma sessão do motor por rodada, em segundo plano e sem `timeout` em volta (§3), e lê o relatório e as fotos.
+5. Cada falha vai a um corretor com a evidência, sem motor. Depois de duas tentativas de corretor falhadas, sobe-se para o especialista, que pode usar a fila. Seguem a sessão nova só com o que falhou, a build e o commit.
+6. O orquestrador não escreve código de jogo, a não ser o ajuste trivial de integração (umas 3 linhas, sem lógica). A regra geral está na [[operacao-agentes#O orquestrador orquestra|Operação de Agentes §2.3]].
+
 ## 7. Implementação de referência
 
 No Slime (`github.com/cajuice/game-slime`), a ordem segue a das seções:
