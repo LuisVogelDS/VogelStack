@@ -221,7 +221,7 @@ Brainstorming, orquestração e planejamento, que ficam com quem conversa com o 
 - ferramenta de verificação (sonda, medição, roteiro de foto) é trabalho de executor e, numa frente, é escrita por ela no mesmo turno da feature;
 - se o corretor falhou duas vezes, a segunda já com a evidência nova, sobe-se para o especialista, sem tentativa do orquestrador no meio;
 - o prompt de quem corrige traz sintoma e evidência, e a hipótese de quem delega vai marcada como hipótese. No Fang, um "é o atlas" escrito como fato levou o corretor a procurar no lugar errado;
-- inspecionar muitas imagens (folhas de quadros, catálogos, fotos de bateria) vai para um leitor, que devolve a conclusão, e não para o contexto do orquestrador.
+- inspecionar muitas imagens (folhas de quadros, catálogos, fotos de bateria) vai para um leitor, que devolve a conclusão, e não para o contexto do orquestrador. O orquestrador lê só as duas ou três fotos por entrega que vão ao dono, porque não mostra o que não viu, e confere por amostra as que os agentes já aprovaram. No Fang, foram 89 imagens lidas em um dia, muitas já aprovadas, e o "vi:" dos agentes deixou passar foto quebrada mais de uma vez: a amostra existe por isso, e não a releitura de tudo.
 
 ### Revezamento em vez de agente longo
 
