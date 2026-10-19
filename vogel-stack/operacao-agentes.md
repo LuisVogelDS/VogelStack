@@ -183,7 +183,7 @@ O custo de uma tarefa deve ser previsto, não descoberto no fim. Regras:
 
 ## 2.3 Modelo, esforço e revezamento de contexto
 
-*Adotada em 09/10/2026 como hipótese em medição; os números são revistos com o medidor antes de virar regra firme. Origem: a medição de 240 agentes de dois projetos de jogo ([[gamedev#6. O custo de tokens está no tamanho do agente|gamedev §6]]) e o guia de custo do fornecedor do modelo.*
+*Adotada em 09/10/2026 como hipótese em medição; os números são revistos com o medidor antes de virar regra firme. Origem: a medição de 240 agentes de dois projetos de jogo ([[gamedev#6. O custo de tokens está no tamanho do agente|gamedev §6]]) e o guia de custo do fornecedor do modelo. De 19/10 a 02/11/2026, nenhuma regra nova entra nesta seção, para que a medição leia o efeito do que já entrou: sete mudanças numa semana deixaram de ser atribuíveis uma a uma.*
 
 Num agente que trabalha por muitas chamadas, quase todo o gasto é o próprio contexto relido a cada chamada, e não o que ele escreve nem as ferramentas que roda. O contexto cresce com cada arquivo lido, cada busca e cada saída de comando, e o custo do agente cresce mais ou menos com o quadrado do número de chamadas. Na medição, os agentes acima de 100 chamadas respondiam por 62% do gasto, e 95% tinha ido para o modelo maior, quase sempre por herança de quem delegou, e não por escolha. As regras abaixo valem para **toda delegação**: do orquestrador às frentes, de uma frente a um subagente dela e de qualquer agente que dispare outro.
 
@@ -229,6 +229,8 @@ Uma frente grande continua uma frente só, com o mesmo escopo e a mesma ordem, m
 
 O tipo vale por turno, e não pela frente inteira. O turno que só compila, testa e relata é trabalho de executor e desce para ele, mesmo quando a frente nasceu especialista, com o motivo na descrição (por exemplo, `[sonnet: turno 2 é compilar, testar e relatar]`).
 
+*Da medição de 15 e 16/10/2026.* A conversa principal também reveza. Depois que o revezamento dos subagentes entrou, o gasto passou a se concentrar no contexto do orquestrador: as chamadas acima de 200 mil tokens de contexto foram 35% das chamadas e 57% do gasto, a quase o triplo do preço por chamada das que ficavam abaixo de 100 mil. Assim, quando o motor de orquestração avisa que o contexto passou do limite, o orquestrador fecha a entrega em curso, escreve a nota de passagem (o que foi feito, o que falta, os arquivos e trechos, as decisões e os descartes, os agentes vivos) e propõe ao usuário seguir numa conversa nova a partir dela.
+
 ### Diagnóstico por território, com reaproveitamento
 
 Na rodada 12 do Slime (11/10/2026), o diagnóstico foi disparado a cada onda de feedback, com um leitor por pedido. Os 8 leitores, todos no modelo menor, custaram 1,71 milhão de tokens equivalentes. Entre 37 e 49% disso foi releitura de contexto, e 17 dos 60 arquivos lidos passaram por mais de um agente: o arquivo do personagem foi lido quatro vezes, porque pedidos diferentes moravam nele. Já delegar a leitura funcionou, pois no contexto do orquestrador entrou só a conclusão de cada leitor, umas 40 linhas. Sendo assim:
@@ -249,6 +251,22 @@ Duas práticas de leitura completam as regras:
 Juntar trabalho para poupar recurso caro de máquina (uma sessão de motor, um build, uma bateria) é outra conta: junta-se a execução, numa sessão só, e não o contexto de quem escreve. Por isso, quando várias frentes dividem um recurso desses, elas não o usam. Cada uma escreve o código e os testes, confere com a checagem barata (compilar fora do editor, lint, teste de unidade), deixa os testes registrados e entrega dizendo o que espera de cada um. O orquestrador roda tudo numa sessão só, no fim, e chama um corretor só para o que falhar. Essa instrução vai no prompt de disparo de cada frente.
 
 Na execução da rodada 12 do Slime (11/10/2026), nove frentes abriam o motor de jogo cada uma por si, numa fila única. Ficavam de 15 a 20 minutos esperando a vez, e as execuções esbarravam na compilação pela metade de outra frente: uma delas gastou a única execução que tinha num erro alheio. Em meia hora, os agentes somaram 10,2 milhões de tokens equivalentes, boa parte em espera e retrabalho.
+
+### Diretriz curta
+
+*Desde 19/10/2026, é este trecho, entre os marcadores, que o motor de orquestração injeta em todo agente, e o próprio motor acrescenta os limiares e os nomes de ferramenta a partir do código dele. Antes havia uma cópia à parte, que se afastou desta seção em menos de uma semana. O trecho resume a §1.5 e a §2.3: quando divergir do corpo delas, vale o corpo, e o trecho se corrige.*
+
+<!-- diretriz-curta:inicio -->
+**Proporção.** O tamanho do trabalho segue o tamanho do pedido. Pedido simples se entrega simples: faça o que foi pedido, mostre o resultado e liste em poucas linhas o que o usuário deve conferir. Teste novo, medição, bateria de regressão ou refatoração vizinha só entram a pedido, ou quando o risco é real (entrega que sai da máquina, banco, migração, motor), e aí diga antes por quê. Nesse caso, a checagem determinística (teste, lint) vem primeiro, e a revisão fica com um agente de contexto limpo, que recebe só o pedido e o resultado. Contexto também é orçamento: assunto novo, que não depende do que a conversa já sabe, vai melhor numa conversa nova.
+
+**Plano e disparo.** Quem planeja decide, e quem executa trabalha com menos esforço do que quem planejou. Cada item delegado leva no plano o tipo de trabalho (executor, corretor, leitor, mecânico, especialista, arquiteto, validador), ou o modelo e o esforço, e o disparo segue o plano. Brainstorming, orquestração e planejamento ficam com o modelo maior, em esforço alto. O disparo leva escopo fechado: o que fazer, o que não fazer e quando parar. Quem discordar do plano no disparo põe o motivo na descrição, sem reavaliar o trabalho do planejador, e só se sobe um degrau por sinal objetivo: teste ou bateria reprovados, build quebrado, entrega recusada pelo usuário.
+
+**O orquestrador orquestra.** Trabalho em cadeia dependente, ou que cabe num contexto só, sai mais barato feito direto, e delegar compensa quando há peças independentes. A medida de "cabe" é umas 15 chamadas, sem recurso caro de máquina; acima disso, o trabalho vai para um tipo. Correção depois de foto, teste ou bateria vai para o corretor, com a evidência e com todas as falhas da rodada juntas. No prompt de quem corrige, a hipótese vai marcada como hipótese, e o corretor que falhou duas vezes sobe para especialista, sem tentativa do orquestrador no meio. Muitas imagens se inspecionam por um leitor: o orquestrador lê só as duas ou três fotos que vão ao usuário e confere por amostra as que os agentes aprovaram.
+
+**Revezamento.** Uma frente grande roda em turnos. Perto do limite de chamadas, o agente escreve a nota de passagem (o que fez, o que falta, os arquivos e trechos que importam, o que já se descartou), e o turno seguinte nasce dela, num agente novo com o mesmo item do plano. O tipo vale por turno, então o turno que só compila, testa e relata desce para executor. O orçamento (teto de turnos, teste uma vez, poucas imagens, o que cortar primeiro) vai no prompt do primeiro disparo. Já quando várias frentes dividem um recurso caro de máquina (motor de jogo, build, bateria), elas entregam com a checagem barata, e o orquestrador roda tudo numa sessão só. A conversa principal também reveza: quando o motor avisa que o contexto passou do limite, ela fecha a entrega em curso, escreve a nota e propõe ao usuário seguir numa conversa nova a partir dela.
+
+**Leitura e feedback.** Leia o trecho, não o arquivo. Enquanto o usuário ainda manda pontos, só registre; o diagnóstico começa quando ele disser que a lista acabou, e na dúvida pergunte. Aí ele sai numa leva só, com um leitor por território de código. Pergunta nova sobre território já lido vai ao agente que o leu, e quem implementa herda o plano com arquivo:linha. O custo de cada item sai desse diagnóstico, nunca de palpite, e item que depende de gosto vira pergunta de design ao dono.
+<!-- diretriz-curta:fim -->
 
 ## 2.2 Resiliência a instabilidade de runtime
 
