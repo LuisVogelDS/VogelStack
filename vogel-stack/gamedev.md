@@ -78,8 +78,15 @@ No Slime (`github.com/cajuice/game-slime`), a ordem segue a das seções:
 
 - **§1:** `Assets/_Slime/Editor/TestePlay.cs` (executor com `-roteiro a,b,c`).
 - **§2:** `Ferramentas/testar.py` (grupos por frente, `todos` para o fechamento).
-- **§3:** `Ferramentas/unity_batch.py` (a fila).
+- **§3:** `Ferramentas/unity_batch.py` (a fila; a versão canônica está no VogelStack, §8).
 - **§4:** `Assets/_Slime/Scripts/Nucleo/AjustesDev.cs` com `Scripts/UI/PainelDev.cs` (painel no F1).
-- **§6:** `Ferramentas/medir_tokens.py`.
+- **§6:** `Ferramentas/medir_tokens.py` (também canônico no VogelStack, §8).
 
 O contrato de uso está em `docs/arquitetura.md` do projeto.
+
+## 8. Ferramentas e skills da stack
+
+O que nasceu nos jogos e se repetia em várias pastas tem agora uma versão só, neste repositório:
+
+- **Ferramentas** em `ferramentas/` (ver o `README.md` de lá): a fila do Unity (§3), a compilação fora do editor (§2 e §6) e o medidor de tokens (§6). Cada jogo recebe uma cópia gerada, com cabeçalho "edite lá", por `scripts/sincronizar-ferramentas.py` (mapa em `ferramentas/manifesto.json`), e guarda o que é próprio dele em `Ferramentas/unity.json`. Os repos continuam autocontidos, mas o bug se corrige uma vez só.
+- **Skills** do plugin `vogel-stack`: `importar-asset-terceiro` (licença na `LICENCAS.md`, extração, `ORIGENS.md`), `build-entrega` (build pela fila, atalho, zip para colega, `docs/builds.md`) e `verificar-captura` (grade das capturas e resumo dos relatórios, a forma barata de ler fotos de que a §6 fala). A `orquestrar-frente` traz o bloco fixo de brief para frente em repo Unity (`brief-repo-unity.md`), que resume as regras das §2, §3 e §6 para o prompt de disparo.

@@ -28,6 +28,8 @@ Não divida quando a tarefa cabe num contexto só, as frentes tocam os mesmos ar
 
 Frente que altera território vizinho trabalha num worktree próprio; frente que só lê não precisa. Frentes que dividem recurso caro (motor de jogo, build, bateria) não o usam: escrevem código e testes, conferem com checagem barata e entregam. O orquestrador roda tudo numa sessão só e chama o corretor apenas para o que falhar.
 
+Frente em repo Unity: o prompt de disparo começa pelo bloco fixo de `${CLAUDE_SKILL_DIR}/brief-repo-unity.md` (repo e versão, leitura obrigatória, regra da fila, git, formato do relatório); o contrato acima vem depois dele.
+
 ## 4. Tipo, modelo e esforço
 
 Os tipos de subagente (executor, corretor, leitor, mecânico, especialista, arquiteto, validador) têm definição única no HarpyNest (`painel/motor/motor.py`, `TIPOS`, que gera `~/.claude/agents`). Escolha o tipo pelo trabalho e não copie a tabela.

@@ -1,0 +1,44 @@
+{
+  "$comentario": "Manifesto das ferramentas canônicas do VogelStack e de onde cada uma é copiada. Leitor: scripts/sincronizar-ferramentas.py. Para ferramenta nova: criar ferramentas/<pasta>/, acrescentar um bloco em 'ferramentas' (origem, arquivos, destino, repos) e rodar o script com --dry-run. 'repos' aceita nome de repo, nome de grupo (de 'grupos') ou {\"repo\": nome, \"destino\": pasta} para trocar a pasta naquele repo. Caminhos usam ~ (pasta do usuário), pois o Luis alterna entre dois notebooks; repo que não existe na máquina é pulado. 'config.gerador' cria o arquivo de configuração por repo na primeira vez, a partir da versão antiga da ferramenta.",
+  "versao": 1,
+  "repos": {
+    "slime": "~/Documents/Cajuice/games/slime",
+    "slime-r24g": "~/Documents/Cajuice/games/slime-r24g",
+    "slime-r25": "~/Documents/Cajuice/games/slime-r25",
+    "slime-r29fogo": "~/Documents/Cajuice/games/slime-r29fogo",
+    "_build-slime": "~/Documents/Cajuice/games/_build-slime",
+    "galinha": "~/Documents/Cajuice/games/galinha",
+    "galinha-controle": "~/Documents/Cajuice/games/galinha-controle",
+    "galinha-corpo": "~/Documents/Cajuice/games/galinha-corpo",
+    "galinha-jogo": "~/Documents/Cajuice/games/galinha-jogo",
+    "galinha-mundo": "~/Documents/Cajuice/games/galinha-mundo",
+    "galinha-natureza": "~/Documents/Cajuice/games/galinha-natureza",
+    "galinha-rede": "~/Documents/Cajuice/games/galinha-rede",
+    "nuvem": "~/Documents/Cajuice/games/nuvem",
+    "fang-you-very-much": "~/Documents/Cajuice/games/fang-you-very-much",
+    "duct-tape": "~/Documents/Cajuice/games/duct-tape",
+    "gobblegoblin": "~/Documents/GameDev/GobbleGoblin"
+  },
+  "grupos": {
+    "slime-todos": ["slime", "slime-r24g", "slime-r25", "slime-r29fogo", "_build-slime"],
+    "galinha-todos": ["galinha", "galinha-controle", "galinha-corpo", "galinha-jogo", "galinha-mundo", "galinha-natureza", "galinha-rede"],
+    "unity-todos": ["slime", "slime-r24g", "slime-r25", "slime-r29fogo", "_build-slime", "galinha", "galinha-controle", "galinha-corpo", "galinha-jogo", "galinha-mundo", "galinha-natureza", "galinha-rede", "nuvem", "fang-you-very-much", "duct-tape", "gobblegoblin"]
+  },
+  "ferramentas": {
+    "unity": {
+      "descricao": "Fila do Unity em batch (unity_batch.py), compilação fora do editor (compilar_fora.py) e a base comum que lê Ferramentas/unity.json.",
+      "origem": "ferramentas/unity",
+      "arquivos": ["unity_comum.py", "unity_batch.py", "compilar_fora.py"],
+      "destino": "Ferramentas",
+      "config": {"arquivo": "Ferramentas/unity.json", "gerador": "unity"},
+      "repos": ["unity-todos"]
+    },
+    "medicao": {
+      "descricao": "Medidor de tokens dos subagentes (medir_tokens.py). Só nos repos que já o tinham.",
+      "origem": "ferramentas/medicao",
+      "arquivos": ["medir_tokens.py"],
+      "destino": "Ferramentas",
+      "repos": ["slime", "slime-r24g", "slime-r25", "slime-r29fogo", "galinha", "galinha-controle", "galinha-corpo", "galinha-jogo", "galinha-mundo", "galinha-natureza", "galinha-rede", "nuvem"]
+    }
+  }
+}
