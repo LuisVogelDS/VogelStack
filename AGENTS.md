@@ -41,4 +41,4 @@ Regras de operação aqui:
 
 ## Procedimentos de agente
 
-Os procedimentos operacionais da stack são skills em `skills/` (plugin `vogel-stack`; instalação em [[quickstart]]): `antes-de-editar` (fetch, upstream, outro agente no clone), `orquestrar-frente` (contrato de frente, teto de turnos, critério de pronto, plano, executor, validador, corretor) e `revezar-turno` (nota de passagem). A leitura humana e o porquê de cada regra estão em [[vogel-stack/operacao-agentes|Operação de Agentes]].
+Os procedimentos operacionais da stack são skills em `skills/` (plugin `vogel-stack`; instalação em [[quickstart]]): `antes-de-editar` (fetch, upstream, outro agente no clone), `orquestrar-frente` (contrato de frente, teto de turnos, critério de pronto, plano, executor, validador, corretor) e `revezar-turno` (nota de passagem). A leitura humana e o porquê de cada regra estão em [[vogel-stack/operacao-agentes|Operação de Agentes]]. Falha repetida vira melhoria do sistema pela skill `registrar-licao`, que escolhe o mecanismo por [[vogel-stack/mecanismos|Qual mecanismo usar]].
