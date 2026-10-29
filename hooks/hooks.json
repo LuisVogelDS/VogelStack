@@ -6,6 +6,30 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-processo.py\"",
+            "if": "Bash(*kill*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo se o alvo e o HarpyNest..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-processo.py\"",
+            "if": "Bash(*Stop-Process*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo se o alvo e o HarpyNest..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-processo.py\"",
+            "if": "Bash(*spps*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo se o alvo e o HarpyNest..."
+          },
+          {
+            "type": "command",
             "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-git.py\"",
             "if": "Bash(*git*)",
             "timeout": 10,
@@ -133,6 +157,18 @@
             "timeout": 10,
             "onFailure": "block",
             "statusMessage": "Conferindo texto publico..."
+          }
+        ]
+      },
+      {
+        "matcher": "PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-processo.py\"",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo se o alvo e o HarpyNest..."
           }
         ]
       }
