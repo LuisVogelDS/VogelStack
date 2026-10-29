@@ -7,7 +7,8 @@ Em 29/10/2026 um agente do DeVirada rodou `taskkill //PID 23016 //F` achando que
 python.exe de 233 MB era a subida dele. Era o motor do HarpyNest: as sessoes de todos
 os projetos cairam e as tarefas de fundo se perderam.
 
-O motor anota em ~/.harpynest/protegidos.json o PID dele e o do app (harpynest.exe).
+O motor anota em ~/.harpynest/protegidos.json o PID dele e os dos pais (o lancador
+do python do venv e o harpynest.exe).
 
 Regras:
   1. taskkill / Stop-Process / kill / pkill / killall / spps com um PID protegido
@@ -73,17 +74,22 @@ def protegidos():
             d = json.load(fh)
     except Exception:
         return {}
+    alvos = [(d.get("motor"), "o motor do HarpyNest")]
+    # os pais do motor: o lancador do python do venv e o harpynest.exe
+    alvos += [(p, "o lancador do motor do HarpyNest") for p in (d.get("pais") or [])]
+    if d.get("app"):
+        alvos.append((d.get("app"), "o app HarpyNest"))
     out = {}
-    for chave, rotulo, nomes in (("motor", "o motor do HarpyNest", PYTHONS), ("app", "o app HarpyNest", {"harpynest"})):
+    for bruto, rotulo in alvos:
         try:
-            pid = int(d.get(chave))
+            pid = int(bruto)
         except (TypeError, ValueError):
             continue
         img = imagem_do_pid(pid)
         if img == "":
             continue
-        if img is None or img in nomes:
-            out[pid] = rotulo
+        if img is None or img in PYTHONS or img.startswith("harpynest"):
+            out[pid] = "o app HarpyNest" if img and img.startswith("harpynest") else rotulo
     return out
 
 

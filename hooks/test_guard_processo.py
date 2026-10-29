@@ -26,7 +26,7 @@ def main():
         d = tempfile.mkdtemp()
         arq = os.path.join(d, "protegidos.json")
         with open(arq, "w", encoding="utf-8") as fh:
-            json.dump({"motor": motor.pid, "app": 4999999}, fh)
+            json.dump({"motor": motor.pid, "pais": [os.getpid(), 4999999]}, fh)
         vazio = os.path.join(d, "nao-existe.json")
         m = motor.pid
         casos = [
@@ -46,6 +46,7 @@ def main():
             ("taskkill /IM python.exe /F", vazio, "Bash", "allow"),     # motor fora: python por nome passa
             ("taskkill /PID 4999999 /F", arq, "Bash", "allow"),          # PID do app que nao existe mais
             ("taskkill /PID %d /F" % m, vazio, "Bash", "allow"),         # sem arquivo, nada protegido
+            ("taskkill /PID %d /F" % os.getpid(), arq, "Bash", "deny"),   # o pai (lancador) tambem
             ("git status", arq, "Bash", "allow"),
         ]
         for cmd, a, ferr, esperado in casos:
