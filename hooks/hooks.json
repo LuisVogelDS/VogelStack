@@ -11,6 +11,128 @@
             "timeout": 10,
             "onFailure": "block",
             "statusMessage": "Conferindo regras de git..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho fila",
+            "if": "Bash(*unity_batch*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regras da fila do Unity..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho exe",
+            "if": "Bash(*nity.exe*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regras do Unity..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho kill",
+            "if": "Bash(*kill*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regras do Unity..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho stop-process",
+            "if": "Bash(*Stop-Process*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regras do Unity..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho commit",
+            "if": "Bash(*git*commit*)",
+            "timeout": 15,
+            "onFailure": "block",
+            "statusMessage": "Conferindo ORIGENS.md dos assets..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho subir",
+            "if": "Bash(*subir.py*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regra de publicacao..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho drive",
+            "if": "Bash(*drive.py*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regra de publicacao..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho upload",
+            "if": "Bash(*-upload*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regra de publicacao..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho voz",
+            "if": "Bash(*voz.py*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo custo da narracao..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho elevenlabs",
+            "if": "Bash(*elevenlabs*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo custo da narracao..."
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho texto-write-canais",
+            "if": "Write(**/canais/**)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo texto publico..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho texto-write-prontos",
+            "if": "Write(**/prontos/**)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo texto publico..."
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho texto-edit-canais",
+            "if": "Edit(**/canais/**)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo texto publico..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-conteudo.py\" --gatilho texto-edit-prontos",
+            "if": "Edit(**/prontos/**)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo texto publico..."
           }
         ]
       }
