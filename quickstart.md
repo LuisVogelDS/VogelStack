@@ -153,6 +153,19 @@ Feito isso, confirme que os wikilinks continuam apontando para arquivos reais:
 pwsh ./scripts/check-wikilinks.ps1
 ```
 
+### Instalar as skills em todos os projetos
+
+Os procedimentos de agente da stack (`antes-de-editar`, `orquestrar-frente`, `revezar-turno`) são skills em `skills/`, empacotadas como o plugin `vogel-stack` com um marketplace local (`.claude-plugin/marketplace.json`, `source: "./"`). Instalado em escopo de usuário, o plugin vale em todos os repositórios da máquina, sem submódulo e sem cópia. Em cada notebook, uma vez, com o caminho do clone:
+
+```powershell
+claude plugin validate "C:\caminho\para\VogelStack"
+claude plugin marketplace add "C:\caminho\para\VogelStack"
+claude plugin install vogel-stack@vogel-stack-local
+claude plugin list
+```
+
+As skills aparecem como `/vogel-stack:antes-de-editar`, `/vogel-stack:orquestrar-frente` e `/vogel-stack:revezar-turno`, e o Claude também as carrega sozinho pela descrição. Como o marketplace aponta para uma pasta local, a edição de uma skill vale na próxima sessão ou em `/reload-plugins`; depois de um `git pull` no clone, nada mais a fazer. Para remover: `claude plugin marketplace remove vogel-stack-local`. Para testar sem instalar, `claude --plugin-dir "C:\caminho\para\VogelStack"`. O `claude plugin validate` acusa só o aviso de falta de `version`, que é intencional: sem versão, cada commit conta como atualização.
+
 ### Quadro de trabalho
 
 Projetos da stack mantêm um `_QUADRO.md` (backlog vivo, formato padronizado) validado por `scripts/check-quadro.ps1`. Ver [[vogel-stack/templates|Templates de Documentação]].

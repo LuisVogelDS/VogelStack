@@ -21,6 +21,8 @@ Esse fluxo é o padrão quando a etapa for:
 
 ## 1.1 Checklist antes de começar uma alteração
 
+*Procedimento em skill: `antes-de-editar`. O texto abaixo é o porquê.*
+
 A [[operacao-agentes#8. Checklist antes de concluir uma alteração|§8]] valida a **saída** de uma alteração. Ela não protege contra o caso inverso: a alteração é impecável, mas o **ponto de partida** estava errado. Trabalho correto sobre base velha sobrescreve trabalho novo — e passa em todo teste de saída, porque nada nele está errado.
 
 Em projeto tocado de mais de uma máquina (ou por mais de um agente), o estado local **não sabe** o que foi publicado de outro lugar até alguém perguntar ao remoto. E o Git **não avisa por conta própria**: `git status` só reporta `behind` quando a branch tem upstream configurado. Sem upstream ele diz `working tree clean` — que se lê como "estou em dia", mas significa apenas "não modifiquei nada". A falha é **silenciosa**, contra o [[principios#3. Clareza operacional é tão importante quanto correção técnica|princípio nº 3]] (erros precisam ser visíveis), e a divergência local↔remoto vira dívida **invisível**, contra o [[principios#1. O comportamento documentado deve refletir o sistema real|princípio nº 1]].
@@ -61,6 +63,8 @@ Complementar à [[operacao-agentes#1.1 Checklist antes de começar uma alteraç�
 
 ## 1.3 Convivência: mais de um agente no mesmo projeto
 
+*Procedimento em skill: `antes-de-editar`, seção 2.*
+
 A [[operacao-agentes#1.1 Checklist antes de começar uma alteração|§1.1]] trata do outro que trabalhou **antes** de você, noutra máquina. Esta trata do outro que está trabalhando **agora**, no mesmo disco. É o caso mais perigoso dos dois, porque o Git não separa nada: dois agentes no mesmo clone dividem working tree, índice, branch, `node_modules`, pasta de build, porta do servidor de desenvolvimento, arquivo de lock e conexão de banco. Nenhuma ferramenta avisa que há outro ali. O primeiro sinal costuma ser o estrago: um `git add -A` que leva junto o trabalho pela metade do vizinho, um `git stash` que o faz sumir, um servidor derrubado no meio do teste de outro.
 
 A regra de fundo é uma só: **o que você não começou não é seu.** Arquivo, processo, porta, pendência no working tree ou branch que outro agente abriu se lê, não se mexe, até ficar claro de quem é.
@@ -97,9 +101,11 @@ Quando e quanto um agente commita e publica não é uma regra única: depende de
 - **Repositório de terceiros** (empregador, cliente, organização): commit e publicação só sob pedido explícito, seguindo a convenção da casa (código de ticket na mensagem, branch, revisão). Na dúvida sobre a convenção, perguntar; nunca inventar um código de ticket.
 - **Em qualquer caso**: só o que a sessão tocou (ver [[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]]), nada de segredo ou dado pessoal ([[seguranca|Segurança e Privacidade]]), e mensagem sem assinatura de máquina ([[principios#22. Texto que chega a humano não deve carregar assinatura de máquina|princípio nº 22]]).
 
-A política concreta, com a lista de quais remotes são de quem, vive nas instruções locais do usuário, não aqui: esta stack é pública e não deve carregar o mapa de onde ele trabalha.
+A política concreta, com a lista de quais remotes são de quem, vive nas instruções locais do usuário (o CLAUDE.md global dele é a fonte), não aqui: esta stack aponta para lá e não repete, e por ser pública não deve carregar o mapa de onde ele trabalha.
 
 ## 1.5 Orquestração: várias frentes em paralelo
+
+*Procedimento em skill: `orquestrar-frente`. O texto abaixo é o porquê.*
 
 A [[operacao-agentes#1.3 Convivência: mais de um agente no mesmo projeto|§1.3]] trata dos agentes que se encontram por acaso no mesmo projeto. Esta trata do caso deliberado: um trabalho que rende mais dividido em frentes simultâneas, sob um orquestrador (um agente ou o próprio usuário). Quando as frentes são independentes, paralelizar é o padrão. Fazer em fila o que não depende de fila não é prudência, é tempo do usuário jogado fora.
 
@@ -191,15 +197,7 @@ Num agente que trabalha por muitas chamadas, quase todo o gasto é o próprio co
 
 Cada delegação tem um tipo, e o tipo traz o padrão de modelo e de esforço de raciocínio:
 
-| Tipo | Para quê | Modelo · esforço |
-|---|---|---|
-| executor | implementação com plano pronto, teste, integração com contrato | intermediário · médio |
-| corretor | o que a bateria, o build ou o teste reprovou | intermediário · alto |
-| leitor | levantamento, busca, diagnóstico que volta como conclusão curta | menor · médio |
-| mecânico | changelog, quadro, organizar arquivos | menor · baixo |
-| especialista | sistema difícil, depuração que já falhou | maior · médio |
-| arquiteto | planejamento de uma implementação grande | maior · alto |
-| validador | conferir uma lista pronta e devolver laudo curto | menor · médio |
+Os sete tipos são executor, corretor, leitor, mecânico, especialista, arquiteto e validador. A definição de cada um (para quê, modelo, esforço, ferramentas e prompt) tem fonte única no HarpyNest, em `painel/motor/motor.py` (`TIPOS`), que também gera os arquivos de `~/.claude/agents`. Esta stack fixa a regra de escolha e não repete a tabela, para ela não se afastar do código.
 
 Brainstorming, orquestração e planejamento, que ficam com quem conversa com o usuário, usam o modelo maior em esforço alto. Os tipos são **tipos de trabalho, não etapas obrigatórias**: o plano decide item a item, e uma tarefa pode não ter arquiteto, validador ou corretor nenhum.
 
@@ -224,6 +222,8 @@ Brainstorming, orquestração e planejamento, que ficam com quem conversa com o 
 - inspecionar muitas imagens (folhas de quadros, catálogos, fotos de bateria) vai para um leitor, que devolve a conclusão, e não para o contexto do orquestrador. O orquestrador lê só as duas ou três fotos por entrega que vão ao dono, porque não mostra o que não viu, e confere por amostra as que os agentes já aprovaram. No Fang, foram 89 imagens lidas em um dia, muitas já aprovadas, e o "vi:" dos agentes deixou passar foto quebrada mais de uma vez: a amostra existe por isso, e não a releitura de tudo.
 
 ### Revezamento em vez de agente longo
+
+*Procedimento em skill: `revezar-turno`.*
 
 Uma frente grande continua uma frente só, com o mesmo escopo e a mesma ordem, mas roda em turnos de até umas 80 chamadas. Perto disso, o agente para e escreve uma nota de passagem curta: o que fez, o que falta, os arquivos e trechos que importam e o que já se descartou. A nota leva o mesmo item do plano, e o turno seguinte é um agente novo, de contexto limpo, que nasce dela. O tempo de relógio fica o mesmo e o custo cai perto da metade. Quem lembra o agente de revezar é o motor de orquestração, quando existe, porque aviso ao orquestrador não basta: na medição, poucos alarmes enviados a ele terminaram com o agente parado.
 
@@ -252,21 +252,11 @@ Juntar trabalho para poupar recurso caro de máquina (uma sessão de motor, um b
 
 Na execução da rodada 12 do Slime (11/10/2026), nove frentes abriam o motor de jogo cada uma por si, numa fila única. Ficavam de 15 a 20 minutos esperando a vez, e as execuções esbarravam na compilação pela metade de outra frente: uma delas gastou a única execução que tinha num erro alheio. Em meia hora, os agentes somaram 10,2 milhões de tokens equivalentes, boa parte em espera e retrabalho.
 
-### Diretriz curta
+### Procedimentos como skills
 
-*Desde 19/10/2026, é este trecho, entre os marcadores, que o motor de orquestração injeta em todo agente, e o próprio motor acrescenta os limiares e os nomes de ferramenta a partir do código dele. Antes havia uma cópia à parte, que se afastou desta seção em menos de uma semana. O trecho resume a §1.5 e a §2.3: quando divergir do corpo delas, vale o corpo, e o trecho se corrige.*
+Os procedimentos desta seção e da §1.5 vivem como skills em `skills/`, distribuídas pelo plugin `vogel-stack` (instalação no [[quickstart#Instalar as skills em todos os projetos|quickstart]]): `orquestrar-frente` (contrato de frente, orçamento, tipo e escalada, recolhimento), `revezar-turno` (nota de passagem) e `antes-de-editar` (§1.1 a §1.3). O corpo desta seção continua sendo a referência e o porquê; a skill traz só o procedimento. Quando divergirem, vale o corpo, e a skill se corrige.
 
-<!-- diretriz-curta:inicio -->
-**Proporção.** O tamanho do trabalho segue o tamanho do pedido. Pedido simples se entrega simples: faça o que foi pedido, mostre o resultado e liste em poucas linhas o que o usuário deve conferir. Teste novo, medição, bateria de regressão ou refatoração vizinha só entram a pedido, ou quando o risco é real (entrega que sai da máquina, banco, migração, motor), e aí diga antes por quê. Nesse caso, a checagem determinística (teste, lint) vem primeiro, e a revisão fica com um agente de contexto limpo, que recebe só o pedido e o resultado. Contexto também é orçamento: assunto novo, que não depende do que a conversa já sabe, vai melhor numa conversa nova.
-
-**Plano e disparo.** Quem planeja decide, e quem executa trabalha com menos esforço do que quem planejou. Cada item delegado leva no plano o tipo de trabalho (executor, corretor, leitor, mecânico, especialista, arquiteto, validador), ou o modelo e o esforço, e o disparo segue o plano. Brainstorming, orquestração e planejamento ficam com o modelo maior, em esforço alto. O disparo leva escopo fechado: o que fazer, o que não fazer e quando parar. Quem discordar do plano no disparo põe o motivo na descrição, sem reavaliar o trabalho do planejador, e só se sobe um degrau por sinal objetivo: teste ou bateria reprovados, build quebrado, entrega recusada pelo usuário.
-
-**O orquestrador orquestra.** Trabalho em cadeia dependente, ou que cabe num contexto só, sai mais barato feito direto, e delegar compensa quando há peças independentes. A medida de "cabe" é umas 15 chamadas, sem recurso caro de máquina; acima disso, o trabalho vai para um tipo. Correção depois de foto, teste ou bateria vai para o corretor, com a evidência e com todas as falhas da rodada juntas. No prompt de quem corrige, a hipótese vai marcada como hipótese, e o corretor que falhou duas vezes sobe para especialista, sem tentativa do orquestrador no meio. Muitas imagens se inspecionam por um leitor: o orquestrador lê só as duas ou três fotos que vão ao usuário e confere por amostra as que os agentes aprovaram.
-
-**Revezamento.** Uma frente grande roda em turnos. Perto do limite de chamadas, o agente escreve a nota de passagem (o que fez, o que falta, os arquivos e trechos que importam, o que já se descartou), e o turno seguinte nasce dela, num agente novo com o mesmo item do plano. O tipo vale por turno, então o turno que só compila, testa e relata desce para executor. O orçamento (teto de turnos, teste uma vez, poucas imagens, o que cortar primeiro) vai no prompt do primeiro disparo. Já quando várias frentes dividem um recurso caro de máquina (motor de jogo, build, bateria), elas entregam com a checagem barata, e o orquestrador roda tudo numa sessão só.
-
-**Leitura e feedback.** Leia o trecho, não o arquivo. Enquanto o usuário ainda manda pontos, só registre; o diagnóstico começa quando ele disser que a lista acabou, e na dúvida pergunte. Aí ele sai numa leva só, com um leitor por território de código. Pergunta nova sobre território já lido vai ao agente que o leu, e quem implementa herda o plano com arquivo:linha. O custo de cada item sai desse diagnóstico, nunca de palpite, e item que depende de gosto vira pergunta de design ao dono.
-<!-- diretriz-curta:fim -->
+Até 27/10/2026 o motor do HarpyNest injetava em todo agente uma diretriz curta, extraída daqui entre marcadores. Ela saiu do `APPEND_PROMPT` na onda 4 do estudo `painel-sem-interpretar` (registro em `docs/medicao-agentes.md` do HarpyNest), e a stack não mantém mais esse trecho: o que ele resumia agora é carregado sob demanda pelas skills, em vez de pesar em todo prompt.
 
 ## 2.2 Resiliência a instabilidade de runtime
 

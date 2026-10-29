@@ -1,0 +1,12 @@
+{
+  "name": "vogel-stack-local",
+  "description": "Skills da Vogel Stack",
+  "owner": { "name": "Luis Vogel" },
+  "plugins": [
+    {
+      "name": "vogel-stack",
+      "source": "./",
+      "description": "Skills de operação de agentes da Vogel Stack: antes-de-editar, orquestrar-frente, revezar-turno."
+    }
+  ]
+}

@@ -12,6 +12,8 @@ Vogel Stack é um conjunto de documentos-base para projetos que usam agentes de 
 - [[vogel-stack/templates|Templates de Documentação]]
 - [[vogel-stack/operacao-leve|Operação Documental]]
 - [[vogel-stack/seguranca|Segurança e Privacidade]]
+- [[vogel-stack/apresentacoes|Apresentações que mostram de onde vem cada número]]
+- [[vogel-stack/gamedev|Desenvolvimento de jogos com agentes]]
 
 ## Como projetos consomem a Vogel Stack
 
@@ -36,3 +38,7 @@ Regras de operação aqui:
 - Documentos novos nascem **já conectados** via wikilinks reais (princípio nº 18). Sem links decorativos.
 - Wikilinks usam a sintaxe `[[caminho/sem/extensao]]` ou `[[caminho|alias]]`.
 - Quando este repositório for atualizado, os projetos que o consomem como submódulo recebem o upgrade via `git submodule update --remote --merge vogel-stack`.
+
+## Procedimentos de agente
+
+Os procedimentos operacionais da stack são skills em `skills/` (plugin `vogel-stack`; instalação em [[quickstart]]): `antes-de-editar` (fetch, upstream, outro agente no clone), `orquestrar-frente` (contrato de frente, teto de turnos, critério de pronto, plano, executor, validador, corretor) e `revezar-turno` (nota de passagem). A leitura humana e o porquê de cada regra estão em [[vogel-stack/operacao-agentes|Operação de Agentes]].

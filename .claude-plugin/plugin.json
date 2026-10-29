@@ -1,0 +1,7 @@
+{
+  "name": "vogel-stack",
+  "description": "Procedimentos da Vogel Stack como skills: conferir o ponto de partida antes de editar, orquestrar frentes e revezar turnos de agente.",
+  "author": { "name": "Luis Vogel" },
+  "homepage": "https://github.com/LuisVogelDS/VogelStack",
+  "repository": "https://github.com/LuisVogelDS/VogelStack"
+}
