@@ -1,0 +1,12 @@
+diff --git a/CLAUDE.md b/CLAUDE.md
+index d40a0079..baa4c248 100644
+--- a/CLAUDE.md
++++ b/CLAUDE.md
+@@ -17,3 +17,7 @@ Jogo incremental 3D low poly da **Cajuice Games**: você é um slime minúsculo
+ - Feel, escala e visual são decisão do Luis; o agente propõe e deixa o valor exposto no Inspector.
+ - Commits em português, um por entrega, sem menção a IA. Repo da Cajuice: commit e push sem esperar pedido.
+ - Capturas de verificação em `Capturas/` (fora do git).
++- Git Bash no Windows: prefixe com `MSYS_NO_PATHCONV=1` o comando que leva argumento começando por `/` (senão o MSYS o converte em caminho) e escreva `taskkill //PID <n>` com barra dupla. Nunca mate o wrapper da fila (regra acima).
++- Asset de terceiro novo (`Assets/AssetDump/` + `ORIGENS.md`): skill `importar-asset-terceiro` do plugin vogel-stack (a chegar).
++- Conferir captura de verificação: skill `verificar-captura` do plugin vogel-stack (a chegar).
++- Série de Shorts de divulgação: tomadas do Estúdio (`Capturas/Estudio/`) → voz → JPEGs → render; a partir da raiz do repo `conteudo`, `bash canais/jogos/videos/render-serie.sh` gera a prévia 540x960 a 30 fps e `--final` o render 1080x1920 a 60 fps (`--en` para a edição em inglês; ver `canais/jogos/serie-slime.md`).

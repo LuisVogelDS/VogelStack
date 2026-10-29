@@ -1,12 +1,14 @@
 {
   "name": "vogel-stack-local",
   "description": "Skills da Vogel Stack",
-  "owner": { "name": "Luis Vogel" },
+  "owner": {
+    "name": "Luis Vogel"
+  },
   "plugins": [
     {
       "name": "vogel-stack",
       "source": "./",
-      "description": "Skills de operação de agentes da Vogel Stack: antes-de-editar, orquestrar-frente, revezar-turno."
+      "description": "Skills, hooks e ferramentas da Vogel Stack: operação de agentes (antes-de-editar, orquestrar-frente, revezar-turno, registrar-licao), gamedev Unity (importar-asset-terceiro, build-entrega, verificar-captura), conteúdo (video-produto-html, deck-numeros-html) e guardas de git, fila Unity e publicação."
     }
   ]
 }
