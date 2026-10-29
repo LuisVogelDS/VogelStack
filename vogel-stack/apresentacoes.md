@@ -10,6 +10,11 @@ de fases, montagem e verificação) fica **fora da stack**, num kit próprio de 
 pelo mesmo motivo do princípio nº 19 ([[principios#19. Problema, não tecnologia|Problema, não tecnologia]]):
 a stack diz o que resolver e como saber se ficou resolvido, não carrega o aparato.
 
+A skill `deck-numeros-html` conduz os passos deste método (roteiro com ficha, medição,
+montagem, verificação, sigilo, ciclo da reunião) e traz o checklist de ajustes de arte e os
+modelos de ROTEIRO, REUNIAO e PASSAGEM. Este documento é a referência canônica do método; a
+skill não o repete, aponta para ele.
+
 ## 1. Quando usar
 
 Vale o trabalho quando:
@@ -121,7 +126,15 @@ feito.
   funciona sem código extra, e entrar num slide pela esquerda mostra o estado final.
 - **Detalhe mora atrás de um ícone.** O cartão tem título, número e até três tópicos; a
   explicação longa abre ao passar o mouse no ⓘ. Tópico em vez de frase emendada com
-  ponto e vírgula.
+  ponto e vírgula. A dica é HTML próprio, não o `title` do navegador, que demora e às
+  vezes não abre.
+- **Número pequeno, diga.** Se a medição enfraquece o argumento que se esperava, o slide
+  diz isso e o argumento muda de lugar, em vez de o número sumir. Sem número medido, sem
+  número: o caso ilustrativo se declara fictício na tela.
+- **Deck que circula sem apresentador se explica por escrito**: cada fase ganha subtítulo
+  próprio e marca no que acendeu.
+- **Todo slide tem a versão parada** (o estado final de uma vez), que sai no PDF e aparece
+  sob movimento reduzido.
 - **A frase não afirma o que o dado não afirma.** "Uma criança para cada três sócios"
   sugere vínculo; "cerca de uma a cada três pessoas" diz a razão. Vale o mesmo para
   posse, causa e sequência.
@@ -167,7 +180,7 @@ interna, só agregados.
    é clicável, e reprovar se a página lançar erro.
 4. Tirar print de cada slide no estado final e olhar. Sobreposição de texto, rótulo que
    quebra e barra que não cresce só aparecem assim.
-5. Olhando os prints em sequência, aplicar o teste do vizinho: trocando o nome do cliente,
+5. Olhando os prints em sequência (com o checklist de ajustes de arte da skill), aplicar o teste do vizinho: trocando o nome do cliente,
    esse deck serviria a outro negócio de outro ramo? Se serve, a forma não saiu do §3. Vale
    também para a cor: nenhum token de identidade do deck de onde veio o andaime, e o nome
    daquele cliente na lista de proibidos.
@@ -208,3 +221,30 @@ E o agente, diante de um pedido assim, **procura o método e o kit antes de esco
 formato**. Se não achar o kit, pergunta onde ele está, em vez de improvisar uma página.
 Uma página de painel pode ser o que se quer, mas é uma escolha dita, não o padrão silencioso.
 
+## 9. O ciclo da reunião
+
+Um deck raramente sai de primeira: a ficha mostrada antes do código, as correções de quem
+encomendou depois de ver montado, a reunião, a reunião seguinte. O trabalho fica leve quando
+cada rodada deixa registro.
+
+- **Mostrar a ficha antes de desenhar.** O roteiro com a ficha de cada slide vai a quem
+  encomendou antes de o HTML existir, com dois ou três objetos candidatos para os slides
+  principais. Descobrir depois que "isso não é a cara deles" custa o deck.
+- **Anotar a correção como regra.** "Tira o verde do fundo" vira "verdes fechados demais não
+  eram a cor que o público reconhece". A ficha do slide guarda o histórico do que saiu e por
+  quê, para ninguém trazer de volta a ideia descartada.
+- **Juntar antes de corrigir.** Enquanto a pessoa ainda manda pontos, só anote; corrija numa
+  leva quando a lista acabar, porque um ponto do fim muda o que se faria com um do começo.
+- **Registrar a reunião.** Um `REUNIAO-<data>.md` interno: quem estava, a dor, o que mudou
+  no entendimento, perguntas numeradas, decisões e combinados com data. Pergunta de produto
+  (quem opera, como se cobra) vai para documento de definição de produto, e o deck só muda
+  depois da decisão, para não misturar levantamento com proposta não aprovada.
+- **Nota de passagem.** A `PASSAGEM.md` (estado, rodadas, pendências, o que espera
+  confirmação, de onde vêm os números) se atualiza ao fim de cada sessão. É por ela que a
+  próxima conversa, de pessoa ou de agente, começa.
+- **Ao mandar:** o HTML autocontido (fontes e imagens embutidas) ou o PDF, nunca a pasta do
+  projeto, que tem script, dados e documentos internos. Se circula sem apresentador, cada
+  fase se explica por escrito.
+- **Congelar o apresentado.** O deck apresentado ou publicado fica como saiu, com a data no
+  nome; o trabalho novo vai numa versão nova. Assim o registro da reunião continua batendo
+  com o deck a que se refere.
