@@ -46,6 +46,8 @@ Fluxo típico: plano, executor, validador (quando o risco justifica), corretor (
 
 ### Modo extensivo (sobra de cota)
 
+Esta subseção só vale quando o dono pede, com essas palavras ou parecidas, para gastar a sobra. Fora disso, vale o resto do §4 e ela pode ser ignorada.
+
 Quando o dono pede para aproveitar a sobra da cota ("gastar o crédito", rodada noturna, "não economizar"), a sobra compra mais escopo, e não modelo mais caro. Assim, entram mais frentes, mais revisão independente, mais teste de borda e as frentes extras do plano. Já o roteamento de modelo das definições de agente continua valendo: executor e corretor em Sonnet; leitor, mecânico e validador em Haiku.
 
 - Opus fica para o trabalho que de fato o pede: especialista (física, câmera, concorrência, depuração que já falhou), arquiteto, e frente visual cujo critério de pronto é julgamento de imagem. Cada frente em Opus leva o motivo na descrição, como em `[opus: câmera no ar]`.
