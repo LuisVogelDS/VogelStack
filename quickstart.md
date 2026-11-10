@@ -1,0 +1,174 @@
+# Quickstart: Vogel Stack
+
+Este guia mostra como instalar a Vogel Stack em outro repositório e operar a documentação no padrão dela.
+
+A operação documental é **uma só**, descrita em [[vogel-stack/operacao-leve|Operação Documental]]: wikilinks curados como malha, link checker determinístico como piso de integridade, e agente de IA sob demanda para auditoria estrutural. **Não há família a escolher** — até 2026-07-16 havia duas, e a dualidade foi removida ([[docs/adr/0002-remover-familia-padrao|ADR 0002]]).
+
+Se o projeto tiver um problema que essa operação não resolve, o princípio nº 19 ([[vogel-stack/principios|Problema, não tecnologia]]) manda declarar a solução alternativa em ADR **do próprio projeto** — não herdar ferramenta por convenção, nem esperar que a stack carregue o aparato por antecipação.
+
+## Conexões principais
+
+- [[vogel-stack/principios|Princípios Gerais]]
+- [[vogel-stack/documentacao-e-versionamento|Documentação e Versionamento]]
+- [[vogel-stack/operacao-agentes|Operação de Agentes]]
+- [[vogel-stack/registro-e-evidencias|Registro e Evidências Operacionais]]
+- [[vogel-stack/evolucao-produto|Evolução de Produto e Arquitetura]]
+- [[vogel-stack/templates|Templates de Documentação]]
+- [[vogel-stack/operacao-leve|Operação Documental]]
+- [[vogel-stack/apresentacoes|Apresentações que mostram de onde vem cada número]]
+- [[vogel-stack/interface|Interface com assinatura própria]]
+- [[vogel-stack/gamedev|Desenvolvimento de jogos com agentes]]
+
+## 1. Instalar a stack como submódulo
+
+No repositório alvo:
+
+```powershell
+Set-Location "C:\caminho\para\repo-alvo"
+git submodule add https://github.com/LuisVogelDS/VogelStack vogel-stack
+git submodule update --init --recursive
+```
+
+Isso instala o repositório inteiro da Vogel Stack dentro de `vogel-stack/`. Com a estrutura atual, os documentos-base ficam em:
+
+```text
+vogel-stack/
+  vogel-stack/
+    principios.md
+    documentacao-e-versionamento.md
+    operacao-agentes.md
+    registro-e-evidencias.md
+    evolucao-produto.md
+    templates.md
+    operacao-leve.md
+    seguranca.md
+    apresentacoes.md
+    interface.md
+    gamedev.md
+```
+
+Por causa dessa pasta interna, os wikilinks do projeto-alvo usam o prefixo `vogel-stack/vogel-stack/` — por exemplo `[[vogel-stack/vogel-stack/principios]]`. O que importa é que o link aponte para um arquivo real que o checker consiga resolver.
+
+## 2. Conectar o projeto à stack por wikilinks reais
+
+Peça a um agente forte que leia a documentação do projeto e insira wikilinks explícitos onde houver dependência real:
+
+```text
+Baseado na Vogel Stack instalada neste repositório, revise README, AGENTS.md, CLAUDE.md,
+quickstart.md, docs/arquitetura.md, docs/operacao.md, docs/versionamento.md,
+docs/changelog.md e outros guias existentes.
+
+Objetivo: conectar o núcleo técnico e operacional deste projeto aos princípios da
+Vogel Stack sem inventar dependências.
+
+Tarefas:
+
+1. Leia a documentação do projeto e os arquivos da stack antes de editar.
+2. Insira links explícitos para arquivos reais da stack sempre que um processo, script,
+   job, pipeline, dashboard, artefato ou contrato precisar seguir uma regra específica.
+3. Todo documento novo ou revisado deve nascer conectado (princípio nº 18).
+4. Nada de link decorativo — cada link representa dependência real.
+5. Se a stack está em `vogel-stack/` contendo outra pasta `vogel-stack/`, use o
+   prefixo `vogel-stack/vogel-stack/`.
+
+Destinos-guia:
+
+- [[vogel-stack/principios]] — princípios permanentes, fontes de verdade, contratos,
+  identificadores canônicos, observabilidade, semântica de saída.
+- [[vogel-stack/documentacao-e-versionamento]] — papéis dos documentos, quickstart,
+  arquitetura, versionamento, changelog.
+- [[vogel-stack/operacao-agentes]] — execuções por agentes, comandos caros, handoffs,
+  logs persistentes, política de custo.
+- [[vogel-stack/registro-e-evidencias]] — registry, manifestos por run, rastreabilidade.
+- [[vogel-stack/evolucao-produto]] — mudanças de produto, dashboards, concepção.
+- [[vogel-stack/templates]] — criar ou corrigir documentos padrão.
+- [[vogel-stack/apresentacoes]] — apresentação de reunião: registrar no `AGENTS.md` onde
+  fica o kit e o acervo, para o agente seguir o método quando o pedido chegar.
+- [[vogel-stack/interface]]: qualquer superfície visual: painel, página, deck,
+  ferramenta interna. Recusas da cara média de máquina e como decidir a forma.
+- [[vogel-stack/gamedev]]: projeto de jogo em motor com editor pesado (Unity): bateria
+  de testes numa sessão só, regressão seletiva por frente, fila e cópias do projeto,
+  painel de regulagem de gosto dentro do jogo.
+
+Ao terminar, liste: arquivos alterados, links adicionados, lacunas documentais
+encontradas e comandos recomendados para validar.
+```
+
+## 3. Instalar o piso: link checker + CI
+
+A malha só é contrato se link quebrado quebrar a build.
+
+- **Não copiar o checker.** O `check-wikilinks.ps1` roda direto do submódulo e, chamado de lá, checa o projeto (não a stack): valida todo `[[wikilink]]`, suporta `[[alvo|alias]]` e `[[alvo#secao]]`, ignora blocos de código e sai com código 1 em quebra. O mesmo vale para `check-quadro.ps1` e `check-sync.ps1`. Cópia por projeto envelhece calada ([[vogel-stack/operacao-agentes#1.1 Checklist antes de começar uma alteração|Operação de Agentes §1.1]]).
+- Criar `.github/workflows/check-malha.yml` para rodar o checker em push/PR para `main`. O checkout precisa trazer o submódulo:
+
+```yaml
+- uses: actions/checkout@v4
+  with:
+    submodules: true
+- name: Validar malha de wikilinks
+  shell: pwsh
+  run: ./vogel-stack/scripts/check-wikilinks.ps1
+```
+
+- Rodar localmente e corrigir tudo **antes** do commit:
+
+```powershell
+pwsh ./vogel-stack/scripts/check-wikilinks.ps1
+```
+
+Projeto que já tem uma cópia em `scripts/` troca a chamada (local e CI) pela do submódulo e apaga a cópia.
+
+## 4. Declarar as decisões do projeto em ADR
+
+Pelo princípio nº 19, o projeto declara em ADR próprio qualquer solução que adote diferente da que a stack descreve — listando a substituição problema-a-problema e referenciando o princípio. Modelos em [[vogel-stack/templates|Templates de Documentação]].
+
+Se o projeto simplesmente segue a operação da stack, não é preciso ADR para isso: o default é o que está descrito aqui.
+
+## 5. Auditoria estrutural sob demanda
+
+Não há relatório de grafo materializado. Quando precisar do equivalente — órfãos, weak links, comunidades isoladas — invoque o agente com o prompt-template de [[vogel-stack/operacao-leve|Operação Documental]] e revise a saída antes de aplicar.
+
+## Guias de apoio
+
+### Atualizar o submódulo em um repositório alvo
+
+Quando a Vogel Stack mudar:
+
+```powershell
+Set-Location "C:\caminho\para\repo-alvo"
+git submodule update --remote --merge vogel-stack
+git status
+```
+
+Depois, registre no repositório alvo o ponteiro atualizado do submódulo:
+
+```powershell
+git add vogel-stack
+git commit -m "Atualiza submodulo VogelStack"
+```
+
+Feito isso, confirme que os wikilinks continuam apontando para arquivos reais:
+
+```powershell
+pwsh ./scripts/check-wikilinks.ps1
+```
+
+### Instalar as skills em todos os projetos
+
+Os procedimentos de agente da stack (`antes-de-editar`, `orquestrar-frente`, `revezar-turno`, `registrar-licao`) são skills em `skills/`, empacotadas como o plugin `vogel-stack` com um marketplace local (`.claude-plugin/marketplace.json`, `source: "./"`). O mesmo marketplace oferece dois plugins opcionais, que só valem a pena para quem trabalha no domínio: `vogel-stack-gamedev` (pasta `gamedev/`, projetos Unity) e `vogel-stack-conteudo` (pasta `conteudo/`, vídeo de produto e narração). Instalado em escopo de usuário, o plugin vale em todos os repositórios da máquina, sem submódulo e sem cópia. Em cada máquina, uma vez, com o caminho do clone:
+
+```powershell
+claude plugin validate "C:\caminho\para\VogelStack"
+claude plugin marketplace add "C:\caminho\para\VogelStack"
+claude plugin install vogel-stack@vogel-stack-local
+# opcionais, só para quem trabalha no domínio
+claude plugin install vogel-stack-gamedev@vogel-stack-local
+claude plugin install vogel-stack-conteudo@vogel-stack-local
+claude plugin list
+```
+
+As skills aparecem como `/vogel-stack:antes-de-editar`, `/vogel-stack:orquestrar-frente` e `/vogel-stack:revezar-turno`, e o Claude também as carrega sozinho pela descrição. Como o marketplace aponta para uma pasta local, a edição de uma skill vale na próxima sessão ou em `/reload-plugins`; depois de um `git pull` no clone, nada mais a fazer. Para remover: `claude plugin marketplace remove vogel-stack-local`. Para testar sem instalar, `claude --plugin-dir "C:\caminho\para\VogelStack"`. O `claude plugin validate` acusa só o aviso de falta de `version`, que é intencional: sem versão, cada commit conta como atualização.
+
+### Quadro de trabalho
+
+Projetos da stack mantêm um `_QUADRO.md` (backlog vivo, formato padronizado) validado por `scripts/check-quadro.ps1`. Ver [[vogel-stack/templates|Templates de Documentação]].

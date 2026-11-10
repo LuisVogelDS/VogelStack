@@ -1,0 +1,10 @@
+# Artefatos de ferramentas locais do usuário (visualizador de grafo, vault de
+# notas, etc.) não são contrato do repositório — ver vogel-stack/operacao-leve.md.
+# As regras ficam aqui só para que um uso local nunca vaze para o repo.
+graphify-out/
+.obsidian/
+
+# Config e worktrees de ferramenta local de sessao — nunca versionar.
+# O repositorio nao depende de nada daqui.
+.claude/
+__pycache__/

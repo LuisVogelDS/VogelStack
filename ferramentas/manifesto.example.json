@@ -1,0 +1,21 @@
+{
+  "$comentario": "Modelo de manifesto das ferramentas canônicas. Leitor: scripts/sincronizar-ferramentas.py --manifesto <arquivo> (ou VOGEL_MANIFESTO). Copie para fora deste repo e preencha com os seus repos. 'repos' aceita nome de repo, nome de grupo (de 'grupos') ou {\"repo\": nome, \"destino\": pasta} para trocar a pasta naquele repo. Caminhos usam ~ (pasta do usuário); repo que não existe na máquina é pulado. 'config.gerador' cria o arquivo de configuração por repo na primeira vez, a partir da versão antiga da ferramenta (só existe o gerador 'unity', que vem do plugin opcional de gamedev).",
+  "versao": 1,
+  "repos": {
+    "projeto-a": "~/projetos/projeto-a",
+    "projeto-b": "~/projetos/projeto-b",
+    "projeto-b-teste": "~/projetos/projeto-b-teste"
+  },
+  "grupos": {
+    "projeto-b-todos": ["projeto-b", "projeto-b-teste"]
+  },
+  "ferramentas": {
+    "medicao": {
+      "descricao": "Medidor de tokens dos subagentes (medir_tokens.py).",
+      "origem": "ferramentas/medicao",
+      "arquivos": ["medir_tokens.py"],
+      "destino": "Ferramentas",
+      "repos": ["projeto-a", "projeto-b-todos"]
+    }
+  }
+}

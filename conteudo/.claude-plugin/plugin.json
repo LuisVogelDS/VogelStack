@@ -1,0 +1,9 @@
+{
+  "name": "vogel-stack-conteudo",
+  "description": "Conteúdo em vídeo para agentes: vídeo de produto a partir de palco HTML (Playwright e FFmpeg), ferramenta de narração (edge-tts ou ElevenLabs) e guarda contra narração paga sem checagem de custo.",
+  "author": {
+    "name": "Luis Vogel"
+  },
+  "homepage": "https://github.com/LuisVogelDS/VogelStack",
+  "repository": "https://github.com/LuisVogelDS/VogelStack"
+}

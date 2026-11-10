@@ -1,0 +1,21 @@
+name: check-malha
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  wikilinks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar malha de wikilinks
+        shell: pwsh
+        run: ./scripts/check-wikilinks.ps1
+      - name: Validar quadro de trabalho
+        shell: pwsh
+        run: ./scripts/check-quadro.ps1
+      - name: Conferir neutralidade
+        run: python3 scripts/check-neutralidade.py

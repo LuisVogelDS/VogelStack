@@ -1,0 +1,24 @@
+{
+  "name": "vogel-stack-local",
+  "description": "Plugins da Vogel Stack",
+  "owner": {
+    "name": "Luis Vogel"
+  },
+  "plugins": [
+    {
+      "name": "vogel-stack",
+      "source": "./",
+      "description": "Núcleo da Vogel Stack: operação de agentes (antes-de-editar, orquestrar-frente, revezar-turno, registrar-licao), deck de decisão com números medidos (deck-numeros-html) e guarda de git (segredo, force push, assinatura de IA; prefixo de commit e repos protegidos por configuração)."
+    },
+    {
+      "name": "vogel-stack-gamedev",
+      "source": "./gamedev",
+      "description": "Gamedev Unity: fila do editor em batch, build de entrega, importação de asset de terceiro com licença, conferência de capturas e o brief fixo de frente em repo Unity."
+    },
+    {
+      "name": "vogel-stack-conteudo",
+      "source": "./conteudo",
+      "description": "Conteúdo: vídeo de divulgação de produto web a partir de um palco HTML e narração (edge-tts gratuito ou ElevenLabs com teto de gasto), com guarda de narração paga."
+    }
+  ]
+}

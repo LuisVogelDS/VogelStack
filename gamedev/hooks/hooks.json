@@ -1,0 +1,51 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho fila",
+            "if": "Bash(*unity_batch*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regras da fila do Unity..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho exe",
+            "if": "Bash(*nity.exe*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regras do Unity..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho kill",
+            "if": "Bash(*kill*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regras do Unity..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho stop-process",
+            "if": "Bash(*Stop-Process*)",
+            "timeout": 10,
+            "onFailure": "block",
+            "statusMessage": "Conferindo regras do Unity..."
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/guard-unity.py\" --gatilho commit",
+            "if": "Bash(*git*commit*)",
+            "timeout": 15,
+            "onFailure": "block",
+            "statusMessage": "Conferindo ORIGENS.md dos assets..."
+          }
+        ]
+      }
+    ]
+  }
+}

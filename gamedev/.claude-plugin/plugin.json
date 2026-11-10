@@ -1,0 +1,9 @@
+{
+  "name": "vogel-stack-gamedev",
+  "description": "Gamedev Unity para agentes: build para entregar, importação de asset de terceiro, verificação por grade de capturas, bloco de brief para frentes em repo Unity, ferramentas da fila do Unity e guarda contra timeout/kill na fila e commit de asset sem origem.",
+  "author": {
+    "name": "Luis Vogel"
+  },
+  "homepage": "https://github.com/LuisVogelDS/VogelStack",
+  "repository": "https://github.com/LuisVogelDS/VogelStack"
+}

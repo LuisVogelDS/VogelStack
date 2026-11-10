@@ -1,0 +1,9 @@
+{
+  "name": "vogel-stack",
+  "description": "Núcleo da Vogel Stack: operação de agentes (antes-de-editar, orquestrar-frente, revezar-turno, registrar-licao), deck de decisão com números medidos (deck-numeros-html) e guarda de git (segredo, force push, assinatura de IA; prefixo de commit e repos protegidos por configuração).",
+  "author": {
+    "name": "Luis Vogel"
+  },
+  "homepage": "https://github.com/LuisVogelDS/VogelStack",
+  "repository": "https://github.com/LuisVogelDS/VogelStack"
+}

@@ -1,0 +1,16 @@
+{
+  "repos_protegidos": [
+    {
+      "remote": "bitbucket.org/acme/monolito",
+      "operacoes": ["pull", "commit", "push", "checkout", "switch", "merge", "rebase", "reset"],
+      "motivo": "Repo compartilhado: so mexa com pedido explicito."
+    }
+  ],
+  "prefixo_commit": [
+    {
+      "remote": "bitbucket.org/acme/*",
+      "regex": "^(PROJ|OPS)-\\d{3,}",
+      "mensagem": "a mensagem precisa comecar com o codigo da tarefa (PROJ-123 ou OPS-123)"
+    }
+  ]
+}
