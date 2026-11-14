@@ -1,4 +1,4 @@
-# Vogel Stack — Instruções para Agentes
+# Vogel Stack: instruções para agentes
 
 Vogel Stack é um conjunto de documentos-base para projetos que usam agentes de IA como parte real do fluxo. Os documentos canônicos da stack estão em `vogel-stack/` (pasta interna deste repositório).
 
@@ -14,6 +14,8 @@ Vogel Stack é um conjunto de documentos-base para projetos que usam agentes de 
 - [[vogel-stack/seguranca|Segurança e Privacidade]]
 - [[vogel-stack/apresentacoes|Apresentações que mostram de onde vem cada número]]
 - [[vogel-stack/gamedev|Desenvolvimento de jogos com agentes]]
+- [[vogel-stack/interface|Interface com assinatura própria]]
+- [[vogel-stack/mecanismos|Qual mecanismo usar]]
 - [[vogel-stack/agentes/README|Modelos de subagente]]
 
 ## Como projetos consomem a Vogel Stack
@@ -21,8 +23,6 @@ Vogel Stack é um conjunto de documentos-base para projetos que usam agentes de 
 A stack é geralmente instalada como submódulo em `vogel-stack/` no projeto-alvo. Wikilinks no projeto-alvo apontam para `[[vogel-stack/vogel-stack/<doc>]]`.
 
 A operação documental é **uma só**, descrita em [[vogel-stack/operacao-leve|Operação Documental]]: wikilinks curados como malha, link checker determinístico como piso de integridade, e agente sob demanda para auditoria estrutural. O passo a passo de adoção está em [[quickstart]].
-
-Até 2026-07-16 a stack oferecia duas famílias, uma delas apoiada em ferramenta de knowledge graph materializado. Essa dualidade foi removida — ver [[docs/adr/0002-remover-familia-padrao|ADR 0002]].
 
 ## Operação deste repositório
 
