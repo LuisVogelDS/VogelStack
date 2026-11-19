@@ -120,8 +120,10 @@ feito.
   Número escrito à mão é o primeiro que fica velho quando a medição roda de novo.
 - **A medição é evidência.** O script e o arquivo de dados ficam versionados junto do
   deck, com data e ambiente, conforme [[registro-e-evidencias|Registro e Evidências Operacionais]].
-- **Nada anda sozinho.** A seta lateral troca de slide; a vertical anda uma fase dentro
-  do slide. Animação que toca no ritmo do autor atropela a pergunta de quem assiste.
+- **Nada anda sozinho.** Uma seta só: → avança uma fase e, quando as fases do slide
+  acabam, passa ao próximo; ← volta do mesmo jeito. As setas verticais não navegam (desde
+  19/11/2026, a pedido de quem usava os decks). Animação que toca no ritmo do autor
+  atropela a pergunta de quem assiste.
 - **Fase é estado.** Cada fase redesenha o slide inteiro no estado dela; voltar uma fase
   funciona sem código extra, e entrar num slide pela esquerda mostra o estado final.
 - **Detalhe mora atrás de um ícone.** O cartão tem título, número e até três tópicos; a
