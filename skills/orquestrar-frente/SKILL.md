@@ -1,6 +1,6 @@
 ---
 name: orquestrar-frente
-description: Divide um trabalho em frentes paralelas e delega a subagentes, com contrato, teto de turnos e critério de pronto. Use quando for disparar vários agentes, planejar delegação, escolher tipo/modelo/esforço de subagente, escrever o prompt de disparo, recolher e conferir o que voltou, ou quando o usuário mandar uma lista de pedidos para avaliar. Cobre plano, executor, validador e corretor.
+description: Divide um trabalho em frentes paralelas e delega a subagentes, com contrato, teto de turnos e critério de pronto. Use quando for disparar vários agentes, planejar delegação, escolher tipo/modelo/esforço de subagente, escrever o prompt de disparo, recolher e conferir o que voltou, ou quando o usuário mandar uma lista de pedidos para avaliar. Cobre plano, executor, revisor, validador e corretor.
 ---
 
 # Orquestrar frentes
@@ -33,7 +33,7 @@ Frente em repo Unity: se o plugin `vogel-stack-gamedev` estiver instalado, o pro
 
 ## 4. Tipo, modelo e esforço
 
-Os tipos de subagente (executor, corretor, leitor, mecânico, especialista, arquiteto, validador) têm modelos em `vogel-stack/agentes/` (o `README.md` de lá explica cada tipo), para copiar em `~/.claude/agents`; o roteamento de modelo mora na definição de cada agente. Escolha o tipo pelo trabalho e não copie a tabela.
+Os tipos de subagente (executor, corretor, leitor, mecânico, especialista, arquiteto, validador, revisor) têm modelos em `vogel-stack/agentes/` (o `README.md` de lá explica cada tipo), para copiar em `~/.claude/agents`; o roteamento de modelo mora na definição de cada agente. Escolha o tipo pelo trabalho e não copie a tabela.
 
 - O plano traz o tipo por item delegado e o disparo o segue. Discordar exige motivo na descrição (`[opus: física do corpo]`).
 - Sobe-se um degrau só por sinal objetivo: bateria ou teste reprovado, build quebrado, recusa do usuário. Esforço antes de modelo.
@@ -42,7 +42,7 @@ Os tipos de subagente (executor, corretor, leitor, mecânico, especialista, arqu
 - Muitas imagens vão para um leitor. O orquestrador lê só as 2 ou 3 que vão ao dono e confere as aprovadas por amostra.
 - O tipo vale por turno: o turno que só compila, testa e relata desce para executor.
 
-Fluxo típico: plano, executor, validador (quando o risco justifica), corretor (só se reprovar).
+Fluxo típico: plano, executor, revisor (mudança não trivial), validador (quando o risco justifica), corretor (só se reprovar).
 
 ### Modo extensivo (sobra de cota)
 
@@ -63,7 +63,7 @@ Origem: numa rodada de 29 frentes (noite de 08 para 09/11/2026), "gastar o créd
 - Entregue o resultado integrado, não "disparei e aguardo". Não encerre com frente rodando.
 - Frente que diz "pronto" sem evidência (teste, saída, caminho) conta como não verificada.
 - O relato chega ao orquestrador; o que importa ao usuário sai na síntese.
-- Entrega que sai da máquina (publicação, deploy, texto a cliente, área sensível): checagem determinística primeiro, depois revisão por frente de contexto limpo, que recebe só o pedido e o resultado.
+- Entrega que sai da máquina (publicação, deploy, texto a cliente, área sensível): checagem determinística primeiro, depois revisão por frente de contexto limpo (o revisor), que recebe só o pedido e o resultado.
 - Decisão de desenho: algumas frentes com ângulos diferentes, sem ver umas às outras, e síntese. A discordância vai ao usuário.
 - Correção do dono que vale para todo trabalho do tipo vira regra por escrito no mesmo dia, com data, exemplo e porquê.
 

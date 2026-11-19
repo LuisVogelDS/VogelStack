@@ -1,6 +1,6 @@
 # Modelos de subagente
 
-Sete definições de subagente do Claude Code, prontas para copiar. Cada arquivo vai para `~/.claude/agents/` (vale em todo projeto da máquina) ou para `.claude/agents/` do repositório (vale só nele). A regra de quando usar cada tipo, com o porquê, está na [[operacao-agentes|Operação de Agentes]] (§2.3, "Tipo de trabalho define modelo e esforço") e a skill `orquestrar-frente` a aplica no plano. Aqui ficam só os moldes, para a regra não se afastar do que roda.
+Oito definições de subagente do Claude Code, prontas para copiar. Cada arquivo vai para `~/.claude/agents/` (vale em todo projeto da máquina) ou para `.claude/agents/` do repositório (vale só nele). A regra de quando usar cada tipo, com o porquê, está na [[operacao-agentes|Operação de Agentes]] (§2.3, "Tipo de trabalho define modelo e esforço") e a skill `orquestrar-frente` a aplica no plano. Aqui ficam só os moldes, para a regra não se afastar do que roda.
 
 | Tipo | Para quê | Modelo e esforço |
 |---|---|---|
@@ -11,7 +11,10 @@ Sete definições de subagente do Claude Code, prontas para copiar. Cada arquivo
 | `especialista` | domínio difícil ou depuração que já falhou (física, câmera, concorrência) | opus, médio |
 | `arquiteto` | planejar antes de mudança que atravessa camadas, devolvendo o plano e não o código | opus, alto, sem edição |
 | `validador` | conferir uma lista de validações pronta e devolver um laudo curto | haiku, médio, sem edição |
+| `revisor` | ler o diff contra o pedido, com contexto limpo, e procurar defeito de correção antes de integrar | sonnet, alto, sem edição |
 
-O roteamento de modelo mora na definição do agente (campos `model` e `effort` do cabeçalho), e não num hook nem no prompt de quem delega. Trocar o modelo de um tipo é editar o arquivo dele, e o plano ainda pode discordar do padrão de um item, com o motivo na descrição. Os campos `tools` e `disallowedTools` fecham o que cada tipo pode fazer: leitor, arquiteto e validador não editam, e o validador não passa de 30 turnos.
+O roteamento de modelo mora na definição do agente (campos `model` e `effort` do cabeçalho), e não num hook nem no prompt de quem delega. Trocar o modelo de um tipo é editar o arquivo dele, e o plano ainda pode discordar do padrão de um item, com o motivo na descrição. Os campos `tools` e `disallowedTools` fecham o que cada tipo pode fazer: leitor, arquiteto, validador e revisor não editam, o validador não passa de 30 turnos e o revisor, de 40.
+
+Os três que antecedem ou conferem uma entrega se distinguem pelo que recebem. O arquiteto vem antes de implementar e devolve o plano. O revisor vem depois, em mudança que não é trivial, e lê o pedido e o diff sem a conclusão de quem fez, atrás de defeito de correção. Já o validador só confere uma lista pronta, quando o risco justifica, e devolve um laudo.
 
 Os modelos não trazem ferramenta específica de um ambiente (um MCP de navegador, por exemplo). Quem precisar dela acrescenta o nome à linha `tools` da sua cópia. Depois de copiar, vale ajustar a `description`, porque é ela que o Claude lê para decidir quando delegar a cada tipo.

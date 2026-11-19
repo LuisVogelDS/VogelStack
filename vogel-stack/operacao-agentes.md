@@ -158,7 +158,7 @@ Planejar em conjunto também serve para decidir, não só para executar. Numa pe
 
 ### Revisar com olhos que não escreveram
 
-Quem produziu uma entrega carrega os mesmos vieses que a produziram, e a autocrítica tende a aprovar. Para entrega que sai da máquina (publicação, deploy, texto para cliente, mudança em área sensível), a revisão fica com uma frente de contexto limpo, que recebe só o pedido original e o resultado. Checagem determinística (teste, lint, link checker) vem antes e continua valendo: a revisão independente pega o que o script não pega, não substitui o script.
+Quem produziu uma entrega carrega os mesmos vieses que a produziram, e a autocrítica tende a aprovar. Para entrega que sai da máquina (publicação, deploy, texto para cliente, mudança em área sensível), a revisão fica com uma frente de contexto limpo (o tipo revisor), que recebe só o pedido original e o resultado. Checagem determinística (teste, lint, link checker) vem antes e continua valendo: a revisão independente pega o que o script não pega, não substitui o script.
 
 ### Correção do dono vira regra no mesmo dia
 
@@ -199,7 +199,7 @@ Num agente que trabalha por muitas chamadas, quase todo o gasto é o próprio co
 
 Cada delegação tem um tipo, e o tipo traz o padrão de modelo e de esforço de raciocínio:
 
-Os sete tipos são executor, corretor, leitor, mecânico, especialista, arquiteto e validador. A definição de cada um (para quê, modelo, esforço, ferramentas e prompt) tem modelo em [[vogel-stack/agentes/README|vogel-stack/agentes/]], arquivos para copiar em `~/.claude/agents` (ou no `.claude/agents` do repo); o roteamento de modelo mora na definição de cada agente. Esta stack fixa a regra de escolha e não repete a tabela, para ela não se afastar dos modelos.
+Os oito tipos são executor, corretor, leitor, mecânico, especialista, arquiteto, validador e revisor. A definição de cada um (para quê, modelo, esforço, ferramentas e prompt) tem modelo em [[vogel-stack/agentes/README|vogel-stack/agentes/]], arquivos para copiar em `~/.claude/agents` (ou no `.claude/agents` do repo); o roteamento de modelo mora na definição de cada agente. Esta stack fixa a regra de escolha e não repete a tabela, para ela não se afastar dos modelos.
 
 Brainstorming, orquestração e planejamento, que ficam com quem conversa com o usuário, usam o modelo maior em esforço alto. Os tipos são **tipos de trabalho, não etapas obrigatórias**: o plano decide item a item, e uma tarefa pode não ter arquiteto, validador ou corretor nenhum.
 
